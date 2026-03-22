@@ -1,14 +1,21 @@
 -- 1. Clientes
--- Pessoas Físicas
-INSERT INTO pessoa (tipo, nome, cpf, email, telefone)
+-- Pessoas
+INSERT INTO pessoa (email, telefone)
     VALUES
-        ('F', 'Ana Silva', '111.222.333-44', 'ana@email.com', '63 99111-2222'),
-        ('F', 'Carlos Souza', '555.666.777-88', 'carlos@email.com', '63 99333-4444');
+        ('ana@email.com', '63 99111-2222'),
+        ('carlos@email.com', '63 99333-4444'),
+        ('contato@tech.com', '63 3211-5555');
+
+-- Pessoas Físicas
+INSERT INTO pessoa_fisica (pessoa_id, nome, cpf)
+    VALUES
+        ('1','Ana Silva', '111.222.333-44'),
+        ('2','Carlos Souza', '555.666.777-88');
 
 -- Pessoas Jurídicas
-INSERT INTO pessoa (tipo, razao_social, cnpj, email, telefone)
+INSERT INTO pessoa_juridica (pessoa_id, razao_social, cnpj)
     VALUES
-        ('J', 'Tech Ltda', '11.222.333/0001-44', 'contato@tech.com', '63 3211-5555');
+        ('3','Tech Ltda', '11.222.333/0001-44');
 
 -- 2. Produtos
 INSERT INTO produto (descricao, valor)

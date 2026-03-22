@@ -1,10 +1,10 @@
 package br.edu.ifto.pweb_jpa.model.entity.cliente;
 
-import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-@DiscriminatorValue("J")
+@PrimaryKeyJoinColumn(name = "pessoa_id")
 public class PessoaJuridica extends Pessoa {
 
     private String cnpj;

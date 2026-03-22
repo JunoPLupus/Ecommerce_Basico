@@ -3,8 +3,7 @@ package br.edu.ifto.pweb_jpa.model.entity.cliente;
 import jakarta.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Pessoa {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
