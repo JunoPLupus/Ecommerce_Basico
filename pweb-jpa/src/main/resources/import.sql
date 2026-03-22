@@ -1,21 +1,14 @@
 -- 1. Clientes
--- Pessoas
-INSERT INTO pessoa (email, telefone)
-    VALUES
-        ('ana@email.com', '63 99111-2222'),
-        ('carlos@email.com', '63 99333-4444'),
-        ('contato@tech.com', '63 3211-5555');
-
 -- Pessoas Físicas
-INSERT INTO pessoa_fisica (pessoa_id, nome, cpf)
+INSERT INTO pessoa_fisica (id, nome, cpf, email, telefone)
     VALUES
-        ('1','Ana Silva', '111.222.333-44'),
-        ('2','Carlos Souza', '555.666.777-88');
+        ('1','Ana Silva', '111.222.333-44', 'ana@email.com', '63 99111-2222'),
+        ('2','Carlos Souza', '555.666.777-88', 'carlos@email.com', '63 99333-4444');
 
 -- Pessoas Jurídicas
-INSERT INTO pessoa_juridica (pessoa_id, razao_social, cnpj)
+INSERT INTO pessoa_juridica (id, razao_social, cnpj, email, telefone)
     VALUES
-        ('3','Tech Ltda', '11.222.333/0001-44');
+        ('3','Tech Ltda', '11.222.333/0001-44', 'contato@tech.com', '63 3211-5555');
 
 -- 2. Produtos
 INSERT INTO produto (descricao, valor)
@@ -48,3 +41,5 @@ VALUES
     (3, 2, 5),
     (1, 3, 5),
     (1, 1, 5);
+
+ALTER SEQUENCE pessoa_seq RESTART WITH 10; -- Hibernate vai gerar novos ids a partir do valor '10'.

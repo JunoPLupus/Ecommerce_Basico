@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "pessoa_id")
 public class PessoaFisica extends Pessoa {
 
     private String cpf;
