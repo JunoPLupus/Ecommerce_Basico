@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Venda</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@latest/css/pico.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="container">
+    <h1 th:text="'Detalhes da Venda #' + ${venda.id}"></h1>
+    <p>
+        <mark th:text="'Data: ' + ${#temporals.format(venda.data, 'dd/MM/yyyy HH:mm')}"></mark>
+        &nbsp;
+        <mark th:text="'Cliente: ' + ${venda.cliente.nomeExibicao}"></mark>
+    </p>
+    <br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Descrição do Produto</th>
+            <th>Valor unitário</th>
+            <th>Quantidade</th>
+            <th>Sub-Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${venda.itens}">
+            <td th:text="${item.produto.id}"></td>
+            <td th:text="${item.produto.descricao}"></td>
+            <td th:text="'R$ ' + ${#numbers.formatDecimal(item.produto.valor, 1, 'POINT', 2, 'COMMA')}"></td>
+            <td th:text="${#numbers.formatDecimal(item.quantidade, 1, 0)}"></td>
+            <td th:text="'R$ ' + ${#numbers.formatDecimal(item.total, 1, 'POINT', 2, 'COMMA')}"></td>
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align: right;"><strong>Total</strong></td>
+            <td><strong th:text="'R$ ' + ${#numbers.formatDecimal(venda.total, 1, 'POINT', 2, 'COMMA')}"></strong></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/vendas/lista}">Voltar para Lista</a>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Vendas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@latest/css/pico.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="container">
+    <h1>Vendas</h1>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Data</th>
+                <th>Cliente</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tr th:each="venda : ${vendas}">
+            <td th:text="${venda.id}"></td>
+            <td th:text="${#temporals.format(venda.data, 'dd/MM/yyyy HH:mm')}"></td>
+            <td th:text="${venda.cliente.nomeExibicao}"></td>
+            <td th:text="'R$ ' + ${#numbers.formatDecimal(venda.total, 1, 'POINT', 2, 'COMMA')}"></td>
+            <td>
+                <a th:href="@{/vendas/detalhes/{id}(id=${venda.id})}"
+                   role="button" class="btn btn-primary">Ver Detalhes</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
