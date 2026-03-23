@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/pweb-jpa.iml" filepath="$PROJECT_DIR$/.idea/pweb-jpa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Mapeamento_JPA.iml" filepath="$PROJECT_DIR$/.idea/Mapeamento_JPA.iml" />
     </modules>
   </component>
 </project>
