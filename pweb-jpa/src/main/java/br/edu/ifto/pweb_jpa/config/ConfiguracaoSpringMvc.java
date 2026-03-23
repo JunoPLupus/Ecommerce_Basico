@@ -1,6 +1,5 @@
 package br.edu.ifto.pweb_jpa.config;
 
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -26,6 +25,4 @@ public class ConfiguracaoSpringMvc implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("forward:/vendas/lista"); // carrega jsp, não muda url
 //
     }
-
-
 }
