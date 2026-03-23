@@ -1,5 +1,8 @@
 .container {
-    margin: 1rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 mark {
