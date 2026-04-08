@@ -17,7 +17,7 @@ public class VendaController {
     @Autowired
     private VendaRepository repository;
 
-    @GetMapping("/lista")
+    @GetMapping("")
     public String list(Model model) {
         model.addAttribute("vendas", repository.findAll());
         return "venda/list";
