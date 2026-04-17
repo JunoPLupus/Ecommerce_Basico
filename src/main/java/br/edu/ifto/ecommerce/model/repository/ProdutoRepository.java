@@ -21,7 +21,7 @@ public class ProdutoRepository {
         return em.find(Produto.class, id);
     }
 
-    public void save(Produto produto) { em.persist(produto); }
+    public void insert(Produto produto) { em.persist(produto); }
 
     public void update(Produto produto) { em.merge(produto); }
 
