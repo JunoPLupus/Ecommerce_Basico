@@ -1,6 +1,7 @@
 package br.edu.ifto.ecommerce.model.repository;
 
 import br.edu.ifto.ecommerce.model.entity.produto.Produto;
+import br.edu.ifto.ecommerce.model.entity.venda.ItemVenda;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -21,12 +22,28 @@ public class ProdutoRepository {
         return em.find(Produto.class, id);
     }
 
+    public boolean existsItemVendaByProdutoId(Long id) {
+        String jpql = "SELECT COUNT(item_venda) FROM ItemVenda item_venda WHERE item_venda.produto.id = :id";
+
+        Long count = em.createQuery(jpql, Long.class)
+                .setParameter("id", id)
+                .getSingleResult();
+
+        return count > 0;
+    }
+
     public void insert(Produto produto) { em.persist(produto); }
 
     public void update(Produto produto) { em.merge(produto); }
 
-    public void delete(Long id) {
+    public boolean delete(Long id) {
         Produto produto = em.find(Produto.class, id);
-        em.remove(produto);
+
+        if (!existsItemVendaByProdutoId(id)) {
+            em.remove(produto);
+            return true;
+        }
+
+        return false;
     }
 }

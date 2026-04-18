@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.*;
 
@@ -73,9 +74,12 @@ public class ProdutoController {
      * @return redirecionamento para a listagem de produtos
      * @PathVariable é utilizado quando o valor da variável é passada diretamente na URL
      */
-    @PostMapping("/remove/{id}")
-    public String remove(@PathVariable("id") Long id){
-        produtoRepository.delete(id);
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+        boolean sucess = produtoRepository.delete(id);
+
+        if(!sucess) redirectAttributes.addFlashAttribute("erro", "Não é possível excluir! Existem vendas associadas a este produto.");
+
         return "redirect:/produtos";
     }
 }
