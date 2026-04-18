@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main})}">
+
+<head th:replace="~{fragments/head :: head(${produto.id == null ? 'Cadastrar Produto' : 'Editar Produto'},~{})}"></head>
+
+<body>
+
+<main class="container card pg-card">
+
+    <h1 class="display-6" th:text="${produto.id == null ? 'Cadastrar Produto' : 'Editar Produto'}"></h1>
+
+    <div th:replace="~{fragments/alert :: alert(${erro})}"></div>
+
+    <form class="mt-3" th:action="@{${produto.id == null ? '/produtos/save' : '/produtos/update'}}" th:object="${produto}" method="post">
+
+        <input type="hidden" th:field="*{id}">
+
+        <div class="mb-3">
+            <label for="descricao" class="form-label">Descrição do Produto</label>
+            <input type="text" class="form-control" th:field="*{descricao}" id="descricao" placeholder="Ex: Teclado Mecânico" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="valor" class="form-label">Valor</label>
+            <div class="input-group">
+                <span class="input-group-text">R$</span>
+                <input type="number" class="form-control"
+                       aria-label="Valor em Reais (R$)"
+                       step="0.01" min="0"
+                       id="valor"
+                       th:field="*{valor}"
+                       placeholder="0.00" required >
+            </div>
+        </div>
+
+        <hr class="border-light-subtle mt-5 mb-3">
+
+        <button type="submit" class="btn btn-primary"
+                th:text="${produto.id == null ? 'Cadastrar Produto' : 'Editar Produto'}"></button>
+    </form>
+
+</main>
+
+</body>
+</html>
