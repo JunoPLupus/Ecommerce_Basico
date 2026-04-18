@@ -62,7 +62,7 @@ public class ProdutoController {
      * @return redirecionamento para a listagem de produtos
      * @PathVariable é utilizado quando o valor da variável é passada diretamente na URL
      */
-    @GetMapping("/remove/{id}")
+    @PostMapping("/remove/{id}")
     public String remove(@PathVariable("id") Long id){
         produtoRepository.delete(id);
         return "redirect:/produtos";
