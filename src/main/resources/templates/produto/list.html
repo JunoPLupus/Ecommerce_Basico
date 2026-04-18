@@ -13,7 +13,7 @@
             <i class="bi bi-box-seam text-muted"></i>
             Gerenciar Produtos
         </h1>
-        <a th:href="@{/produto/insert}"
+        <a th:href="@{/produtos/insert}"
            type="button" class="btn btn-primary"
            data-bs-toggle="tooltip"
            data-bs-placement="top"
@@ -46,8 +46,9 @@
                        title="Editar produto">
                         <i class="bi bi-pen"></i>
                     </a>
-                    <form th:action="@{/produtos/delete/{id}(id=${produto.id})}">
+                    <form th:action="@{/produtos/delete/{id}(id=${produto.id})}" method="post">
                         <button type="submit" class="btn btn-danger"
+                                onclick="return window.confirm('Tem certeza que deseja excluir este produto?')"
                                 data-bs-toggle="tooltip"
                                 data-bs-placement="top"
                                 title="Deletar produto">
