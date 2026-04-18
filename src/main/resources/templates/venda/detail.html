@@ -6,15 +6,7 @@
 
 <body>
 
-<nav class="container mt-navbar" aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a th:href="@{/vendas}">Vendas</a>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page"
-            th:text="'Detalhes da venda #' + ${venda.id}"></li>
-    </ol>
-</nav>
+<nav th:replace="~{fragments/breadcrumb :: breadcrumb(${breadcrumbItems})}"></nav>
 
 <main class="container card pg-card">
 
