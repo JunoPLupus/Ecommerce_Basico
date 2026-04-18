@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
+
+<head th:replace="~{fragments/head :: head('Gerenciar Produtos',~{})}"></head>
+
+<body>
+
+<main class="container card pg-card mt-navbar">
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3">
+        <h1 class="display-6">
+            <i class="bi bi-box-seam text-muted"></i>
+            Gerenciar Produtos
+        </h1>
+        <a th:href="@{/produtos/insert}"
+           type="button" class="btn btn-primary"
+           data-bs-toggle="tooltip"
+           data-bs-placement="top"
+           title="Cadastrar Novo Produto">
+            <i class="bi bi-plus-lg"></i>
+            Cadastrar Novo Produto
+        </a>
+    </div>
+
+    <div th:replace="~{fragments/alert :: alert(${erro})}"></div>
+
+    <table class="table table-striped table-hover align-middle mt-3">
+        <thead>
+        <tr>
+            <th scope="col" class="fw-light">ID</th>
+            <th scope="col" class="fw-light">Descrição</th>
+            <th scope="col" class="fw-light">Valor(R$)</th>
+            <th scope="col" class="fw-light" colspan="2"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="produto : ${produtos}">
+            <td scope="row" th:text="${produto.id}"></td>
+            <td th:text="${produto.descricao}"></td>
+            <td th:text="'R$ ' + ${#numbers.formatDecimal(produto.valor, 1, 'POINT', 2, 'COMMA')}"></td>
+            <td class="text-end">
+                <div class="d-flex gap-2 justify-content-end">
+                    <a th:href="@{/produtos/edit/{id}(id=${produto.id})}"
+                       type="button" class="btn btn-primary"
+                       data-bs-toggle="tooltip"
+                       data-bs-placement="top"
+                       title="Editar produto">
+                        <i class="bi bi-pen"></i>
+                    </a>
+                    <form th:action="@{/produtos/delete/{id}(id=${produto.id})}" method="post">
+                        <button type="submit" class="btn btn-danger"
+                                onclick="return window.confirm('Tem certeza que deseja excluir este produto?')"
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="top"
+                                title="Deletar produto">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</main>
+
+</body>
+</html>

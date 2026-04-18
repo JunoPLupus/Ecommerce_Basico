@@ -2,17 +2,20 @@
 
 <html lang="pt-BR"
       xmlns:th="http://www.thymeleaf.org"
-      th:fragment="layout(head, breadcrumb, main)">
+      th:fragment="layout(head, main, scripts)">
 
     <head th:replace="${head}"></head>
 
     <body class="d-flex flex-column min-vh-100 bg-light">
         <header th:replace="~{fragments/header :: header}"></header>
 
-        <div th:replace="${breadcrumb}"></div>
+        <nav th:if="${breadcrumbItems != null}"
+             th:replace="~{fragments/breadcrumb :: breadcrumb(${breadcrumbItems})}"></nav>
 
         <main th:replace="${main}"></main>
 
         <footer th:replace="~{fragments/footer :: footer}"></footer>
+
+        <th:block th:replace="${scripts}"/>
     </body>
 </html>

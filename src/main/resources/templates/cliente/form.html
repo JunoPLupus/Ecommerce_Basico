@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{::script})}">
+
+<head th:replace="~{fragments/head :: head('Cadastrar Cliente',~{})}"></head>
+
+<body>
+
+<main class="container card pg-card">
+
+    <h1 class="display-6">Cadastrar Cliente</h1>
+    <p class="fw-light">Todos os campos são obrigatórios</p>
+
+    <div th:replace="~{fragments/alert :: alert(${erro})}"></div>
+
+    <ul class="nav nav-tabs mt-3">
+        <li class="nav-item">
+            <a class="nav-link active" id="nav-item-pf" aria-current="page" href="#">Pessoa Física</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="nav-item-pj" href="#">Pessoa Jurífica</a>
+        </li>
+    </ul>
+
+    <form class="mt-3" id="form-cadastro-cliente" th:action="@{/clientes/save/fisica}" method="post">
+
+        <input type="hidden" id="id" name="id">
+
+        <div id="campos-pf">
+            <div class="mb-3">
+                <label for="cpf" class="form-label">CPF</label>
+                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Ex: 000.000.000-00" required>
+            </div>
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Ex: João Silva" required>
+            </div>
+        </div>
+
+        <div id="campos-pj" hidden>
+            <div class="mb-3">
+                <label for="cnpj" class="form-label">CNPJ</label>
+                <input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="Ex: 00.000.000/0000-00" required disabled>
+            </div>
+
+            <div class="mb-3">
+                <label for="razao_social" class="form-label">Razão Social</label>
+                <input type="text" class="form-control" id="razao_social" name="razaoSocial" placeholder="Ex: Empresa LTDA." required disabled>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Ex: exemplo@gmail.com" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="telefone" class="form-label">Telefone</label>
+            <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Ex: (00) 1234-5678" required>
+        </div>
+
+        <hr class="border-light-subtle mt-5 mb-3">
+
+        <button type="submit" class="btn btn-primary">Cadastrar Cliente</button>
+    </form>
+
+</main>
+
+<script th:src="@{/js/cliente-form.js}"></script>
+
+</body>
+</html>

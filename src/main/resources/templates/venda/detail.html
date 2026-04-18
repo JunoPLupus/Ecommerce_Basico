@@ -1,24 +1,16 @@
 <!DOCTYPE html>
 
-<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::nav}, ~{::main})}">
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
 
 <head th:replace="~{fragments/head :: head('Detalhes da Venda',~{})}"></head>
 
 <body>
 
-<nav class="container mt-navbar" aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a th:href="@{/vendas}">Vendas</a>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page"
-            th:text="'Detalhes da venda #' + ${venda.id}"></li>
-    </ol>
-</nav>
-
 <main class="container card pg-card">
 
-    <h1 class="display-4">Detalhes da Venda
+    <h1 class="display-6">
+        <i class="bi bi-bag text-muted"></i>
+        Detalhes da Venda
         <small class="text-muted" th:text="'#' + ${venda.id}"></small>
     </h1>
     <p>
