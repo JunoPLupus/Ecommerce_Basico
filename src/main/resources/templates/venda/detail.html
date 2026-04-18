@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 
-<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::nav}, ~{::main})}">
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main})}">
 
 <head th:replace="~{fragments/head :: head('Detalhes da Venda',~{})}"></head>
 
 <body>
-
-<nav th:replace="~{fragments/breadcrumb :: breadcrumb(${breadcrumbItems})}"></nav>
 
 <main class="container card pg-card">
 
