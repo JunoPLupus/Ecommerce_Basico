@@ -22,8 +22,10 @@
             Cadastrar Novo Produto
         </a>
     </div>
-    <br>
-    <table class="table table-striped table-hover align-middle">
+
+    <div th:replace="~{fragments/alert :: alert(${erro})}"></div>
+
+    <table class="table table-striped table-hover align-middle mt-3">
         <thead>
         <tr>
             <th scope="col" class="fw-light">ID</th>
