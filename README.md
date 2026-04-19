@@ -50,7 +50,7 @@ Este projeto foi construído de forma incremental durante a disciplina, evoluind
 
 ![Detalhes da Venda](docs/images/cadastrar-cliente-pf.png)
 
-### 🧑‍🦱 Cadastro de Pessoa Jurídica
+### 👨‍💼 Cadastro de Pessoa Jurídica
 > Cadastro de pessoa jurídica com cnpj, razão social, email e telefone.
 
 ![Detalhes da Venda](docs/images/cadastrar-cliente-pj.png)
