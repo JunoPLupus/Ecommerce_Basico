@@ -28,6 +28,33 @@ Este projeto foi construído de forma incremental durante a disciplina, evoluind
 
 ![Detalhes da Venda](docs/images/detalhe-venda.png)
 
+## 📦 Listagem de Produtos
+> Visualização completa dos produtos, descrição e valor.
+
+![Detalhes da Venda](docs/images/gerenciar-produtos.png)
+
+## 📦 Cadastro de Produto
+> Cadastro de produto com descrição e valor.
+
+![Detalhes da Venda](docs/images/cadastrar-produto.png)
+
+## 📦 Edição de Produto
+> Edição de dados de produto existente.
+
+![Detalhes da Venda](docs/images/editar-produto.png)
+
+## 👤 Cadastro de Cliente
+
+### 🧑‍🦱 Cadastro de Pessoa Física
+> Cadastro de pessoa física com cpf, nome, email e telefone.
+
+![Detalhes da Venda](docs/images/cadastrar-cliente-pf.png)
+
+### 🧑‍🦱 Cadastro de Pessoa Jurídica
+> Cadastro de pessoa jurídica com cnpj, razão social, email e telefone.
+
+![Detalhes da Venda](docs/images/cadastrar-cliente-pj.png)
+
 ---
 
 # ✨ Funcionalidades Implementadas
@@ -39,12 +66,22 @@ Este projeto foi construído de forma incremental durante a disciplina, evoluind
 - ✅ Exibição de itens da venda
 - ✅ Cálculo de total geral
 
+## 📦 Produtos
+- ✅ Listagem de produtos
+- ✅ Cadastro de produto
+- ✅ Edição de produto
+- ✅ Remoção de produto (com proteção contra deleção de produtos vinculados a vendas)
+
 ## 👤 Clientes
-- ✅ Herança entre entidades
+- ✅ Herança entre entidades (Pessoa Física e Pessoa Jurídica)
+- ✅ Cadastro de Pessoa Física (nome, CPF, e-mail, telefone)
+- ✅ Cadastro de Pessoa Jurídica (razão social, CNPJ, e-mail, telefone)
 
 ## 🎨 Interface
 - ✅ Layout responsivo com Bootstrap 5
 - ✅ Reutilização de templates com Thymeleaf Fragments
+- ✅ Breadcrumb dinâmico parametrizado
+- ✅ Fragmento de alerta reutilizável
 - ✅ Navegação organizada
 
 ## 🗄️ Banco de Dados
@@ -56,17 +93,17 @@ Este projeto foi construído de forma incremental durante a disciplina, evoluind
 
 # 🧠 Tecnologias Utilizadas
 
-| Tecnologia   | Função |
-|--------------|--------|
-| Java 25      | Linguagem principal |
-| Spring Boot 4.0.3 | Inicialização e configuração |
-| Spring MVC   | Controllers e rotas |
-| Thymeleaf    | Templates HTML dinâmicos |
-| Bootstrap 5.2.3  | Estilização responsiva |
-| JPA          | API de persistência |
-| Hibernate    | Implementação ORM da JPA |
-| H2 Database  | Banco em memória/arquivo |
-| Maven        | Gerenciamento de dependências |
+| Tecnologia        | Função                          |
+|-------------------|---------------------------------|
+| Java 25           | Linguagem principal             |
+| Spring Boot 4.0.3 | Inicialização e configuração    |
+| Spring MVC        | Controllers e rotas             |
+| Thymeleaf         | Templates HTML dinâmicos        |
+| Bootstrap 5.2.3   | Estilização responsiva          |
+| JPA               | API de persistência             |
+| Hibernate         | Implementação ORM da JPA        |
+| H2 Database       | Banco em memória/arquivo        |
+| Maven             | Gerenciamento de dependências   |
 
 ---
 
@@ -77,10 +114,11 @@ O sistema segue o padrão **MVC (Model-View-Controller)**:
 ```text
 src/main/java/
 ├── controller   -> Requisições HTTP
-├── model        -> Entidades de domínio
+├── model        -> Entidades de domínio e records utilitários
 ├── repository   -> Persistência com EntityManager
 ├── config       -> Configurações Spring MVC
-````
+└── util         -> Classes utilitárias (ex: BreadcrumbUtils)
+```
 
 ---
 
@@ -135,14 +173,26 @@ Utilizando:
 Uso de fragments parametrizados:
 
 ```html
-<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::nav}, ~{::main})}">
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{::script})}">
 ```
 
 Benefícios:
 
 * Reaproveitamento de estrutura
 * Padronização visual
+* Suporte a scripts por página
 * Manutenção simplificada
+
+### Breadcrumb Dinâmico
+
+O breadcrumb é gerado dinamicamente via `BreadcrumbItem` record e renderizado por um fragment parametrizado:
+
+```java
+model.addAttribute("breadcrumbItems", breadcrumb(
+    new BreadcrumbItem("Produtos", "/produtos"),
+    new BreadcrumbItem("Editar Produto", null)
+));
+```
 
 ---
 
@@ -213,21 +263,18 @@ A proposta da disciplina prioriza o entendimento progressivo das tecnologias:
 
 # 📌 Próximas Melhorias
 
-### 📦 Produtos
-* 📦 Cadastro
-* 📦 Edição
-* 📦 Exclusão
-* 📦 Listagem
-
-### 👤 Clientes
-* 🧑‍🦱 Cadastro de Pessoa Física
-* 👨‍💼 Cadastro de Pessoa Jurídica
-
-### 🔍 Filtros de listagens e Buscas
+### 🔍 Filtros e Buscas
 * 🔍 Filtro de vendas por data
 * 🔍 Filtro de vendas por cliente
-* 🔍 Filtro de clientes por nome
+* 🔍 Listagem de clientes com filtro por nome
 * 🔍 Busca de produtos por descrição
+
+### 👤 Clientes
+* 📋 Listagem de clientes
+
+### 🎨 Interface
+* 🎨 Migração de CSS para SCSS
+* 🎨 Centralização de rotas em classe global
 
 ### 🔐 Sistema
 * 🔐 Autenticação de usuários

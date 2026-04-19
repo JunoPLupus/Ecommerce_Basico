@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" th:href="@{/vendas}">
-                <img th:src="@{/images/logo-2.svg}" alt="IFTO" height="40">
+                <img th:src="@{/images/logo.svg}" alt="IFTO" height="40">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,6 +23,8 @@
                         </a>
                     </li>
                 </ul>
+
+                <a class="btn btn-outline-light" th:href="@{/clientes/cadastro}">Cadastrar Cliente</a>
             </div>
         </div>
     </nav>
