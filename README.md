@@ -247,7 +247,7 @@ Password: (vazio)
 
 # 📚 Contexto Acadêmico
 
-Projeto desenvolvido no **IFTO - Campus Paraíso do Tocantins**, como parte das atividades da disciplina de **Programação Web II**.
+Projeto desenvolvido no **IFTO - Campus Palmas do Tocantins**, como parte das atividades da disciplina de **Programação Web II**.
 
 A proposta da disciplina prioriza o entendimento progressivo das tecnologias:
 
