@@ -46,6 +46,16 @@ i {
   @extend .bi;
 }
 
+mark {
+  @extend .badge;
+  @extend .rounded-pill;
+  @extend .bg-light;
+  @extend .text-dark;
+  span {
+    @extend .fw-normal;
+  }
+}
+
 .button-danger {
   @extend .btn;
   @extend .btn-danger;
@@ -194,4 +204,12 @@ i {
 
 .icon-plus {
   @extend .bi-plus-lg;
+}
+
+.icon-person {
+  @extend .bi-person;
+}
+
+.icon-calendar {
+  @extend .bi-calendar;
 }

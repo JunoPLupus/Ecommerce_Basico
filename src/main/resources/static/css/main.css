@@ -4915,7 +4915,7 @@ form .has-validation.search-bar > .form-floating:nth-last-child(n+3) > input,
   --bs-pagination-border-radius: var(--bs-border-radius-sm);
 }
 
-.badge {
+.badge, mark {
   --bs-badge-padding-x: 0.65em;
   --bs-badge-padding-y: 0.35em;
   --bs-badge-font-size: 0.75em;
@@ -4933,11 +4933,11 @@ form .has-validation.search-bar > .form-floating:nth-last-child(n+3) > input,
   vertical-align: baseline;
   border-radius: var(--bs-badge-border-radius);
 }
-.badge:empty {
+.badge:empty, mark:empty {
   display: none;
 }
 
-.btn .badge, .button-danger .badge, .button-primary .badge, .button-secondary .badge, .button-outline-light .badge {
+.btn .badge, .button-danger .badge, .button-primary .badge, .button-secondary .badge, .button-outline-light .badge, .btn mark, .button-danger mark, .button-primary mark, .button-secondary mark, .button-outline-light mark {
   position: relative;
   top: -1px;
 }
@@ -8460,7 +8460,7 @@ form .has-validation.search-bar > .form-floating:nth-last-child(n+3) > input,
   font-weight: 300 !important;
 }
 
-.fw-normal {
+.fw-normal, mark span {
   font-weight: 400 !important;
 }
 
@@ -8582,7 +8582,7 @@ form .has-validation.search-bar > .form-floating:nth-last-child(n+3) > input,
   color: rgba(var(--bs-light-rgb), var(--bs-text-opacity)) !important;
 }
 
-.text-dark {
+.text-dark, mark {
   --bs-text-opacity: 1;
   color: rgba(var(--bs-dark-rgb), var(--bs-text-opacity)) !important;
 }
@@ -8872,7 +8872,7 @@ form .has-validation.search-bar > .form-floating:nth-last-child(n+3) > input,
   background-color: rgba(var(--bs-danger-rgb), var(--bs-bg-opacity)) !important;
 }
 
-.bg-light {
+.bg-light, mark {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
 }
@@ -9020,7 +9020,7 @@ form .has-validation.search-bar > .form-floating:nth-last-child(n+3) > input,
   border-radius: 50% !important;
 }
 
-.rounded-pill {
+.rounded-pill, mark {
   border-radius: var(--bs-border-radius-pill) !important;
 }
 
@@ -13040,7 +13040,7 @@ form .has-validation.search-bar > .form-floating:nth-last-child(n+3) > input,
   content: "\f1f5";
 }
 
-.bi-calendar::before {
+.bi-calendar::before, .icon-calendar::before {
   content: "\f1f6";
 }
 
@@ -16024,7 +16024,7 @@ form .has-validation.search-bar > .form-floating:nth-last-child(n+3) > input,
   content: "\f4e0";
 }
 
-.bi-person::before {
+.bi-person::before, .icon-person::before {
   content: "\f4e1";
 }
 
