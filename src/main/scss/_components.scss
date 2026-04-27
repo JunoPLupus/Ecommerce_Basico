@@ -1,0 +1,181 @@
+@use "../../../node_modules/bootstrap/scss/bootstrap";
+@use "../../../node_modules/bootstrap-icons/font/bootstrap-icons";
+
+h1 {
+  @extend .display-6;
+}
+
+form {
+  label {
+    @extend .form-label;
+  }
+  input {
+    @extend .form-control;
+  }
+}
+
+hr {
+  @extend .border-light-subtle;
+  @extend .mt-5;
+  @extend .mb-3;
+}
+
+table {
+  @extend .table;
+  @extend .table-striped;
+  @extend .table-hover;
+  @extend .align-middle;
+  @extend .mt-3;
+
+  th {
+    @extend .fw-light;
+  }
+}
+
+footer {
+  @extend .container;
+  @extend .mt-auto;
+  @extend .pg-footer;
+}
+
+a {
+  text-decoration: none;
+}
+
+i {
+  @extend .bi;
+}
+
+.button-danger {
+  @extend .btn;
+  @extend .btn-danger;
+}
+
+.button-primary {
+  @extend .btn;
+  @extend .btn-primary;
+}
+
+.pg-card {
+  @extend .container;
+  @extend .card;
+  @extend .mt-3;
+  background-color: white;
+  padding: 2rem;
+}
+
+.nav-tab {
+  @extend .nav;
+  @extend .nav-tabs;
+  @extend .mt-3;
+
+  li {
+    @extend .nav-item;
+    a {
+      @extend .nav-link;
+    }
+  }
+}
+
+.mt-navbar {
+  margin-top: 1rem;
+}
+
+.subtotal {
+  max-width: 3rem;
+}
+
+.pg-footer {
+  @extend .pt-3;
+}
+
+.input-group{
+  span {
+    @extend .input-group-text;
+  }
+}
+
+.button-group {
+  @extend .d-flex;
+  @extend .gap-2;
+  @extend .justify-content-end;
+}
+
+.coluna-dupla-principal {
+  @extend .d-flex;
+  @extend .justify-content-between;
+  @extend .flex-wrap;
+  @extend .flex-md-nowrap;
+  @extend .align-items-center;
+  @extend .pt-3;
+}
+
+.pg-header {
+  @extend .container-fluid;
+  @extend .sticky-top;
+  @extend .p-0;
+
+  nav {
+    @extend .navbar;
+    @extend .navbar-expand-lg;
+    @extend .navbar-dark;
+    @extend .bg-dark;
+
+    .pg-nav-container {
+      @extend .container-fluid;
+    }
+
+    .pg-nav-brand {
+      @extend .navbar-brand;
+    }
+
+    .pg-nav-toggler {
+      @extend .navbar-toggler;
+    }
+
+    .pg-nav-collapse {
+      @extend .collapse;
+      @extend .navbar-collapse;
+    }
+
+    ul {
+      @extend .navbar-nav;
+      @extend .me-auto;
+      @extend .mb-2;
+      @extend .mb-lg-0;
+
+      li {
+        @extend .nav-item;
+
+        a {
+          @extend .nav-link;
+        }
+      }
+    }
+  }
+}
+
+.button-outline-light {
+  @extend .btn;
+  @extend .btn-outline-light;
+}
+
+.icon-bag {
+  @extend .bi-bag;
+}
+
+.icon-box {
+  @extend .bi-box-seam;
+}
+
+.icon-search {
+  @extend .bi-search;
+}
+
+.icon-pen {
+  @extend .bi-pen;
+}
+
+.icon-trash {
+  @extend .bi-trash;
+}
