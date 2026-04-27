@@ -1,33 +1,28 @@
-<header class="container-fluid sticky-top p-0" th:fragment="header">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" th:href="@{/vendas}">
+<header class="pg-header" th:fragment="header">
+    <nav>
+        <div class="pg-nav-container">
+            <a class="pg-nav-brand" th:href="@{/vendas}">
                 <img th:src="@{/images/logo.svg}" alt="IFTO" height="40">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            <button class="pg-nav-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page"
-                           th:href="@{/vendas}">
-                            <i class="bi bi-bag"></i> Vendas
+            <div class="pg-nav-collapse" id="navbarSupportedContent">
+                <ul>
+                    <li>
+                        <a aria-current="page" th:href="@{/vendas}">
+                            <i class="icon-bag"></i> Vendas
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page"
-                           th:href="@{/produtos}">
-                            <i class="bi bi-box-seam"></i> Gerenciar Produtos
+                    <li>
+                        <a aria-current="page" th:href="@{/produtos}">
+                            <i class="icon-box"></i> Gerenciar Produtos
                         </a>
                     </li>
                 </ul>
-
-                <a class="btn btn-outline-light" th:href="@{/clientes/cadastro}">Cadastrar Cliente</a>
+                <a class="button-outline-light" th:href="@{/clientes/cadastro}">Cadastrar Cliente</a>
             </div>
         </div>
     </nav>
 </header>
-
-
