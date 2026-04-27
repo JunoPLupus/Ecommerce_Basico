@@ -56,6 +56,11 @@ i {
   @extend .btn-primary;
 }
 
+.button-secondary {
+  @extend .btn;
+  @extend .btn-outline-secondary;
+}
+
 .pg-card {
   @extend .container;
   @extend .card;
@@ -89,7 +94,14 @@ i {
   @extend .pt-3;
 }
 
-.input-group{
+.search-bar {
+  @extend .input-group;
+  @extend .mt-4;
+  @extend .mb-4;
+}
+
+.input-group {
+  flex-flow: row;
   span {
     @extend .input-group-text;
   }
@@ -101,7 +113,7 @@ i {
   @extend .justify-content-end;
 }
 
-.coluna-dupla-principal {
+.main-double-collumns {
   @extend .d-flex;
   @extend .justify-content-between;
   @extend .flex-wrap;
@@ -178,4 +190,8 @@ i {
 
 .icon-trash {
   @extend .bi-trash;
+}
+
+.icon-plus {
+  @extend .bi-plus-lg;
 }

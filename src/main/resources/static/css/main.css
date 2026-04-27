@@ -2445,7 +2445,7 @@ textarea.form-control-lg {
   clip: rect(0, 0, 0, 0);
   pointer-events: none;
 }
-.btn-check[disabled] + .btn, .btn-check[disabled] + .button-danger, .btn-check[disabled] + .button-primary, .btn-check[disabled] + .button-outline-light, .btn-check:disabled + .btn, .btn-check:disabled + .button-danger, .btn-check:disabled + .button-primary, .btn-check:disabled + .button-outline-light {
+.btn-check[disabled] + .btn, .btn-check[disabled] + .button-danger, .btn-check[disabled] + .button-primary, .btn-check[disabled] + .button-secondary, .btn-check[disabled] + .button-outline-light, .btn-check:disabled + .btn, .btn-check:disabled + .button-danger, .btn-check:disabled + .button-primary, .btn-check:disabled + .button-secondary, .btn-check:disabled + .button-outline-light {
   pointer-events: none;
   filter: none;
   opacity: 0.65;
@@ -2625,35 +2625,39 @@ form .form-floating > input:not(:placeholder-shown) ~ label,
   color: #6c757d;
 }
 
-.input-group {
+.input-group, .search-bar {
   position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
   width: 100%;
 }
-.input-group > .form-control, form .input-group > input,
+.input-group > .form-control, .search-bar > .form-control, form .input-group > input, form .search-bar > input,
 .input-group > .form-select,
-.input-group > .form-floating {
+.search-bar > .form-select,
+.input-group > .form-floating,
+.search-bar > .form-floating {
   position: relative;
   flex: 1 1 auto;
   width: 1%;
   min-width: 0;
 }
-.input-group > .form-control:focus, form .input-group > input:focus,
+.input-group > .form-control:focus, .search-bar > .form-control:focus, form .input-group > input:focus, form .search-bar > input:focus,
 .input-group > .form-select:focus,
-.input-group > .form-floating:focus-within {
+.search-bar > .form-select:focus,
+.input-group > .form-floating:focus-within,
+.search-bar > .form-floating:focus-within {
   z-index: 5;
 }
-.input-group .btn, .input-group .button-danger, .input-group .button-primary, .input-group .button-outline-light {
+.input-group .btn, .search-bar .btn, .input-group .button-danger, .search-bar .button-danger, .input-group .button-primary, .search-bar .button-primary, .input-group .button-secondary, .search-bar .button-secondary, .input-group .button-outline-light, .search-bar .button-outline-light {
   position: relative;
   z-index: 2;
 }
-.input-group .btn:focus, .input-group .button-danger:focus, .input-group .button-primary:focus, .input-group .button-outline-light:focus {
+.input-group .btn:focus, .search-bar .btn:focus, .input-group .button-danger:focus, .search-bar .button-danger:focus, .input-group .button-primary:focus, .search-bar .button-primary:focus, .input-group .button-secondary:focus, .search-bar .button-secondary:focus, .input-group .button-outline-light:focus, .search-bar .button-outline-light:focus {
   z-index: 5;
 }
 
-.input-group-text, .input-group span {
+.input-group-text, .input-group span, .search-bar span {
   display: flex;
   align-items: center;
   padding: 0.375rem 0.75rem;
@@ -2672,9 +2676,11 @@ form .form-floating > input:not(:placeholder-shown) ~ label,
 .input-group-lg > .form-select,
 .input-group-lg > .input-group-text,
 .input-group .input-group-lg > span,
+.search-bar .input-group-lg > span,
 .input-group-lg > .btn,
 .input-group-lg > .button-danger,
 .input-group-lg > .button-primary,
+.input-group-lg > .button-secondary,
 .input-group-lg > .button-outline-light {
   padding: 0.5rem 1rem;
   font-size: 1.25rem;
@@ -2685,9 +2691,11 @@ form .form-floating > input:not(:placeholder-shown) ~ label,
 .input-group-sm > .form-select,
 .input-group-sm > .input-group-text,
 .input-group .input-group-sm > span,
+.search-bar .input-group-sm > span,
 .input-group-sm > .btn,
 .input-group-sm > .button-danger,
 .input-group-sm > .button-primary,
+.input-group-sm > .button-secondary,
 .input-group-sm > .button-outline-light {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
@@ -2699,29 +2707,38 @@ form .form-floating > input:not(:placeholder-shown) ~ label,
   padding-right: 3rem;
 }
 
-.input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating),
+.input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating), .search-bar:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating),
 .input-group:not(.has-validation) > .dropdown-toggle:nth-last-child(n+3),
+.search-bar:not(.has-validation) > .dropdown-toggle:nth-last-child(n+3),
 .input-group:not(.has-validation) > .form-floating:not(:last-child) > .form-control,
+.search-bar:not(.has-validation) > .form-floating:not(:last-child) > .form-control,
 form .input-group:not(.has-validation) > .form-floating:not(:last-child) > input,
-.input-group:not(.has-validation) > .form-floating:not(:last-child) > .form-select {
+form .search-bar:not(.has-validation) > .form-floating:not(:last-child) > input,
+.input-group:not(.has-validation) > .form-floating:not(:last-child) > .form-select,
+.search-bar:not(.has-validation) > .form-floating:not(:last-child) > .form-select {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
-.input-group.has-validation > :nth-last-child(n+3):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating),
+.input-group.has-validation > :nth-last-child(n+3):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating), .has-validation.search-bar > :nth-last-child(n+3):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating),
 .input-group.has-validation > .dropdown-toggle:nth-last-child(n+4),
+.has-validation.search-bar > .dropdown-toggle:nth-last-child(n+4),
 .input-group.has-validation > .form-floating:nth-last-child(n+3) > .form-control,
+.has-validation.search-bar > .form-floating:nth-last-child(n+3) > .form-control,
 form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
-.input-group.has-validation > .form-floating:nth-last-child(n+3) > .form-select {
+form .has-validation.search-bar > .form-floating:nth-last-child(n+3) > input,
+.input-group.has-validation > .form-floating:nth-last-child(n+3) > .form-select,
+.has-validation.search-bar > .form-floating:nth-last-child(n+3) > .form-select {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
-.input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+.input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback), .search-bar > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
   margin-left: calc(-1 * var(--bs-border-width));
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
-.input-group > .form-floating:not(:first-child) > .form-control, form .input-group > .form-floating:not(:first-child) > input,
-.input-group > .form-floating:not(:first-child) > .form-select {
+.input-group > .form-floating:not(:first-child) > .form-control, .search-bar > .form-floating:not(:first-child) > .form-control, form .input-group > .form-floating:not(:first-child) > input, form .search-bar > .form-floating:not(:first-child) > input,
+.input-group > .form-floating:not(:first-child) > .form-select,
+.search-bar > .form-floating:not(:first-child) > .form-select {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -2808,11 +2825,15 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   margin-left: 0.5em;
 }
 
-.was-validated .input-group > .form-control:not(:focus):valid, .was-validated form .input-group > input:not(:focus):valid, form .was-validated .input-group > input:not(:focus):valid, .input-group > .form-control:not(:focus).is-valid, form .input-group > input:not(:focus).is-valid,
+.was-validated .input-group > .form-control:not(:focus):valid, .was-validated .search-bar > .form-control:not(:focus):valid, .was-validated form .input-group > input:not(:focus):valid, form .was-validated .input-group > input:not(:focus):valid, .was-validated form .search-bar > input:not(:focus):valid, form .was-validated .search-bar > input:not(:focus):valid, .input-group > .form-control:not(:focus).is-valid, .search-bar > .form-control:not(:focus).is-valid, form .input-group > input:not(:focus).is-valid, form .search-bar > input:not(:focus).is-valid,
 .was-validated .input-group > .form-select:not(:focus):valid,
+.was-validated .search-bar > .form-select:not(:focus):valid,
 .input-group > .form-select:not(:focus).is-valid,
+.search-bar > .form-select:not(:focus).is-valid,
 .was-validated .input-group > .form-floating:not(:focus-within):valid,
-.input-group > .form-floating:not(:focus-within).is-valid {
+.was-validated .search-bar > .form-floating:not(:focus-within):valid,
+.input-group > .form-floating:not(:focus-within).is-valid,
+.search-bar > .form-floating:not(:focus-within).is-valid {
   z-index: 3;
 }
 
@@ -2898,15 +2919,19 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   margin-left: 0.5em;
 }
 
-.was-validated .input-group > .form-control:not(:focus):invalid, .was-validated form .input-group > input:not(:focus):invalid, form .was-validated .input-group > input:not(:focus):invalid, .input-group > .form-control:not(:focus).is-invalid, form .input-group > input:not(:focus).is-invalid,
+.was-validated .input-group > .form-control:not(:focus):invalid, .was-validated .search-bar > .form-control:not(:focus):invalid, .was-validated form .input-group > input:not(:focus):invalid, form .was-validated .input-group > input:not(:focus):invalid, .was-validated form .search-bar > input:not(:focus):invalid, form .was-validated .search-bar > input:not(:focus):invalid, .input-group > .form-control:not(:focus).is-invalid, .search-bar > .form-control:not(:focus).is-invalid, form .input-group > input:not(:focus).is-invalid, form .search-bar > input:not(:focus).is-invalid,
 .was-validated .input-group > .form-select:not(:focus):invalid,
+.was-validated .search-bar > .form-select:not(:focus):invalid,
 .input-group > .form-select:not(:focus).is-invalid,
+.search-bar > .form-select:not(:focus).is-invalid,
 .was-validated .input-group > .form-floating:not(:focus-within):invalid,
-.input-group > .form-floating:not(:focus-within).is-invalid {
+.was-validated .search-bar > .form-floating:not(:focus-within):invalid,
+.input-group > .form-floating:not(:focus-within).is-invalid,
+.search-bar > .form-floating:not(:focus-within).is-invalid {
   z-index: 4;
 }
 
-.btn, .button-danger, .button-primary, .button-outline-light {
+.btn, .button-danger, .button-primary, .button-secondary, .button-outline-light {
   --bs-btn-padding-x: 0.75rem;
   --bs-btn-padding-y: 0.375rem;
   --bs-btn-font-family: ;
@@ -2940,44 +2965,44 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .btn, .button-danger, .button-primary, .button-outline-light {
+  .btn, .button-danger, .button-primary, .button-secondary, .button-outline-light {
     transition: none;
   }
 }
-.btn:hover, .button-danger:hover, .button-primary:hover, .button-outline-light:hover {
+.btn:hover, .button-danger:hover, .button-primary:hover, .button-secondary:hover, .button-outline-light:hover {
   color: var(--bs-btn-hover-color);
   background-color: var(--bs-btn-hover-bg);
   border-color: var(--bs-btn-hover-border-color);
 }
-.btn-check + .btn:hover, .btn-check + .button-danger:hover, .btn-check + .button-primary:hover, .btn-check + .button-outline-light:hover {
+.btn-check + .btn:hover, .btn-check + .button-danger:hover, .btn-check + .button-primary:hover, .btn-check + .button-secondary:hover, .btn-check + .button-outline-light:hover {
   color: var(--bs-btn-color);
   background-color: var(--bs-btn-bg);
   border-color: var(--bs-btn-border-color);
 }
-.btn:focus-visible, .button-danger:focus-visible, .button-primary:focus-visible, .button-outline-light:focus-visible {
+.btn:focus-visible, .button-danger:focus-visible, .button-primary:focus-visible, .button-secondary:focus-visible, .button-outline-light:focus-visible {
   color: var(--bs-btn-hover-color);
   background-color: var(--bs-btn-hover-bg);
   border-color: var(--bs-btn-hover-border-color);
   outline: 0;
   box-shadow: var(--bs-btn-focus-box-shadow);
 }
-.btn-check:focus-visible + .btn, .btn-check:focus-visible + .button-danger, .btn-check:focus-visible + .button-primary, .btn-check:focus-visible + .button-outline-light {
+.btn-check:focus-visible + .btn, .btn-check:focus-visible + .button-danger, .btn-check:focus-visible + .button-primary, .btn-check:focus-visible + .button-secondary, .btn-check:focus-visible + .button-outline-light {
   border-color: var(--bs-btn-hover-border-color);
   outline: 0;
   box-shadow: var(--bs-btn-focus-box-shadow);
 }
-.btn-check:checked + .btn, .btn-check:checked + .button-danger, .btn-check:checked + .button-primary, .btn-check:checked + .button-outline-light, :not(.btn-check) + .btn:active, :not(.btn-check) + .button-danger:active, :not(.btn-check) + .button-primary:active, :not(.btn-check) + .button-outline-light:active, .btn:first-child:active, .button-danger:first-child:active, .button-primary:first-child:active, .button-outline-light:first-child:active, .btn.active, .active.button-danger, .active.button-primary, .active.button-outline-light, .btn.show, .show.button-danger, .show.button-primary, .show.button-outline-light {
+.btn-check:checked + .btn, .btn-check:checked + .button-danger, .btn-check:checked + .button-primary, .btn-check:checked + .button-secondary, .btn-check:checked + .button-outline-light, :not(.btn-check) + .btn:active, :not(.btn-check) + .button-danger:active, :not(.btn-check) + .button-primary:active, :not(.btn-check) + .button-secondary:active, :not(.btn-check) + .button-outline-light:active, .btn:first-child:active, .button-danger:first-child:active, .button-primary:first-child:active, .button-secondary:first-child:active, .button-outline-light:first-child:active, .btn.active, .active.button-danger, .active.button-primary, .active.button-secondary, .active.button-outline-light, .btn.show, .show.button-danger, .show.button-primary, .show.button-secondary, .show.button-outline-light {
   color: var(--bs-btn-active-color);
   background-color: var(--bs-btn-active-bg);
   border-color: var(--bs-btn-active-border-color);
 }
-.btn-check:checked + .btn:focus-visible, .btn-check:checked + .button-danger:focus-visible, .btn-check:checked + .button-primary:focus-visible, .btn-check:checked + .button-outline-light:focus-visible, :not(.btn-check) + .btn:active:focus-visible, :not(.btn-check) + .button-danger:active:focus-visible, :not(.btn-check) + .button-primary:active:focus-visible, :not(.btn-check) + .button-outline-light:active:focus-visible, .btn:first-child:active:focus-visible, .button-danger:first-child:active:focus-visible, .button-primary:first-child:active:focus-visible, .button-outline-light:first-child:active:focus-visible, .btn.active:focus-visible, .active.button-danger:focus-visible, .active.button-primary:focus-visible, .active.button-outline-light:focus-visible, .btn.show:focus-visible, .show.button-danger:focus-visible, .show.button-primary:focus-visible, .show.button-outline-light:focus-visible {
+.btn-check:checked + .btn:focus-visible, .btn-check:checked + .button-danger:focus-visible, .btn-check:checked + .button-primary:focus-visible, .btn-check:checked + .button-secondary:focus-visible, .btn-check:checked + .button-outline-light:focus-visible, :not(.btn-check) + .btn:active:focus-visible, :not(.btn-check) + .button-danger:active:focus-visible, :not(.btn-check) + .button-primary:active:focus-visible, :not(.btn-check) + .button-secondary:active:focus-visible, :not(.btn-check) + .button-outline-light:active:focus-visible, .btn:first-child:active:focus-visible, .button-danger:first-child:active:focus-visible, .button-primary:first-child:active:focus-visible, .button-secondary:first-child:active:focus-visible, .button-outline-light:first-child:active:focus-visible, .btn.active:focus-visible, .active.button-danger:focus-visible, .active.button-primary:focus-visible, .active.button-secondary:focus-visible, .active.button-outline-light:focus-visible, .btn.show:focus-visible, .show.button-danger:focus-visible, .show.button-primary:focus-visible, .show.button-secondary:focus-visible, .show.button-outline-light:focus-visible {
   box-shadow: var(--bs-btn-focus-box-shadow);
 }
-.btn-check:checked:focus-visible + .btn, .btn-check:checked:focus-visible + .button-danger, .btn-check:checked:focus-visible + .button-primary, .btn-check:checked:focus-visible + .button-outline-light {
+.btn-check:checked:focus-visible + .btn, .btn-check:checked:focus-visible + .button-danger, .btn-check:checked:focus-visible + .button-primary, .btn-check:checked:focus-visible + .button-secondary, .btn-check:checked:focus-visible + .button-outline-light {
   box-shadow: var(--bs-btn-focus-box-shadow);
 }
-.btn:disabled, .button-danger:disabled, .button-primary:disabled, .button-outline-light:disabled, .btn.disabled, .disabled.button-danger, .disabled.button-primary, .disabled.button-outline-light, fieldset:disabled .btn, fieldset:disabled .button-danger, fieldset:disabled .button-primary, fieldset:disabled .button-outline-light {
+.btn:disabled, .button-danger:disabled, .button-primary:disabled, .button-secondary:disabled, .button-outline-light:disabled, .btn.disabled, .disabled.button-danger, .disabled.button-primary, .disabled.button-secondary, .disabled.button-outline-light, fieldset:disabled .btn, fieldset:disabled .button-danger, fieldset:disabled .button-primary, fieldset:disabled .button-secondary, fieldset:disabled .button-outline-light {
   color: var(--bs-btn-disabled-color);
   pointer-events: none;
   background-color: var(--bs-btn-disabled-bg);
@@ -3138,7 +3163,7 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   --bs-gradient: none;
 }
 
-.btn-outline-secondary {
+.btn-outline-secondary, .button-secondary {
   --bs-btn-color: #6c757d;
   --bs-btn-border-color: #6c757d;
   --bs-btn-hover-color: #fff;
@@ -3279,14 +3304,14 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   color: var(--bs-btn-hover-color);
 }
 
-.btn-lg, .btn-group-lg > .btn, .btn-group-lg > .button-danger, .btn-group-lg > .button-primary, .btn-group-lg > .button-outline-light {
+.btn-lg, .btn-group-lg > .btn, .btn-group-lg > .button-danger, .btn-group-lg > .button-primary, .btn-group-lg > .button-secondary, .btn-group-lg > .button-outline-light {
   --bs-btn-padding-y: 0.5rem;
   --bs-btn-padding-x: 1rem;
   --bs-btn-font-size: 1.25rem;
   --bs-btn-border-radius: var(--bs-border-radius-lg);
 }
 
-.btn-sm, .btn-group-sm > .btn, .btn-group-sm > .button-danger, .btn-group-sm > .button-primary, .btn-group-sm > .button-outline-light {
+.btn-sm, .btn-group-sm > .btn, .btn-group-sm > .button-danger, .btn-group-sm > .button-primary, .btn-group-sm > .button-secondary, .btn-group-sm > .button-outline-light {
   --bs-btn-padding-y: 0.25rem;
   --bs-btn-padding-x: 0.5rem;
   --bs-btn-font-size: 0.875rem;
@@ -3653,58 +3678,70 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   display: inline-flex;
   vertical-align: middle;
 }
-.btn-group > .btn, .btn-group > .button-danger, .btn-group > .button-primary, .btn-group > .button-outline-light,
+.btn-group > .btn, .btn-group > .button-danger, .btn-group > .button-primary, .btn-group > .button-secondary, .btn-group > .button-outline-light,
 .btn-group-vertical > .btn,
 .btn-group-vertical > .button-danger,
 .btn-group-vertical > .button-primary,
+.btn-group-vertical > .button-secondary,
 .btn-group-vertical > .button-outline-light {
   position: relative;
   flex: 1 1 auto;
 }
-.btn-group > .btn-check:checked + .btn, .btn-group > .btn-check:checked + .button-danger, .btn-group > .btn-check:checked + .button-primary, .btn-group > .btn-check:checked + .button-outline-light,
+.btn-group > .btn-check:checked + .btn, .btn-group > .btn-check:checked + .button-danger, .btn-group > .btn-check:checked + .button-primary, .btn-group > .btn-check:checked + .button-secondary, .btn-group > .btn-check:checked + .button-outline-light,
 .btn-group > .btn-check:focus + .btn,
 .btn-group > .btn-check:focus + .button-danger,
 .btn-group > .btn-check:focus + .button-primary,
+.btn-group > .btn-check:focus + .button-secondary,
 .btn-group > .btn-check:focus + .button-outline-light,
 .btn-group > .btn:hover,
 .btn-group > .button-danger:hover,
 .btn-group > .button-primary:hover,
+.btn-group > .button-secondary:hover,
 .btn-group > .button-outline-light:hover,
 .btn-group > .btn:focus,
 .btn-group > .button-danger:focus,
 .btn-group > .button-primary:focus,
+.btn-group > .button-secondary:focus,
 .btn-group > .button-outline-light:focus,
 .btn-group > .btn:active,
 .btn-group > .button-danger:active,
 .btn-group > .button-primary:active,
+.btn-group > .button-secondary:active,
 .btn-group > .button-outline-light:active,
 .btn-group > .btn.active,
 .btn-group > .active.button-danger,
 .btn-group > .active.button-primary,
+.btn-group > .active.button-secondary,
 .btn-group > .active.button-outline-light,
 .btn-group-vertical > .btn-check:checked + .btn,
 .btn-group-vertical > .btn-check:checked + .button-danger,
 .btn-group-vertical > .btn-check:checked + .button-primary,
+.btn-group-vertical > .btn-check:checked + .button-secondary,
 .btn-group-vertical > .btn-check:checked + .button-outline-light,
 .btn-group-vertical > .btn-check:focus + .btn,
 .btn-group-vertical > .btn-check:focus + .button-danger,
 .btn-group-vertical > .btn-check:focus + .button-primary,
+.btn-group-vertical > .btn-check:focus + .button-secondary,
 .btn-group-vertical > .btn-check:focus + .button-outline-light,
 .btn-group-vertical > .btn:hover,
 .btn-group-vertical > .button-danger:hover,
 .btn-group-vertical > .button-primary:hover,
+.btn-group-vertical > .button-secondary:hover,
 .btn-group-vertical > .button-outline-light:hover,
 .btn-group-vertical > .btn:focus,
 .btn-group-vertical > .button-danger:focus,
 .btn-group-vertical > .button-primary:focus,
+.btn-group-vertical > .button-secondary:focus,
 .btn-group-vertical > .button-outline-light:focus,
 .btn-group-vertical > .btn:active,
 .btn-group-vertical > .button-danger:active,
 .btn-group-vertical > .button-primary:active,
+.btn-group-vertical > .button-secondary:active,
 .btn-group-vertical > .button-outline-light:active,
 .btn-group-vertical > .btn.active,
 .btn-group-vertical > .active.button-danger,
 .btn-group-vertical > .active.button-primary,
+.btn-group-vertical > .active.button-secondary,
 .btn-group-vertical > .active.button-outline-light {
   z-index: 1;
 }
@@ -3714,37 +3751,41 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   flex-wrap: wrap;
   justify-content: flex-start;
 }
-.btn-toolbar .input-group {
+.btn-toolbar .input-group, .btn-toolbar .search-bar {
   width: auto;
 }
 
 .btn-group {
   border-radius: var(--bs-border-radius);
 }
-.btn-group > :not(.btn-check:first-child) + .btn, .btn-group > :not(.btn-check:first-child) + .button-danger, .btn-group > :not(.btn-check:first-child) + .button-primary, .btn-group > :not(.btn-check:first-child) + .button-outline-light,
+.btn-group > :not(.btn-check:first-child) + .btn, .btn-group > :not(.btn-check:first-child) + .button-danger, .btn-group > :not(.btn-check:first-child) + .button-primary, .btn-group > :not(.btn-check:first-child) + .button-secondary, .btn-group > :not(.btn-check:first-child) + .button-outline-light,
 .btn-group > .btn-group:not(:first-child) {
   margin-left: calc(-1 * var(--bs-border-width));
 }
-.btn-group > .btn:not(:last-child):not(.dropdown-toggle), .btn-group > .button-danger:not(:last-child):not(.dropdown-toggle), .btn-group > .button-primary:not(:last-child):not(.dropdown-toggle), .btn-group > .button-outline-light:not(:last-child):not(.dropdown-toggle),
+.btn-group > .btn:not(:last-child):not(.dropdown-toggle), .btn-group > .button-danger:not(:last-child):not(.dropdown-toggle), .btn-group > .button-primary:not(:last-child):not(.dropdown-toggle), .btn-group > .button-secondary:not(:last-child):not(.dropdown-toggle), .btn-group > .button-outline-light:not(:last-child):not(.dropdown-toggle),
 .btn-group > .btn.dropdown-toggle-split:first-child,
 .btn-group > .dropdown-toggle-split.button-danger:first-child,
 .btn-group > .dropdown-toggle-split.button-primary:first-child,
+.btn-group > .dropdown-toggle-split.button-secondary:first-child,
 .btn-group > .dropdown-toggle-split.button-outline-light:first-child,
 .btn-group > .btn-group:not(:last-child) > .btn,
 .btn-group > .btn-group:not(:last-child) > .button-danger,
 .btn-group > .btn-group:not(:last-child) > .button-primary,
+.btn-group > .btn-group:not(:last-child) > .button-secondary,
 .btn-group > .btn-group:not(:last-child) > .button-outline-light {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
-.btn-group > .btn:nth-child(n+3), .btn-group > .button-danger:nth-child(n+3), .btn-group > .button-primary:nth-child(n+3), .btn-group > .button-outline-light:nth-child(n+3),
+.btn-group > .btn:nth-child(n+3), .btn-group > .button-danger:nth-child(n+3), .btn-group > .button-primary:nth-child(n+3), .btn-group > .button-secondary:nth-child(n+3), .btn-group > .button-outline-light:nth-child(n+3),
 .btn-group > :not(.btn-check) + .btn,
 .btn-group > :not(.btn-check) + .button-danger,
 .btn-group > :not(.btn-check) + .button-primary,
+.btn-group > :not(.btn-check) + .button-secondary,
 .btn-group > :not(.btn-check) + .button-outline-light,
 .btn-group > .btn-group:not(:first-child) > .btn,
 .btn-group > .btn-group:not(:first-child) > .button-danger,
 .btn-group > .btn-group:not(:first-child) > .button-primary,
+.btn-group > .btn-group:not(:first-child) > .button-secondary,
 .btn-group > .btn-group:not(:first-child) > .button-outline-light {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -3761,12 +3802,12 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   margin-right: 0;
 }
 
-.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split, .btn-group-sm > .button-danger + .dropdown-toggle-split, .btn-group-sm > .button-primary + .dropdown-toggle-split, .btn-group-sm > .button-outline-light + .dropdown-toggle-split {
+.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split, .btn-group-sm > .button-danger + .dropdown-toggle-split, .btn-group-sm > .button-primary + .dropdown-toggle-split, .btn-group-sm > .button-secondary + .dropdown-toggle-split, .btn-group-sm > .button-outline-light + .dropdown-toggle-split {
   padding-right: 0.375rem;
   padding-left: 0.375rem;
 }
 
-.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split, .btn-group-lg > .button-danger + .dropdown-toggle-split, .btn-group-lg > .button-primary + .dropdown-toggle-split, .btn-group-lg > .button-outline-light + .dropdown-toggle-split {
+.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split, .btn-group-lg > .button-danger + .dropdown-toggle-split, .btn-group-lg > .button-primary + .dropdown-toggle-split, .btn-group-lg > .button-secondary + .dropdown-toggle-split, .btn-group-lg > .button-outline-light + .dropdown-toggle-split {
   padding-right: 0.75rem;
   padding-left: 0.75rem;
 }
@@ -3776,30 +3817,33 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   align-items: flex-start;
   justify-content: center;
 }
-.btn-group-vertical > .btn, .btn-group-vertical > .button-danger, .btn-group-vertical > .button-primary, .btn-group-vertical > .button-outline-light,
+.btn-group-vertical > .btn, .btn-group-vertical > .button-danger, .btn-group-vertical > .button-primary, .btn-group-vertical > .button-secondary, .btn-group-vertical > .button-outline-light,
 .btn-group-vertical > .btn-group {
   width: 100%;
 }
-.btn-group-vertical > .btn:not(:first-child), .btn-group-vertical > .button-danger:not(:first-child), .btn-group-vertical > .button-primary:not(:first-child), .btn-group-vertical > .button-outline-light:not(:first-child),
+.btn-group-vertical > .btn:not(:first-child), .btn-group-vertical > .button-danger:not(:first-child), .btn-group-vertical > .button-primary:not(:first-child), .btn-group-vertical > .button-secondary:not(:first-child), .btn-group-vertical > .button-outline-light:not(:first-child),
 .btn-group-vertical > .btn-group:not(:first-child) {
   margin-top: calc(-1 * var(--bs-border-width));
 }
-.btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .button-danger:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .button-primary:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .button-outline-light:not(:last-child):not(.dropdown-toggle),
+.btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .button-danger:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .button-primary:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .button-secondary:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .button-outline-light:not(:last-child):not(.dropdown-toggle),
 .btn-group-vertical > .btn-group:not(:last-child) > .btn,
 .btn-group-vertical > .btn-group:not(:last-child) > .button-danger,
 .btn-group-vertical > .btn-group:not(:last-child) > .button-primary,
+.btn-group-vertical > .btn-group:not(:last-child) > .button-secondary,
 .btn-group-vertical > .btn-group:not(:last-child) > .button-outline-light {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-.btn-group-vertical > .btn:nth-child(n+3), .btn-group-vertical > .button-danger:nth-child(n+3), .btn-group-vertical > .button-primary:nth-child(n+3), .btn-group-vertical > .button-outline-light:nth-child(n+3),
+.btn-group-vertical > .btn:nth-child(n+3), .btn-group-vertical > .button-danger:nth-child(n+3), .btn-group-vertical > .button-primary:nth-child(n+3), .btn-group-vertical > .button-secondary:nth-child(n+3), .btn-group-vertical > .button-outline-light:nth-child(n+3),
 .btn-group-vertical > :not(.btn-check) + .btn,
 .btn-group-vertical > :not(.btn-check) + .button-danger,
 .btn-group-vertical > :not(.btn-check) + .button-primary,
+.btn-group-vertical > :not(.btn-check) + .button-secondary,
 .btn-group-vertical > :not(.btn-check) + .button-outline-light,
 .btn-group-vertical > .btn-group:not(:first-child) > .btn,
 .btn-group-vertical > .btn-group:not(:first-child) > .button-danger,
 .btn-group-vertical > .btn-group:not(:first-child) > .button-primary,
+.btn-group-vertical > .btn-group:not(:first-child) > .button-secondary,
 .btn-group-vertical > .btn-group:not(:first-child) > .button-outline-light {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -4893,7 +4937,7 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   display: none;
 }
 
-.btn .badge, .button-danger .badge, .button-primary .badge, .button-outline-light .badge {
+.btn .badge, .button-danger .badge, .button-primary .badge, .button-secondary .badge, .button-outline-light .badge {
   position: relative;
   top: -1px;
 }
@@ -6842,7 +6886,7 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   background-color: currentcolor;
   opacity: 0.5;
 }
-.placeholder.btn::before, .placeholder.button-danger::before, .placeholder.button-primary::before, .placeholder.button-outline-light::before {
+.placeholder.btn::before, .placeholder.button-danger::before, .placeholder.button-primary::before, .placeholder.button-secondary::before, .placeholder.button-outline-light::before {
   display: inline-block;
   content: "";
 }
@@ -7372,7 +7416,7 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   display: table-cell !important;
 }
 
-.d-flex, .button-group, .coluna-dupla-principal {
+.d-flex, .button-group, .main-double-collumns {
   display: flex !important;
 }
 
@@ -7774,7 +7818,7 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   flex-shrink: 1 !important;
 }
 
-.flex-wrap, .coluna-dupla-principal {
+.flex-wrap, .main-double-collumns {
   flex-wrap: wrap !important;
 }
 
@@ -7798,7 +7842,7 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   justify-content: center !important;
 }
 
-.justify-content-between, .coluna-dupla-principal {
+.justify-content-between, .main-double-collumns {
   justify-content: space-between !important;
 }
 
@@ -7818,7 +7862,7 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   align-items: flex-end !important;
 }
 
-.align-items-center, .coluna-dupla-principal {
+.align-items-center, .main-double-collumns {
   align-items: center !important;
 }
 
@@ -8024,7 +8068,7 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   margin-top: 1rem !important;
 }
 
-.mt-4 {
+.mt-4, .search-bar {
   margin-top: 1.5rem !important;
 }
 
@@ -8080,7 +8124,7 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   margin-bottom: 1rem !important;
 }
 
-.mb-4 {
+.mb-4, .search-bar {
   margin-bottom: 1.5rem !important;
 }
 
@@ -8216,7 +8260,7 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   padding-top: 0.5rem !important;
 }
 
-.pt-3, .pg-footer, footer, .coluna-dupla-principal {
+.pt-3, .pg-footer, footer, .main-double-collumns {
   padding-top: 1rem !important;
 }
 
@@ -9826,7 +9870,7 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   .flex-md-wrap {
     flex-wrap: wrap !important;
   }
-  .flex-md-nowrap, .coluna-dupla-principal {
+  .flex-md-nowrap, .main-double-collumns {
     flex-wrap: nowrap !important;
   }
   .flex-md-wrap-reverse {
@@ -17436,7 +17480,7 @@ form .input-group.has-validation > .form-floating:nth-last-child(n+3) > input,
   content: "\f64c";
 }
 
-.bi-plus-lg::before {
+.bi-plus-lg::before, .icon-plus::before {
   content: "\f64d";
 }
 
@@ -20339,6 +20383,10 @@ a {
 
 .subtotal {
   max-width: 3rem;
+}
+
+.input-group, .search-bar {
+  flex-flow: row;
 }
 
 /*# sourceMappingURL=main.css.map */
