@@ -1,7 +1,6 @@
 package br.edu.ifto.ecommerce.model.repository;
 
 import br.edu.ifto.ecommerce.model.entity.produto.Produto;
-import br.edu.ifto.ecommerce.model.entity.venda.ItemVenda;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -16,6 +15,13 @@ public class ProdutoRepository {
 
     public List<Produto> findAll() {
         return em.createQuery("from Produto", Produto.class).getResultList();
+    }
+
+    public List<Produto> findAllByDescricao(String descricao) {
+        return em.createQuery(
+                        "from Produto where lower(descricao) like lower(:descricao)", Produto.class)
+                .setParameter("descricao", "%" + descricao + "%")
+                .getResultList();
     }
 
     public Produto findById(Long id) {

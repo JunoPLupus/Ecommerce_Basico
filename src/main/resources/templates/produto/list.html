@@ -23,9 +23,16 @@
         </a>
     </div>
 
+    <form th:action="@{/produtos}" method="get" class="search-bar">
+        <input type="search" id="search" name="search" placeholder="Pesquisar por descrição..." aria-label="search" >
+        <button class="button-secondary" type="submit" id="button-search">
+            <i class="icon-search"></i>
+        </button>
+    </form>
+
     <div th:replace="~{fragments/alert :: alert(${erro})}"></div>
 
-    <table>
+    <table th:if="${produtos != null}">
         <thead>
         <tr>
             <th scope="col">ID</th>
@@ -62,6 +69,8 @@
         </tr>
         </tbody>
     </table>
+
+    <p th:if="${produtos == null}">Nenhum produto encontrado.</p>
 
 </main>
 
