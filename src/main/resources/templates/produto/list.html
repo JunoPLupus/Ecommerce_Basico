@@ -32,7 +32,9 @@
 
     <div th:replace="~{fragments/alert :: alert(${erro})}"></div>
 
-    <table th:if="${produtos != null}">
+    <p th:if="${produtos == null || #lists.isEmpty(produtos)}">Nenhum produto encontrado.</p>
+
+    <table th:unless="${produtos == null || #lists.isEmpty(produtos)}">
         <thead>
         <tr>
             <th scope="col">ID</th>
@@ -69,8 +71,6 @@
         </tr>
         </tbody>
     </table>
-
-    <p th:if="${produtos == null}">Nenhum produto encontrado.</p>
 
 </main>
 
