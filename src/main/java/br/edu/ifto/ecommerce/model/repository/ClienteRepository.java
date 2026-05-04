@@ -14,8 +14,8 @@ public class ClienteRepository {
     private EntityManager em;
 
     public List<Pessoa> findAllByNome(String nome) {
-        return em.createQuery( // TODO: Buscar por nome ou razão social
-                        "FROM Pessoa p WHERE lower(p.nome) like lower(:nome)", Pessoa.class)
+        return em.createQuery( // TODO: Terminar a implementação sem erros
+                        "FROM Pessoa p WHERE lower(p.nome) like lower(:nome) OR lower(p.razaoSocial) like lower(:nome) ", Pessoa.class)
                 .setParameter("nome", "%" + nome + "%")
                 .getResultList();
     }
