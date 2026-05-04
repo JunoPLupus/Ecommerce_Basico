@@ -12,7 +12,30 @@
         <i class="icon-bag text-muted"></i>
         Vendas
     </h1>
-    <table>
+
+    <form th:action="@{/vendas}" method="get" class="search-bar">
+        <input type="search" id="nomeCliente" name="nomeCliente" placeholder="Pesquisar por nome do cliente..." aria-label="Filtro por nome de cliente" >
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Filtrar
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <input type="date" class="dropdown-item" id="dataInicial" name="dataInicial" href="#" aria-label="Data inicial">
+                </li>
+                <li>
+                    <input type="date" class="dropdown-item" id="dataFinal" name="dataFinal" href="#" aria-label="Data final">
+                </li>
+            </ul>
+        </div>
+        <button class="button-secondary" type="submit" id="button-search">
+            <i class="icon-search"></i>
+        </button>
+    </form>
+
+    <p th:if="${vendas == null || #lists.isEmpty(vendas)}">Nenhuma venda encontrada.</p>
+
+    <table th:unless="${vendas == null || #lists.isEmpty(vendas)} ">
         <thead>
         <tr>
             <th scope="col">ID</th>
