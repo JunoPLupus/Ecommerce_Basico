@@ -10,6 +10,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.*;
 
 @Transactional
@@ -21,12 +24,16 @@ public class ProdutoController {
     private ProdutoRepository produtoRepository;
 
     @GetMapping({"", "/list"})
-    public String listar(@RequestParam(required = false) String search, ModelMap model) {
-        if(search != null && !search.isBlank()){
-            model.addAttribute("produtos", produtoRepository.findAllByDescricao(search));
-        } else {
-            model.addAttribute("produtos", produtoRepository.findAll());
-        }
+    public String listar(@RequestParam(required = false) String descricao,
+                         ModelMap model) {
+
+        // TODO: ajustar filtro de pesquisa para aceitar descrição ou id como input
+        List<Produto> produtos = new ArrayList<>(
+                descricao != null && !descricao.isBlank() ?
+                        produtoRepository.findAllByDescricao(descricao) :
+                        produtoRepository.findAll());
+        // TODO: criar filtro por range de valor/preço unitário
+        model.addAttribute("produtos", produtos);
         return "produto/list";
     }
 
