@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
+<head th:replace="~{fragments/head :: head('Detalhes do Cliente',~{})}"></head>
+<body>
+<main class="pg-card">
+
+    <h1>
+        <i class="icon-person text-muted"></i>
+        Detalhes do Cliente
+        <small class="text-muted" th:text="'#' + ${cliente.id}"></small>
+    </h1>
+    <p>
+        <mark>
+            <i class="icon-document"></i>
+            <span th:text="${(cliente.getTipo() == 'F'.charAt(0) ? 'CPF' : 'CNPJ') + ': ' + cliente.getDocumentoMascarado()}"></span>
+        </mark>
+
+        <mark>
+            <i class="icon-person-identity"></i>
+            <span th:text="${(cliente.getTipo() == 'F'.charAt(0) ? 'Nome' : 'Razão Social') + ': ' + cliente.getNomeExibicao()}"></span>
+        </mark>
+        &nbsp;
+        <mark>
+            <i class="icon-email"></i>
+            <span th:text="'E-mail: ' + ${cliente.email}"></span>
+        </mark>
+
+        <mark>
+            <i class="icon-phone"></i>
+            <span th:text="'Telefone: ' + ${cliente.telefone}"></span>
+        </mark>
+    </p>
+    <br>
+
+    <p th:if="${vendas == null || #lists.isEmpty(vendas)}">Nenhuma venda associada à este cliente.</p>
+
+    <table th:unless="${vendas == null || #lists.isEmpty(vendas)} ">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Data</th>
+            <th scope="col">Total</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="venda : ${vendas}">
+            <td scope="row" th:text="${venda.id}"></td>
+            <td th:text="${#temporals.format(venda.data, 'dd/MM/yyyy HH:mm')}"></td>
+            <td th:text="'R$ ' + ${#numbers.formatDecimal(venda.total, 1, 'POINT', 2, 'COMMA')}"></td>
+            <td class="text-end">
+                <a th:href="@{/vendas/detalhes/{id}(id=${venda.id})}"
+                   type="button" class="button-primary"
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="top"
+                   title="Ver detalhes da venda">
+                    <i class="icon-document"></i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

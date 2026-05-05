@@ -13,11 +13,19 @@ public class ClienteRepository {
     @PersistenceContext
     private EntityManager em;
 
-    public List<Pessoa> findAllByNome(String nome) {
-        return em.createQuery( // TODO: Terminar a implementação sem erros
-                        "FROM Pessoa p WHERE lower(p.nome) like lower(:nome) OR lower(p.razaoSocial) like lower(:nome) ", Pessoa.class)
-                .setParameter("nome", "%" + nome + "%")
+    public List<Pessoa> findAll(){
+        return em.createQuery("FROM Pessoa", Pessoa.class).getResultList();
+    }
+
+    public List<Pessoa> findAllByNomeOuRazaoSocial(String nomeOuRazaoSocial) {
+        return em.createQuery(
+                        "FROM Pessoa p WHERE lower(TREAT(p AS PessoaFisica).nome) LIKE lower(:nome) OR lower(TREAT(p AS PessoaJuridica).razaoSocial) LIKE lower(:nome)", Pessoa.class)
+                .setParameter("nome", "%" + nomeOuRazaoSocial + "%")
                 .getResultList();
+    }
+
+    public Pessoa findById(Long id){
+        return em.find(Pessoa.class, id);
     }
 
     public void insert(Pessoa pessoa){

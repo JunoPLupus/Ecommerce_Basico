@@ -40,6 +40,14 @@ public class VendaRepository {
         return query.getResultList();
     }
 
+    public List<Venda> findAllByClienteId(Long idCliente) {
+        String hql = "FROM Venda v WHERE v.cliente.id = :idCliente";
+
+        return em.createQuery(hql, Venda.class)
+                .setParameter("idCliente", idCliente)
+                .getResultList();
+    }
+
     public Venda findById(Long id) {
         return em.find(Venda.class, id);
     }
