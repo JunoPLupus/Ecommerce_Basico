@@ -33,6 +33,11 @@
         </button>
     </form>
 
+    <div th:if="${filtrosAplicados != null}">
+        <span th:text="${filtrosAplicados} + ' filtro(s) aplicado(s).'"></span>
+        <a th:href="@{/vendas}">Limpar filtros</a>
+    </div>
+
     <p th:if="${vendas == null || #lists.isEmpty(vendas)}">Nenhuma venda encontrada.</p>
 
     <table th:unless="${vendas == null || #lists.isEmpty(vendas)} ">
