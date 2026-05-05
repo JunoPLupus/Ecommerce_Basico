@@ -17,7 +17,9 @@
         &nbsp;
         <mark>
             <i class="icon-person"></i>
-            <span th:text="'Cliente: ' + ${venda.cliente.nomeExibicao}"></span>
+            <span> Cliente:
+                <a th:href="@{/clientes/detalhes/{id}(id=${venda.cliente.id})}" th:text="${venda.cliente.nomeExibicao}" class="link"></a>
+            </span>
         </mark>
     </p>
     <br>
