@@ -24,7 +24,13 @@
             </button>
             <ul class="dropdown-menu">
                 <li>
-                    <input type="date" class="dropdown-item" id="dataInicial" name="dataInicial" href="#" aria-label="Data inicial">
+                    <label for="date-picker">Data ou intervalo</label>
+                    <div class="input-group">
+                        <span><i class="icon-calendar"></i></span>
+                        <input type="text" class="date-picker" id="date-picker" placeholder="Selecione a(s) data(s)">
+                    </div>
+                    <input type="hidden" name="dataInicial" id="dataInicial" th:value="${dataInicial}">
+                    <input type="hidden" name="dataFinal" id="dataFinal" th:value="${dataFinal}">
                 </li>
                 <li>
                     <input type="date" class="dropdown-item" id="dataFinal" name="dataFinal" href="#" aria-label="Data final">
