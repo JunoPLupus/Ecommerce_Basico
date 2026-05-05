@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.*;
 
@@ -36,6 +36,12 @@ public class VendaController {
         System.out.println(dataInicial);
         List<Venda> vendas = vendaRepository.findAllByDynamicFilters(nomeCliente, dataInicial, dataFinal);
 
+        int filtrosAplicados = 0;
+        if (nomeCliente != null) {
+            model.addAttribute("nomeCliente", nomeCliente);
+            filtrosAplicados++;
+        }
+        if(filtrosAplicados > 0) model.addAttribute("filtrosAplicados", filtrosAplicados);
         model.addAttribute("vendas", vendas);
         return "venda/list";
     }
