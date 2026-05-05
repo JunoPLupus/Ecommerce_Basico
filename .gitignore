@@ -35,3 +35,12 @@ build/
 ### Node ###
 node_modules/
 package-lock.json
+
+### CSS gerado pelo SCSS ###
+src/main/resources/static/css/main.css
+src/main/resources/static/css/main.css.map
+
+### Arquivos extras ###
+src/main/resources/static/js/bootstrap.bundle.min.js
+src/main/resources/static/js/flatpickr.min.js
+src/main/resources/static/css/flatpickr.min.css

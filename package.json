@@ -2,7 +2,8 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
-    "bootstrap-icons": "^1.11.0"
+    "bootstrap-icons": "^1.11.0",
+    "flatpickr": "^4.6.13"
   },
   "devDependencies": {
     "sass": "^1.99.0",
@@ -11,6 +12,6 @@
   "scripts": {
     "compile-sass": "sass src/main/scss/main.scss src/main/resources/static/css/main.css",
     "watch-sass": "sass --watch src/main/scss/main.scss src/main/resources/static/css/main.css",
-    "postinstall": "copyfiles -f node_modules/bootstrap/dist/js/bootstrap.bundle.min.js src/main/resources/static/js && copyfiles -f node_modules/bootstrap-icons/font/fonts/* src/main/resources/static/css/fonts"
+    "postinstall": "copyfiles -f node_modules/bootstrap/dist/js/bootstrap.bundle.min.js src/main/resources/static/js && copyfiles -f node_modules/bootstrap-icons/font/fonts/* src/main/resources/static/css/fonts && copyfiles -f node_modules/flatpickr/dist/flatpickr.min.js src/main/resources/static/js && copyfiles -f node_modules/flatpickr/dist/flatpickr.min.css src/main/resources/static/css"
   }
 }

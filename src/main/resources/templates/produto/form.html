@@ -1,11 +1,7 @@
 <!DOCTYPE html>
-
 <html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
-
 <head th:replace="~{fragments/head :: head(${produto.id == null ? 'Cadastrar Produto' : 'Editar Produto'},~{})}"></head>
-
 <body>
-
 <main class="pg-card">
 
     <h1 th:text="${produto.id == null ? 'Cadastrar Produto' : 'Editar Produto'}"></h1>
@@ -24,7 +20,7 @@
         <div class="mb-4">
             <label for="valor" class="form-label">Valor</label>
             <div class="input-group">
-                <span class="input-group-text">R$</span>
+                <span>R$</span>
                 <input type="number" aria-label="Valor em Reais (R$)"
                        step="0.01" min="0"
                        id="valor"
@@ -32,14 +28,11 @@
                        placeholder="0.00" required >
             </div>
         </div>
-
         <hr>
-
         <button type="submit" class="button-primary"
                 th:text="${produto.id == null ? 'Cadastrar Produto' : 'Editar Produto'}"></button>
     </form>
 
 </main>
-
 </body>
 </html>

@@ -39,5 +39,11 @@ public abstract class Pessoa {
         this.telefone = telefone;
     }
 
+    public abstract char getTipo();
+
     public abstract String getNomeExibicao();
+
+    public abstract String getDocumento();
+
+    public abstract String getDocumentoMascarado();
 }

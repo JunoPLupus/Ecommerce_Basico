@@ -27,7 +27,22 @@ public class PessoaFisica extends Pessoa {
     }
 
     @Override
+    public char getTipo() {
+        return 'F';
+    }
+
+    @Override
     public String getNomeExibicao() {
         return getNome();
+    }
+
+    @Override
+    public String getDocumento() {
+        return getCpf();
+    }
+
+    @Override
+    public String getDocumentoMascarado() {
+        return "***" + getDocumento().substring(3, 9) + "**-**";
     }
 }

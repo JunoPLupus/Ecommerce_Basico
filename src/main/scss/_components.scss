@@ -46,6 +46,16 @@ i {
   @extend .bi;
 }
 
+mark {
+  @extend .badge;
+  @extend .rounded-pill;
+  @extend .bg-light;
+  @extend .text-dark;
+  span {
+    @extend .fw-normal;
+  }
+}
+
 .button-danger {
   @extend .btn;
   @extend .btn-danger;
@@ -54,6 +64,11 @@ i {
 .button-primary {
   @extend .btn;
   @extend .btn-primary;
+}
+
+.button-secondary {
+  @extend .btn;
+  @extend .btn-outline-secondary;
 }
 
 .pg-card {
@@ -89,7 +104,34 @@ i {
   @extend .pt-3;
 }
 
-.input-group{
+.search-bar {
+  @extend .input-group;
+  @extend .mt-4;
+  @extend .mb-4;
+}
+
+.dropdown {
+  .filter-btn {
+    @extend .button-secondary;
+    @extend .rounded-0;
+    @extend .dropdown-toggle;
+  }
+  .dropdown-menu {
+    @extend .dropdown-menu-end;
+    min-width: max-content;
+
+    li {
+      padding: 1rem;
+    }
+  }
+}
+
+.date-picker input {
+  min-width: 215px;
+}
+
+.input-group {
+  flex-flow: row;
   span {
     @extend .input-group-text;
   }
@@ -101,7 +143,7 @@ i {
   @extend .justify-content-end;
 }
 
-.coluna-dupla-principal {
+.main-double-collumns {
   @extend .d-flex;
   @extend .justify-content-between;
   @extend .flex-wrap;
@@ -178,4 +220,36 @@ i {
 
 .icon-trash {
   @extend .bi-trash;
+}
+
+.icon-plus {
+  @extend .bi-plus-lg;
+}
+
+.icon-person {
+  @extend .bi-person;
+}
+
+.icon-calendar {
+  @extend .bi-calendar;
+}
+
+.icon-numbers {
+  @extend .bi-123;
+}
+
+.icon-person-identity {
+  @extend .bi-person-vcard;
+}
+
+.icon-email {
+  @extend .bi-envelope-at;
+}
+
+.icon-phone {
+  @extend .bi-telephone;
+}
+
+.icon-document {
+  @extend .bi-file-earmark-text;
 }

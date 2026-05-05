@@ -12,7 +12,48 @@
         <i class="icon-bag text-muted"></i>
         Vendas
     </h1>
-    <table>
+
+    <form th:action="@{/vendas}" method="get" class="search-bar">
+        <input type="search" id="nomeCliente" name="nomeCliente" placeholder="Pesquisar por nome do cliente..." aria-label="Filtro por nome de cliente" th:value="${nomeCliente}" >
+        <div class="dropdown">
+            <button class="filter-btn"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Filtrar
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <label for="date-picker">Data ou intervalo</label>
+                    <div class="input-group">
+                        <span><i class="icon-calendar"></i></span>
+                        <input type="text" class="date-picker" id="date-picker" placeholder="Selecione a(s) data(s)">
+                    </div>
+                    <input type="hidden" name="dataInicial" id="dataInicial" th:value="${dataInicial}">
+                    <input type="hidden" name="dataFinal" id="dataFinal" th:value="${dataFinal}">
+                </li>
+                <li>
+                    <label for="valorMinimo">Valor Total (R$)</label>
+                    <div class="input-group">
+                        <input type="number" step="0.01" min="0" name="valorMinimo" id="valorMinimo" placeholder="Valor mínimo" th:value="${valorMinimo}">
+                        <input type="number" step="0.01" min="0" name="valorMaximo" id="valorMaximo" placeholder="Valor máximo" th:value="${valorMaximo}" aria-label="Valor máximo">
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <button class="button-secondary" type="submit" id="button-search">
+            <i class="icon-search"></i>
+        </button>
+    </form>
+
+    <div th:if="${filtrosAplicados != null}">
+        <span th:text="${filtrosAplicados} + ' filtro(s) aplicado(s).'"></span>
+        <a th:href="@{/vendas}">Limpar filtros</a>
+    </div>
+
+    <p th:if="${vendas == null || #lists.isEmpty(vendas)}">Nenhuma venda encontrada.</p>
+
+    <table th:unless="${vendas == null || #lists.isEmpty(vendas)} ">
         <thead>
         <tr>
             <th scope="col">ID</th>
@@ -34,7 +75,7 @@
                    data-bs-toggle="tooltip"
                    data-bs-placement="top"
                    title="Ver detalhes da venda">
-                    <i class="icon-search"></i>
+                    <i class="icon-document"></i>
                 </a>
             </td>
         </tr>

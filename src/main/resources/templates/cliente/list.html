@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
+
+<head th:replace="~{fragments/head :: head('Clientes',~{})}"></head>
+
+<body>
+
+<main class="pg-card">
+
+    <h1>
+        <i class="icon-person text-muted"></i>
+        Clientes
+    </h1>
+
+    <form th:action="@{/clientes}" method="get" class="search-bar">
+        <input type="search" id="nome" name="nome" placeholder="Pesquisar por nome do cliente..." aria-label="Filtro por nome de cliente" th:value="${nome}">
+        <button class="button-secondary" type="submit" id="button-search">
+            <i class="icon-search"></i>
+        </button>
+    </form>
+
+    <div th:if="${filtrosAplicados != null}">
+        <span th:text="${filtrosAplicados} + ' filtro(s) aplicado(s).'"></span>
+        <a th:href="@{/clientes}">Limpar filtros</a>
+    </div>
+
+    <div th:replace="~{fragments/alert :: alert(${erro})}"></div>
+
+    <p th:if="${clientes == null || #lists.isEmpty(clientes)}">Nenhum cliente encontrado.</p>
+
+    <table th:unless="${clientes == null || #lists.isEmpty(clientes)}">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome de Exibição</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cliente : ${clientes}">
+            <td scope="row" th:text="${cliente.id}"></td>
+            <td th:text="${cliente.getNomeExibicao()}"></td>
+            <td class="text-end">
+                <div class="button-group">
+                    <a th:href="@{/clientes/detalhes/{id}(id=${cliente.id})}"
+                       type="button" class="button-primary"
+                       data-bs-toggle="tooltip"
+                       data-bs-placement="top"
+                       title="Ver detalhes do cliente">
+                        <i class="icon-document"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</main>
+
+</body>
+</html>
