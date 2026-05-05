@@ -38,3 +38,5 @@ package-lock.json
 
 ### Arquivos extras ###
 src/main/resources/static/js/bootstrap.bundle.min.js
+src/main/resources/static/js/flatpickr.min.js
+src/main/resources/static/css/flatpickr.min.css
