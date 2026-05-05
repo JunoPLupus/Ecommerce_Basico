@@ -16,8 +16,11 @@
     <form th:action="@{/vendas}" method="get" class="search-bar">
         <input type="search" id="nomeCliente" name="nomeCliente" placeholder="Pesquisar por nome do cliente..." aria-label="Filtro por nome de cliente" th:value="${nomeCliente}" >
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Filtrar
+            <button class="filter-btn"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Filtrar
             </button>
             <ul class="dropdown-menu">
                 <li>
