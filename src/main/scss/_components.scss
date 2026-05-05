@@ -110,6 +110,26 @@ mark {
   @extend .mb-4;
 }
 
+.dropdown {
+  .filter-btn {
+    @extend .button-secondary;
+    @extend .rounded-0;
+    @extend .dropdown-toggle;
+  }
+  .dropdown-menu {
+    @extend .dropdown-menu-end;
+    min-width: max-content;
+
+    li {
+      padding: 1rem;
+    }
+  }
+}
+
+.date-picker input {
+  min-width: 215px;
+}
+
 .input-group {
   flex-flow: row;
   span {
@@ -212,4 +232,24 @@ mark {
 
 .icon-calendar {
   @extend .bi-calendar;
+}
+
+.icon-numbers {
+  @extend .bi-123;
+}
+
+.icon-person-identity {
+  @extend .bi-person-vcard;
+}
+
+.icon-email {
+  @extend .bi-envelope-at;
+}
+
+.icon-phone {
+  @extend .bi-telephone;
+}
+
+.icon-document {
+  @extend .bi-file-earmark-text;
 }
