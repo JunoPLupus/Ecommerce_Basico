@@ -33,7 +33,11 @@
                     <input type="hidden" name="dataFinal" id="dataFinal" th:value="${dataFinal}">
                 </li>
                 <li>
-                    <input type="date" class="dropdown-item" id="dataFinal" name="dataFinal" href="#" aria-label="Data final">
+                    <label for="valorMinimo">Valor Total (R$)</label>
+                    <div class="input-group">
+                        <input type="number" step="0.01" min="0" name="valorMinimo" id="valorMinimo" placeholder="Valor mínimo" th:value="${valorMinimo}">
+                        <input type="number" step="0.01" min="0" name="valorMaximo" id="valorMaximo" placeholder="Valor máximo" th:value="${valorMaximo}" aria-label="Valor máximo">
+                    </div>
                 </li>
             </ul>
         </div>

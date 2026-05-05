@@ -30,9 +30,15 @@ public class VendaController {
     public String list(@RequestParam(required = false) String nomeCliente,
                        @RequestParam(required = false) LocalDate dataInicial,
                        @RequestParam(required = false) LocalDate dataFinal,
+                       @RequestParam(required = false) Double valorMinimo,
+                       @RequestParam(required = false) Double valorMaximo,
                        Model model) {
 
-        List<Venda> vendas = vendaRepository.findAllByDynamicFilters(nomeCliente, dataInicial, dataFinal);
+        List<Venda> vendas_banco = vendaRepository.findAllByDynamicFilters(nomeCliente, dataInicial, dataFinal);
+        List<Venda> vendas = _filtrarPorValorTotal(vendas_banco, valorMinimo, valorMaximo);
+
+        boolean hasValorMinimo = valorMinimo != null && valorMinimo > 0.0;
+        boolean hasValorMaximo = valorMaximo != null && valorMaximo > 0.0;
 
         int filtrosAplicados = 0;
         if (nomeCliente != null) {
@@ -44,6 +50,10 @@ public class VendaController {
             filtrosAplicados++;
         }
         if (dataFinal != null) model.addAttribute("dataFinal", dataFinal);
+        if (hasValorMinimo || hasValorMaximo) filtrosAplicados++;
+        if (hasValorMinimo) model.addAttribute("valorMinimo", valorMinimo);
+        if (hasValorMaximo) model.addAttribute("valorMaximo", valorMaximo);
+
         if(filtrosAplicados > 0) model.addAttribute("filtrosAplicados", filtrosAplicados);
         model.addAttribute("vendas", vendas);
         return "venda/list";
@@ -60,5 +70,24 @@ public class VendaController {
         ));
 
         return "venda/detail";
+    }
+
+    /*
+    * Filtro de valor aplicado em memória pois o total é calculado
+    * a partir dos itens. Para volumes maiores, considerar subquery HQL.
+     */
+    private List<Venda> _filtrarPorValorTotal(List<Venda> vendas, Double valorMinimo, Double valorMaximo) {
+        Stream<Venda> stream = vendas.stream();
+        if (valorMinimo != null && valorMinimo > 0.0) stream = _filtrarPorValorMinimo(stream, valorMinimo);
+        if (valorMaximo != null && valorMaximo > 0.0) stream = _filtrarPorValorMaximo(stream, valorMaximo);
+        return stream.toList();
+    }
+
+    private Stream<Venda> _filtrarPorValorMinimo(Stream<Venda> vendas, Double valorMinimo) {
+        return vendas.filter(v -> v.total() >= valorMinimo);
+    }
+
+    private Stream<Venda> _filtrarPorValorMaximo(Stream<Venda> vendas, Double valorMaximo) {
+        return vendas.filter(v -> v.total() <= valorMaximo);
     }
 }
