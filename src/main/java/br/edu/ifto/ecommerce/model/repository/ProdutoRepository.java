@@ -1,10 +1,12 @@
 package br.edu.ifto.ecommerce.model.repository;
 
 import br.edu.ifto.ecommerce.model.entity.produto.Produto;
+import br.edu.ifto.ecommerce.model.entity.venda.Venda;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -13,15 +15,34 @@ public class ProdutoRepository {
     @PersistenceContext
     private EntityManager em;
 
-    public List<Produto> findAll() {
-        return em.createQuery("from Produto", Produto.class).getResultList();
+    private String _generateDynamicHQL(String descricao,
+                                       Double precoMinimo,
+                                       Double precoMaximo) {
+        String hql = "FROM Produto p WHERE ";
+
+        hql += descricao != null?
+                "lower(descricao) like lower(:descricao)" :
+                "1=1";
+
+        if (precoMinimo != null && precoMaximo != null) hql+= " AND p.valor BETWEEN :precoMinimo AND :precoMaximo";
+        else if (precoMinimo != null) hql += " AND p.valor >= :precoMinimo";
+        else if (precoMaximo != null) hql += " AND p.valor <= :precoMaximo";
+
+        return hql;
     }
 
-    public List<Produto> findAllByDescricao(String descricao) {
-        return em.createQuery(
-                        "from Produto where lower(descricao) like lower(:descricao)", Produto.class)
-                .setParameter("descricao", "%" + descricao + "%")
-                .getResultList();
+    public List<Produto> findAllByDynamicFilters(String descricao,
+                                               Double precoMinimo,
+                                               Double precoMaximo) {
+        String dynamicHql = _generateDynamicHQL(descricao, precoMinimo, precoMaximo);
+
+        var query = em.createQuery(dynamicHql, Produto.class);
+
+        if (descricao != null) query.setParameter("descricao", "%" + descricao + "%");
+        if (precoMinimo != null) query.setParameter("precoMinimo", precoMinimo);
+        if (precoMaximo != null) query.setParameter("precoMaximo", precoMaximo);
+
+        return query.getResultList();
     }
 
     public Produto findById(Long id) {

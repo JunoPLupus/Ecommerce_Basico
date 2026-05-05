@@ -25,14 +25,24 @@ public class ProdutoController {
 
     @GetMapping({"", "/list"})
     public String listar(@RequestParam(required = false) String descricao,
+                         @RequestParam(required = false) Double precoMinimo,
+                         @RequestParam(required = false) Double precoMaximo,
                          ModelMap model) {
 
         // TODO: ajustar filtro de pesquisa para aceitar descrição ou id como input
         List<Produto> produtos = new ArrayList<>(
-                descricao != null && !descricao.isBlank() ?
-                        produtoRepository.findAllByDescricao(descricao) :
-                        produtoRepository.findAll());
-        // TODO: criar filtro por range de valor/preço unitário
+                produtoRepository.findAllByDynamicFilters(descricao, precoMinimo, precoMaximo));
+        int filtrosAplicados = 0;
+
+        if (descricao != null) {
+            model.addAttribute("descricao", descricao);
+            filtrosAplicados++;
+        }
+        if (precoMinimo != null || precoMaximo != null) filtrosAplicados++;
+        if (precoMinimo != null) model.addAttribute("precoMinimo", precoMinimo);
+        if (precoMaximo != null) model.addAttribute("precoMaximo", precoMaximo);
+
+        if (filtrosAplicados > 0) model.addAttribute("filtrosAplicados", filtrosAplicados);
         model.addAttribute("produtos", produtos);
         return "produto/list";
     }
