@@ -6,7 +6,6 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -15,7 +14,7 @@ public class VendaRepository {
     @PersistenceContext
     private EntityManager em;
 
-    private String _generateDynamicHQL(String nomeCliente, LocalDate dataInicial, LocalDate dataFinal) {
+    private String generateDynamicHQL(String nomeCliente, LocalDate dataInicial, LocalDate dataFinal) {
         String hql = "FROM Venda v WHERE ";
 
         hql += nomeCliente != null?
@@ -29,7 +28,7 @@ public class VendaRepository {
     }
 
     public List<Venda> findAllByDynamicFilters(String nomeCliente, LocalDate dataInicial, LocalDate dataFinal) {
-        String dynamicHql = _generateDynamicHQL(nomeCliente,  dataInicial, dataFinal);
+        String dynamicHql = generateDynamicHQL(nomeCliente,  dataInicial, dataFinal);
 
         var query = em.createQuery(dynamicHql, Venda.class);
 

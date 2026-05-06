@@ -1,12 +1,10 @@
 package br.edu.ifto.ecommerce.model.repository;
 
 import br.edu.ifto.ecommerce.model.entity.produto.Produto;
-import br.edu.ifto.ecommerce.model.entity.venda.Venda;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -15,9 +13,9 @@ public class ProdutoRepository {
     @PersistenceContext
     private EntityManager em;
 
-    private String _generateDynamicHQL(String descricao,
-                                       Double precoMinimo,
-                                       Double precoMaximo) {
+    private String generateDynamicHQL(String descricao,
+                                      Double precoMinimo,
+                                      Double precoMaximo) {
         String hql = "FROM Produto p WHERE ";
 
         hql += descricao != null?
@@ -34,7 +32,7 @@ public class ProdutoRepository {
     public List<Produto> findAllByDynamicFilters(String descricao,
                                                Double precoMinimo,
                                                Double precoMaximo) {
-        String dynamicHql = _generateDynamicHQL(descricao, precoMinimo, precoMaximo);
+        String dynamicHql = generateDynamicHQL(descricao, precoMinimo, precoMaximo);
 
         var query = em.createQuery(dynamicHql, Produto.class);
 
