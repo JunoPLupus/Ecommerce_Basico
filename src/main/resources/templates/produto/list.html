@@ -13,7 +13,7 @@
             <i class="icon-box text-muted"></i>
             Gerenciar Produtos
         </h1>
-        <a th:href="@{/produtos/insert}"
+        <a th:href="@{/admin/produtos/insert}"
            type="button" class="button-primary"
            data-bs-toggle="tooltip"
            data-bs-placement="top"
@@ -23,7 +23,7 @@
         </a>
     </div>
 
-    <form th:action="@{/produtos}" method="get" class="search-bar">
+    <form th:action="@{/admin/produtos}" method="get" class="search-bar">
         <input type="search" id="descricao" name="descricao" placeholder="Pesquisar por descrição do produto..." aria-label="Filtro por descrição de produto" th:value="${descricao}" >
         <div class="dropdown">
             <button class="filter-btn"
@@ -72,14 +72,14 @@
             <td th:text="'R$ ' + ${#numbers.formatDecimal(produto.valor, 1, 'POINT', 2, 'COMMA')}"></td>
             <td class="text-end">
                 <div class="button-group">
-                    <a th:href="@{/produtos/edit/{id}(id=${produto.id})}"
+                    <a th:href="@{/admin/produtos/edit/{id}(id=${produto.id})}"
                        type="button" class="button-primary"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
                        title="Editar produto">
                         <i class="icon-pen"></i>
                     </a>
-                    <form th:action="@{/produtos/delete/{id}(id=${produto.id})}" method="post">
+                    <form th:action="@{/admin/produtos/delete/{id}(id=${produto.id})}" method="post">
                         <button type="submit" class="button-danger"
                                 onclick="return window.confirm('Tem certeza que deseja excluir este produto?')"
                                 data-bs-toggle="tooltip"

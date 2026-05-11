@@ -1,4 +1,4 @@
-package br.edu.ifto.ecommerce.controller;
+package br.edu.ifto.ecommerce.controller.admin;
 
 import br.edu.ifto.ecommerce.model.entity.produto.Produto;
 import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
@@ -13,17 +13,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.ArrayList;
 import java.util.List;
 
+import static br.edu.ifto.ecommerce.config.Rotas.*;
 import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.*;
 
 @Transactional
 @Controller
-@RequestMapping("produtos")
-public class ProdutoController {
+@RequestMapping(ADMIN_PRODUTOS)
+public class AdminProdutoController {
 
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    @GetMapping({"", "/list"})
+    @GetMapping({"", LISTA})
     public String listar(@RequestParam(required = false) String descricao,
                          @RequestParam(required = false) Double precoMinimo,
                          @RequestParam(required = false) Double precoMaximo,
@@ -51,16 +52,16 @@ public class ProdutoController {
      * @param produto necessário devido utilizar no form.html o th:object que faz referência ao objeto esperado no controller.
      * @return html de cadastro de produto
      */
-    @GetMapping("/insert")
+    @GetMapping(INSERT)
     public String insert(Produto produto, ModelMap model){
         model.addAttribute("breadcrumbItems", breadcrumb(
-                new BreadcrumbItem("Produtos", "/produtos"),
+                new BreadcrumbItem("Produtos","/" + ADMIN_PRODUTOS),
                 new BreadcrumbItem("Cadastrar Produto", null)
         ));
         return "produto/form";
     }
 
-    @PostMapping("/save")
+    @PostMapping(SAVE)
     public String save(Produto produto){
         produtoRepository.insert(produto);
         return "redirect:/produtos";
@@ -71,17 +72,17 @@ public class ProdutoController {
      * @return html de edição de produto
      * @PathVariable é utilizado quando o valor da variável é passada diretamente na URL
      */
-    @GetMapping("/edit/{id}")
+    @GetMapping(EDIT_ID)
     public String edit(@PathVariable("id") Long id, ModelMap model) {
         model.addAttribute("produto", produtoRepository.findById(id));
         model.addAttribute("breadcrumbItems", breadcrumb(
-                new BreadcrumbItem("Produtos", "/produtos"),
+                new BreadcrumbItem("Produtos", "/" + ADMIN_PRODUTOS),
                 new BreadcrumbItem("Editar Produto", null)
         ));
         return "produto/form";
     }
 
-    @PostMapping("/update")
+    @PostMapping(UPDATE)
     public String update(Produto produto) {
         produtoRepository.update(produto);
         return "redirect:/produtos";
@@ -92,7 +93,7 @@ public class ProdutoController {
      * @return redirecionamento para a listagem de produtos
      * @PathVariable é utilizado quando o valor da variável é passada diretamente na URL
      */
-    @PostMapping("/delete/{id}")
+    @PostMapping(DELETE_ID)
     public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
         boolean sucess = produtoRepository.delete(id);
 

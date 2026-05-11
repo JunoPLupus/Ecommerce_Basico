@@ -1,7 +1,7 @@
 <header class="pg-header" th:fragment="header">
     <nav>
         <div class="pg-nav-container">
-            <a class="pg-nav-brand" th:href="@{/vendas}">
+            <a class="pg-nav-brand" th:href="@{/admin/vendas}">
                 <img th:src="@{/images/logo.svg}" alt="IFTO" height="40">
             </a>
             <button class="pg-nav-toggler" type="button" data-bs-toggle="collapse"
@@ -11,17 +11,17 @@
             <div class="pg-nav-collapse" id="navbarSupportedContent">
                 <ul>
                     <li>
-                        <a aria-current="page" th:href="@{/clientes}">
-                            <i class="icon-person"></i> Clientes
+                        <a aria-current="page" th:href="@{/admin/clientes}">
+                            <i class="icon-person"></i> Gerenciar Clientes
                         </a>
                     </li>
                     <li>
-                        <a aria-current="page" th:href="@{/vendas}">
-                            <i class="icon-bag"></i> Vendas
+                        <a aria-current="page" th:href="@{/admin/vendas}">
+                            <i class="icon-bag"></i> Gerenciar Vendas
                         </a>
                     </li>
                     <li>
-                        <a aria-current="page" th:href="@{/produtos}">
+                        <a aria-current="page" th:href="@{/admin/produtos}">
                             <i class="icon-box"></i> Gerenciar Produtos
                         </a>
                     </li>

@@ -13,7 +13,7 @@
         Clientes
     </h1>
 
-    <form th:action="@{/clientes}" method="get" class="search-bar">
+    <form th:action="@{/admin/clientes}" method="get" class="search-bar">
         <input type="search" id="nome" name="nome" placeholder="Pesquisar por nome do cliente..." aria-label="Filtro por nome de cliente" th:value="${nome}">
         <button class="button-secondary" type="submit" id="button-search">
             <i class="icon-search"></i>
@@ -43,7 +43,7 @@
             <td th:text="${cliente.getNomeExibicao()}"></td>
             <td class="text-end">
                 <div class="button-group">
-                    <a th:href="@{/clientes/detalhes/{id}(id=${cliente.id})}"
+                    <a th:href="@{/admin/clientes/detalhes/{id}(id=${cliente.id})}"
                        type="button" class="button-primary"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"

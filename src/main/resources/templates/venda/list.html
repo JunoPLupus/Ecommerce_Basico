@@ -13,7 +13,7 @@
         Vendas
     </h1>
 
-    <form th:action="@{/vendas}" method="get" class="search-bar">
+    <form th:action="@{/admin/vendas}" method="get" class="search-bar">
         <input type="search" id="nomeCliente" name="nomeCliente" placeholder="Pesquisar por nome do cliente..." aria-label="Filtro por nome de cliente" th:value="${nomeCliente}" >
         <div class="dropdown">
             <button class="filter-btn"
@@ -70,7 +70,7 @@
             <td th:text="${venda.cliente.nomeExibicao}"></td>
             <td th:text="'R$ ' + ${#numbers.formatDecimal(venda.total, 1, 'POINT', 2, 'COMMA')}"></td>
             <td class="text-end">
-                <a th:href="@{/vendas/detalhes/{id}(id=${venda.id})}"
+                <a th:href="@{/admin/vendas/detalhes/{id}(id=${venda.id})}"
                    type="button" class="button-primary"
                    data-bs-toggle="tooltip"
                    data-bs-placement="top"
