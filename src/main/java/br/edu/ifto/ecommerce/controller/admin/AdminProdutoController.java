@@ -3,7 +3,7 @@ package br.edu.ifto.ecommerce.controller.admin;
 import br.edu.ifto.ecommerce.model.entity.produto.Produto;
 import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
 import br.edu.ifto.ecommerce.model.repository.ProdutoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -18,10 +18,10 @@ import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.*;
 
 @Transactional
 @Controller
+@AllArgsConstructor
 @RequestMapping(ADMIN_PRODUTOS)
 public class AdminProdutoController {
 
-    @Autowired
     private ProdutoRepository produtoRepository;
 
     @GetMapping({"", LISTA})

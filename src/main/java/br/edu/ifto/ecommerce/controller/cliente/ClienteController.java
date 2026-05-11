@@ -3,7 +3,9 @@ package br.edu.ifto.ecommerce.controller.cliente;
 import br.edu.ifto.ecommerce.model.entity.cliente.PessoaFisica;
 import br.edu.ifto.ecommerce.model.entity.cliente.PessoaJuridica;
 import br.edu.ifto.ecommerce.model.repository.ClienteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +14,10 @@ import static br.edu.ifto.ecommerce.config.Rotas.*;
 
 @Transactional
 @Controller
+@AllArgsConstructor
 @RequestMapping(CLIENTES)
 public class ClienteController {
-    @Autowired
+
     ClienteRepository clienteRepository;
 
     @GetMapping(CADASTRO)

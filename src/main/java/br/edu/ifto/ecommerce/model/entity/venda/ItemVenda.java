@@ -2,10 +2,15 @@ package br.edu.ifto.ecommerce.model.entity.venda;
 
 import br.edu.ifto.ecommerce.model.entity.produto.Produto;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class ItemVenda implements Serializable {
 
@@ -20,30 +25,6 @@ public class ItemVenda implements Serializable {
     private Venda venda;
 
     private Double quantidade;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Double getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(Double quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public Produto getProduto() { return produto; }
-
-    public void setProduto(Produto produto) { this.produto = produto; }
-
-    public Venda getVenda() { return venda; }
-
-    public void setVenda(Venda venda) { this.venda = venda; }
 
     public BigDecimal total(){
         return this.produto

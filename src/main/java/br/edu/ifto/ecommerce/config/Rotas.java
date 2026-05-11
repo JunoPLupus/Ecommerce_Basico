@@ -8,6 +8,7 @@ public final class Rotas {
     public static final String PRODUTOS = "produtos";
     public static final String CLIENTES = "clientes";
     public static final String VENDAS = "vendas";
+
     public static final String LISTA = "/list";
     public static final String DETALHES = "/detalhes";
     public static final String CADASTRO = "/cadastro";
