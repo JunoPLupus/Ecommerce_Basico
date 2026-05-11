@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+import static br.edu.ifto.ecommerce.config.Diretorios.*;
 import static br.edu.ifto.ecommerce.config.Rotas.*;
 import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.breadcrumb;
 
@@ -43,7 +44,7 @@ public class AdminClienteController {
         }
 
         model.addAttribute("clientes", clientes);
-        return "cliente/list";
+        return HTML_ADMIN_LISTA_CLIENTES;
     }
 
     @GetMapping(DETALHES_ID)
@@ -58,6 +59,6 @@ public class AdminClienteController {
                 new BreadcrumbItem("Detalhes do cliente #" + id, null)
         ));
 
-        return "cliente/detail";
+        return HTML_ADMIN_DETAIL_CLIENTES;
     }
 }

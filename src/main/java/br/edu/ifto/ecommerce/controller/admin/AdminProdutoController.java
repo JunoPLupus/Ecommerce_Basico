@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.ArrayList;
 import java.util.List;
 
+import static br.edu.ifto.ecommerce.config.Diretorios.*;
 import static br.edu.ifto.ecommerce.config.Rotas.*;
 import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.*;
 
@@ -45,7 +46,7 @@ public class AdminProdutoController {
 
         if (filtrosAplicados > 0) model.addAttribute("filtrosAplicados", filtrosAplicados);
         model.addAttribute("produtos", produtos);
-        return "produto/list";
+        return HTML_ADMIN_LISTA_PRODUTOS;
     }
 
     /**
@@ -58,7 +59,7 @@ public class AdminProdutoController {
                 new BreadcrumbItem("Produtos","/" + ADMIN_PRODUTOS),
                 new BreadcrumbItem("Cadastrar Produto", null)
         ));
-        return "produto/form";
+        return HTML_ADMIN_FORM_PRODUTOS;
     }
 
     @PostMapping(SAVE)
@@ -79,7 +80,7 @@ public class AdminProdutoController {
                 new BreadcrumbItem("Produtos", "/" + ADMIN_PRODUTOS),
                 new BreadcrumbItem("Editar Produto", null)
         ));
-        return "produto/form";
+        return HTML_ADMIN_FORM_PRODUTOS;
     }
 
     @PostMapping(UPDATE)

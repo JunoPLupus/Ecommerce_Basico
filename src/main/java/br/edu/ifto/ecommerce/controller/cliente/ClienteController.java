@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import static br.edu.ifto.ecommerce.config.Diretorios.HTML_CLIENTE_FORM;
 import static br.edu.ifto.ecommerce.config.Rotas.*;
 
 @Transactional
@@ -22,7 +23,7 @@ public class ClienteController {
 
     @GetMapping(CADASTRO)
     public String insert(){
-        return "cliente/form";
+        return HTML_CLIENTE_FORM;
     }
 
     @PostMapping(SAVE_PF)

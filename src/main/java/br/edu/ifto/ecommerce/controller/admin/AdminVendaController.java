@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static br.edu.ifto.ecommerce.config.Diretorios.*;
 import static br.edu.ifto.ecommerce.config.Rotas.*;
 import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.*;
 
@@ -57,7 +58,7 @@ public class AdminVendaController {
 
         if(filtrosAplicados > 0) model.addAttribute("filtrosAplicados", filtrosAplicados);
         model.addAttribute("vendas", vendas);
-        return "venda/list";
+        return HTML_ADMIN_LISTA_VENDAS;
     }
 
     @GetMapping(DETALHES_ID)
@@ -70,7 +71,7 @@ public class AdminVendaController {
                 new BreadcrumbItem("Detalhes da venda #" + venda.getId(), null)
         ));
 
-        return "venda/detail";
+        return HTML_ADMIN_DETAIL_VENDAS;
     }
 
     /*
