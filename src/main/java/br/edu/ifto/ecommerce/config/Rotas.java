@@ -24,9 +24,13 @@ public final class Rotas {
     public static final String ADMIN_PRODUTOS = ADMIN + "/" + PRODUTOS;
     public static final String ADMIN_CLIENTES = ADMIN + "/" + CLIENTES;
     public static final String ADMIN_VENDAS = ADMIN + "/" + VENDAS;
+
     public static final String DETALHES_ID = DETALHES + ID;
     public static final String SAVE_PF = SAVE + FISICA;
     public static final String SAVE_PJ = SAVE + JURIDICA;
     public static final String EDIT_ID = EDIT + ID;
     public static final String DELETE_ID = DELETE + ID;
+    public static final String ADMIN_LISTA_PRODUTOS = ADMIN_PRODUTOS + LISTA;
+
+    public static final String CADASTRO_CLIENTE = CLIENTES + CADASTRO;
 }

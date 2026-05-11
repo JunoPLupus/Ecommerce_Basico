@@ -64,7 +64,7 @@ public class AdminProdutoController {
     @PostMapping(SAVE)
     public String save(Produto produto){
         produtoRepository.insert(produto);
-        return "redirect:/produtos";
+        return "redirect:/" + ADMIN_PRODUTOS;
     }
 
     /**
@@ -85,7 +85,7 @@ public class AdminProdutoController {
     @PostMapping(UPDATE)
     public String update(Produto produto) {
         produtoRepository.update(produto);
-        return "redirect:/produtos";
+        return "redirect:/" + ADMIN_PRODUTOS;
     }
 
     /**
@@ -99,6 +99,6 @@ public class AdminProdutoController {
 
         if(!sucess) redirectAttributes.addFlashAttribute("erro", "Não é possível excluir! Existem vendas associadas a este produto.");
 
-        return "redirect:/produtos";
+        return "redirect:/" + ADMIN_PRODUTOS;
     }
 }

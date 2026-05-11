@@ -28,12 +28,12 @@ public class ClienteController {
     @PostMapping(SAVE_PF)
     public String saveFisica(PessoaFisica pessoa){
         clienteRepository.insert(pessoa);
-        return "redirect:/clientes/cadastro";
+        return "redirect:/" + CADASTRO_CLIENTE;
     }
 
     @PostMapping(SAVE_PJ)
     public String saveJuridica(PessoaJuridica pessoa){
         clienteRepository.insert(pessoa);
-        return "redirect:/clientes/cadastro";
+        return "redirect:/" + CADASTRO_CLIENTE;
     }
 }
