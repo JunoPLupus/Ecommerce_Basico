@@ -1,6 +1,9 @@
 package br.edu.ifto.ecommerce.config;
 
-public class Rotas {
+public final class Rotas {
+
+    private Rotas() {}
+
     public static final String ADMIN = "admin";
     public static final String PRODUTOS = "produtos";
     public static final String CLIENTES = "clientes";
