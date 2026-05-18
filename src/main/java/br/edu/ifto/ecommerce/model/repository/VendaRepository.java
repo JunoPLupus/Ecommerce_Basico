@@ -50,4 +50,8 @@ public class VendaRepository {
     public Venda findById(Long id) {
         return em.find(Venda.class, id);
     }
+
+    public void insert(Venda venda) { em.persist(venda);}
+
+    public void update(Venda venda) { em.merge(venda); }
 }

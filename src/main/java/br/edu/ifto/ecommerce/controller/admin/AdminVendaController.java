@@ -1,9 +1,9 @@
-package br.edu.ifto.ecommerce.controller;
+package br.edu.ifto.ecommerce.controller.admin;
 
 import br.edu.ifto.ecommerce.model.entity.venda.Venda;
 import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
 import br.edu.ifto.ecommerce.model.repository.VendaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -16,17 +16,19 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static br.edu.ifto.ecommerce.config.Diretorios.*;
+import static br.edu.ifto.ecommerce.config.Rotas.*;
 import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.*;
 
 @Transactional
 @Controller
-@RequestMapping("vendas")
-public class VendaController {
+@AllArgsConstructor
+@RequestMapping(ADMIN_VENDAS)
+public class AdminVendaController {
 
-    @Autowired
     private VendaRepository vendaRepository;
 
-    @GetMapping("")
+    @GetMapping({"", LISTA})
     public String list(@RequestParam(required = false) String nomeCliente,
                        @RequestParam(required = false) LocalDate dataInicial,
                        @RequestParam(required = false) LocalDate dataFinal,
@@ -34,8 +36,8 @@ public class VendaController {
                        @RequestParam(required = false) Double valorMaximo,
                        Model model) {
 
-        List<Venda> vendas_banco = vendaRepository.findAllByDynamicFilters(nomeCliente, dataInicial, dataFinal);
-        List<Venda> vendas = _filtrarPorValorTotal(vendas_banco, valorMinimo, valorMaximo);
+        List<Venda> vendasBanco = vendaRepository.findAllByDynamicFilters(nomeCliente, dataInicial, dataFinal);
+        List<Venda> vendas = filtrarPorValorTotal(vendasBanco, valorMinimo, valorMaximo);
 
         boolean hasValorMinimo = valorMinimo != null && valorMinimo > 0.0;
         boolean hasValorMaximo = valorMaximo != null && valorMaximo > 0.0;
@@ -56,38 +58,38 @@ public class VendaController {
 
         if(filtrosAplicados > 0) model.addAttribute("filtrosAplicados", filtrosAplicados);
         model.addAttribute("vendas", vendas);
-        return "venda/list";
+        return HTML_ADMIN_LISTA_VENDAS;
     }
 
-    @GetMapping("/detalhes/{id}")
+    @GetMapping(DETALHES_ID)
     public String detail(@PathVariable("id") Long id, Model model) {
         Venda venda = vendaRepository.findById(id);
 
         model.addAttribute("venda", venda);
         model.addAttribute("breadcrumbItems", breadcrumb(
-                new BreadcrumbItem("Vendas", "/vendas"),
+                new BreadcrumbItem("Vendas", "/" + ADMIN_VENDAS),
                 new BreadcrumbItem("Detalhes da venda #" + venda.getId(), null)
         ));
 
-        return "venda/detail";
+        return HTML_ADMIN_DETAIL_VENDAS;
     }
 
     /*
     * Filtro de valor aplicado em memória pois o total é calculado
     * a partir dos itens. Para volumes maiores, considerar subquery HQL.
      */
-    private List<Venda> _filtrarPorValorTotal(List<Venda> vendas, Double valorMinimo, Double valorMaximo) {
+    private List<Venda> filtrarPorValorTotal(List<Venda> vendas, Double valorMinimo, Double valorMaximo) {
         Stream<Venda> stream = vendas.stream();
-        if (valorMinimo != null && valorMinimo > 0.0) stream = _filtrarPorValorMinimo(stream, valorMinimo);
-        if (valorMaximo != null && valorMaximo > 0.0) stream = _filtrarPorValorMaximo(stream, valorMaximo);
+        if (valorMinimo != null && valorMinimo > 0.0) stream = filtrarPorValorMinimo(stream, valorMinimo);
+        if (valorMaximo != null && valorMaximo > 0.0) stream = filtrarPorValorMaximo(stream, valorMaximo);
         return stream.toList();
     }
 
-    private Stream<Venda> _filtrarPorValorMinimo(Stream<Venda> vendas, Double valorMinimo) {
+    private Stream<Venda> filtrarPorValorMinimo(Stream<Venda> vendas, Double valorMinimo) {
         return vendas.filter(v -> v.total() >= valorMinimo);
     }
 
-    private Stream<Venda> _filtrarPorValorMaximo(Stream<Venda> vendas, Double valorMaximo) {
+    private Stream<Venda> filtrarPorValorMaximo(Stream<Venda> vendas, Double valorMaximo) {
         return vendas.filter(v -> v.total() <= valorMaximo);
     }
 }

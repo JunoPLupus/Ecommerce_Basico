@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
+
+<head th:replace="~{fragments/head :: head('Carrinho',~{})}"></head>
+
+<body>
+
+<main class="pg-card">
+
+    <div class="main-double-collumns">
+        <h1>
+            <i class="icon-cart text-muted"></i>
+            Meu Carrinho
+        </h1>
+        <form th:action="@{/pedidos/insert}" method="post" th:unless="${carrinho.getItens() == null || #lists.isEmpty(carrinho.getItens())}">
+            <select name="clienteId" class="form-select" aria-label="Default select example">
+                <option selected>Selecione um cliente</option>
+                <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.getNomeExibicao()}"></option>
+            </select>
+            <button
+               type="submit" class="button-primary"
+               data-bs-toggle="tooltip"
+               data-bs-placement="top"
+               title="Finalizar compra">
+                Finalizar compra
+            </button>
+        </form>
+
+    </div>
+
+    <div th:replace="~{fragments/alert :: alert(${erro})}"></div>
+
+    <p th:if="${carrinho.getItens() == null || #lists.isEmpty(carrinho.getItens())}">Seu carrinho está vazio. Vá às compras!</p>
+
+    <table th:unless="${carrinho.getItens() == null || #lists.isEmpty(carrinho.getItens())}">
+        <thead>
+        <tr>
+            <th scope="col">Descrição</th>
+            <th scope="col">Valor Unitário(R$)</th>
+            <th scope="col"></th>
+            <th scope="col">Quantidade</th>
+            <th scope="col"></th>
+            <th scope="col">Subtotal</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${carrinho.getItens()}">
+            <td th:text="${item.produto.descricao}"></td>
+            <td th:text="'R$ ' + ${#numbers.formatDecimal(item.produto.valor, 1, 'POINT', 2, 'COMMA')}"></td>
+            <td>
+                <form th:action="@{/carrinho/reduce/{id}(id=${item.produto.id})}" method="post">
+                    <button type="submit" class="button-primary"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="Reduzir quantidade do produto">
+                        <i class="icon-minus"></i>
+                    </button>
+                </form>
+            </td>
+            <td th:text="${item.quantidade}"></td>
+            <td>
+                <form th:action="@{/carrinho/add/{id}(id=${item.produto.id})}" method="post">
+                    <button type="submit" class="button-primary"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="Aumentar quantidade do produto">
+                        <i class="icon-plus"></i>
+                    </button>
+                </form>
+            </td>
+            <td th:text="'R$ ' + ${#numbers.formatDecimal(item.total(), 1, 'POINT', 2, 'COMMA')}"></td>
+            <td>
+                <form th:action="@{/carrinho/delete/{id}(id=${item.produto.id})}" method="post">
+                    <button type="submit" class="button-danger"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="Remover produto do carrinho">
+                        <i class="icon-trash"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h5 th:unless="${carrinho.getItens() == null || #lists.isEmpty(carrinho.getItens())}" class="total" th:text="'R$ ' + ${#numbers.formatDecimal(session.carrinho.total(), 1, 'POINT', 2, 'COMMA')}"></h5>
+
+</main>
+
+</body>
+</html>
