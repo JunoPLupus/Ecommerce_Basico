@@ -22,7 +22,7 @@
 
     <div th:if="${filtrosAplicados != null}">
         <span th:text="${filtrosAplicados} + ' filtro(s) aplicado(s).'"></span>
-        <a th:href="@{/clientes}">Limpar filtros</a>
+        <a th:href="@{/admin/clientes}">Limpar filtros</a>
     </div>
 
     <div th:replace="~{fragments/alert :: alert(${erro})}"></div>

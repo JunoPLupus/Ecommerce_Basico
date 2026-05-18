@@ -32,8 +32,10 @@ public class Venda implements Serializable {
     public Double total() {
         double total = 0.0;
 
-        for (ItemVenda item : itens) {
-            total += item.total().doubleValue();
+        if (itens != null) {
+            for (ItemVenda item : itens) {
+                total += item.total().doubleValue();
+            }
         }
 
         return total;

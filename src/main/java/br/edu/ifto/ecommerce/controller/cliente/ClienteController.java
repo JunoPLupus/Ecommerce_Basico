@@ -5,7 +5,6 @@ import br.edu.ifto.ecommerce.model.entity.cliente.PessoaJuridica;
 import br.edu.ifto.ecommerce.model.repository.ClienteRepository;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;

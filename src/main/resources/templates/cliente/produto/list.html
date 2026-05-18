@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
+<head th:replace="~{fragments/head :: head('Produtos',~{})}"></head>
+<body>
+<main class="pg-card">
+
+    <p th:if="${produtos == null || #lists.isEmpty(produtos)}">Nenhum produto encontrado.</p>
+
+    <div th:unless="${produtos == null || #lists.isEmpty(produtos)}" class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="col" th:each="produto : ${produtos}">
+            <div class="card h-100">
+                <img src="https://placehold.co/600x400" class="card-img-top" alt="Foto do produto">
+                <div class="card-body">
+                    <h6 class="card-title" th:text="${produto.descricao}">Descrição</h6>
+                    <h4 class="card-text" th:text="'R$ ' + ${#numbers.formatDecimal(produto.valor, 1, 'POINT', 2, 'COMMA')}">Preço</h4>
+                </div>
+                <div class="card-footer text-center">
+                    <form th:action="@{/carrinho/insert/{id}(id=${produto.id})}" method="post">
+                        <button type="submit" class="button-primary"
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="top"
+                                title="Adicionar produto no Carrinho">
+                            <i class="icon-plus"></i>
+                            Adicionar no Carrinho
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+</body>
+</html>

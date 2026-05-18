@@ -24,7 +24,7 @@ public class ItemVenda implements Serializable {
     @ManyToOne
     private Venda venda;
 
-    private Double quantidade;
+    private int quantidade;
 
     public BigDecimal total(){
         return this.produto

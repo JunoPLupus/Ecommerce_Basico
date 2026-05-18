@@ -202,6 +202,11 @@ mark {
   @extend .btn-outline-light;
 }
 
+.total {
+  @extend .text-end;
+  margin-right: 15%;
+}
+
 .icon-bag {
   @extend .bi-bag;
 }
@@ -224,6 +229,10 @@ mark {
 
 .icon-plus {
   @extend .bi-plus-lg;
+}
+
+.icon-minus {
+  @extend .bi-dash;
 }
 
 .icon-person {
@@ -252,4 +261,8 @@ mark {
 
 .icon-document {
   @extend .bi-file-earmark-text;
+}
+
+.icon-cart {
+  @extend .bi-cart;
 }
