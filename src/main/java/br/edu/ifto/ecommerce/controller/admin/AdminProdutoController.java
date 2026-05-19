@@ -67,8 +67,6 @@ public class AdminProdutoController {
     public String save(@Valid Produto produto, BindingResult result, Model model){
         if (produto.getUrlImagem() == null || produto.getUrlImagem().trim().isEmpty()) produto.setUrlImagem("https://placehold.co/600x400");
         if (result.hasErrors()) {
-            String mensagem = result.getAllErrors().getFirst().getDefaultMessage();
-            model.addAttribute("erro", mensagem);
             return HTML_ADMIN_FORM_PRODUTOS;
         }
         produtoRepository.insert(produto);
@@ -94,8 +92,6 @@ public class AdminProdutoController {
     public String update(@Valid Produto produto, BindingResult result, Model model) {
         if (produto.getUrlImagem() == null || produto.getUrlImagem().trim().isEmpty()) produto.setUrlImagem("https://placehold.co/600x400");
         if (result.hasErrors()) {
-            String mensagem = result.getAllErrors().getFirst().getDefaultMessage();
-            model.addAttribute("erro", mensagem);
             return HTML_ADMIN_FORM_PRODUTOS;
         }
         produtoRepository.update(produto);
