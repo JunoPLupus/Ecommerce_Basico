@@ -3,10 +3,12 @@ package br.edu.ifto.ecommerce.controller.admin;
 import br.edu.ifto.ecommerce.model.entity.produto.Produto;
 import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
 import br.edu.ifto.ecommerce.model.repository.ProdutoRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -17,7 +19,6 @@ import static br.edu.ifto.ecommerce.config.Diretorios.*;
 import static br.edu.ifto.ecommerce.config.Rotas.*;
 import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.*;
 
-@Transactional
 @Controller
 @AllArgsConstructor
 @RequestMapping(ADMIN_PRODUTOS)
@@ -63,7 +64,12 @@ public class AdminProdutoController {
     }
 
     @PostMapping(SAVE)
-    public String save(Produto produto){
+    public String save(@Valid Produto produto, BindingResult result, Model model){
+        if (result.hasErrors()) {
+            String mensagem = result.getAllErrors().getFirst().getDefaultMessage();
+            model.addAttribute("erro", mensagem);
+            return HTML_ADMIN_FORM_PRODUTOS;
+        }
         produtoRepository.insert(produto);
         return "redirect:/" + ADMIN_PRODUTOS;
     }
@@ -84,7 +90,12 @@ public class AdminProdutoController {
     }
 
     @PostMapping(UPDATE)
-    public String update(Produto produto) {
+    public String update(@Valid Produto produto, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            String mensagem = result.getAllErrors().getFirst().getDefaultMessage();
+            model.addAttribute("erro", mensagem);
+            return HTML_ADMIN_FORM_PRODUTOS;
+        }
         produtoRepository.update(produto);
         return "redirect:/" + ADMIN_PRODUTOS;
     }

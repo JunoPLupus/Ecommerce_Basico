@@ -4,10 +4,12 @@ import br.edu.ifto.ecommerce.model.entity.venda.Venda;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Transactional
 @Repository
 public class VendaRepository {
 

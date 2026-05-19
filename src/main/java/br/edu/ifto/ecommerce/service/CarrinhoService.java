@@ -7,8 +7,11 @@ import br.edu.ifto.ecommerce.model.repository.ProdutoRepository;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Objects;
 
+@Transactional
 @Service
 @AllArgsConstructor
 public class CarrinhoService {

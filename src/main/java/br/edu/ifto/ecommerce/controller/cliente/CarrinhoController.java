@@ -8,7 +8,6 @@ import br.edu.ifto.ecommerce.service.CarrinhoService;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +20,6 @@ import java.util.List;
 import static br.edu.ifto.ecommerce.config.Diretorios.HTML_CARRINHO;
 import static br.edu.ifto.ecommerce.config.Rotas.*;
 
-@Transactional
 @Controller
 @AllArgsConstructor
 @RequestMapping(CARRINHO)
