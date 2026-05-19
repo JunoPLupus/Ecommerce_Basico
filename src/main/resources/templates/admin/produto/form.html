@@ -6,9 +6,9 @@
 
     <h1 th:text="${produto.id == null ? 'Cadastrar Produto' : 'Editar Produto'}"></h1>
 
-    <div th:replace="~{fragments/alert :: alert(${erro})}"></div>
+    <div th:replace="~{fragments/alert :: alert(${erro})}"></div> <!-- TODO: Colocar todos os erros visíveis simultaneamente -->
 
-    <form class="mt-3" th:action="@{${produto.id == null ? '/admin/produtos/save' : '/admin/produtos/update'}}" th:object="${produto}" method="post" disabled>
+    <form class="mt-3" th:action="@{${produto.id == null ? '/admin/produtos/save' : '/admin/produtos/update'}}" th:object="${produto}" method="post" novalidate>
 
         <input type="hidden" th:field="*{id}">
 
