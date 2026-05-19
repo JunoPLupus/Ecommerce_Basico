@@ -11,7 +11,7 @@
     <h1>Cadastrar Cliente</h1>
     <p class="fw-light">Todos os campos são obrigatórios*</p>
 
-    <div th:replace="~{fragments/alert :: alert(${erro})}"></div>
+    <div th:replace="~{fragments/alert :: alert(${erro})}"></div> <!-- TODO: Separar em dois formulários para exibir o erro específico do campo abaixo dele com th:object -->
 
     <ul class="nav-tab">
         <li>

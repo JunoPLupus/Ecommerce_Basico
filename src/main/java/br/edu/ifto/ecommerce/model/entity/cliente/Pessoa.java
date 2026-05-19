@@ -29,6 +29,8 @@ public abstract class Pessoa {
     @NotBlank (message = "{erro.pessoa.telefone.obrigatorio}")
     private String telefone;
 
+    // TODO: adicionar atributo senha
+
     public abstract char getTipo();
 
     public abstract String getNomeExibicao();
