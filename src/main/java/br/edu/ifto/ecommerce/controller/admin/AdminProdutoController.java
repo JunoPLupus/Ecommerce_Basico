@@ -65,6 +65,7 @@ public class AdminProdutoController {
 
     @PostMapping(SAVE)
     public String save(@Valid Produto produto, BindingResult result, Model model){
+        if (produto.getUrlImagem() == null || produto.getUrlImagem().trim().isEmpty()) produto.setUrlImagem("https://placehold.co/600x400");
         if (result.hasErrors()) {
             String mensagem = result.getAllErrors().getFirst().getDefaultMessage();
             model.addAttribute("erro", mensagem);
@@ -91,6 +92,7 @@ public class AdminProdutoController {
 
     @PostMapping(UPDATE)
     public String update(@Valid Produto produto, BindingResult result, Model model) {
+        if (produto.getUrlImagem() == null || produto.getUrlImagem().trim().isEmpty()) produto.setUrlImagem("https://placehold.co/600x400");
         if (result.hasErrors()) {
             String mensagem = result.getAllErrors().getFirst().getDefaultMessage();
             model.addAttribute("erro", mensagem);

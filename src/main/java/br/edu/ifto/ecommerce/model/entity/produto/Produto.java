@@ -21,9 +21,11 @@ public class Produto implements Serializable {
     @Id
     private Long id;
 
+    private String urlImagem;
+
     @NotNull (message = "{erro.produto.descricao.obrigatorio}")
     @NotBlank (message = "{erro.produto.descricao.obrigatorio}")
-    @Size(min = 5, max = 200, message = "{erro.produto.descricao.tamanho}")
+    @Size(min = 5, max = 300, message = "{erro.produto.descricao.tamanho}")
     private String descricao;
 
     @NotNull (message = "{erro.produto.valor.obrigatorio}")

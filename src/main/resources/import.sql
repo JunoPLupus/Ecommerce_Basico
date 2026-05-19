@@ -11,12 +11,12 @@ INSERT INTO pessoa (tipo, razao_social, cnpj, email, telefone)
         ('J', 'Tech Ltda', '67.421.057/0001-35', 'contato@tech.com', '63 3211-5555');
 
 -- 2. Produtos
-INSERT INTO produto (descricao, valor)
+INSERT INTO produto (url_imagem, descricao, valor)
     VALUES
-        ('PS5', 3500.0),
-        ('Caneta Bic', 2.50),
-        ('Teclado Mecânico', 250.0),
-        ('Livro - Tidy First?', 44.17);
+        ('https://m.media-amazon.com/images/I/51SM5xU-M1L._AC_SX679_.jpg','PlayStation®5 Slim Edição Digital', 4099.90),
+        ('https://m.media-amazon.com/images/I/61EtSxH1huL._AC_SX679_.jpg', 'Caneta Azul Bic Cristal Dura Mais – Ponta Esferográfica Média de 1.0mm. Escrita Macia e Cor Intensa – Leve 4 Pague 3 – Pacote 4 Canetas', 5.99),
+        ('https://m.media-amazon.com/images/I/71zFMjCmtrL._AC_SX679_.jpg', 'Teclado Mecânico Gamer 60% RGB, Switch Blue YH, QWERTY, Retroiluminação RGB com 12 Efeitos, 63 Teclas, USB 2.0, Preto, Anti-Ghosting', 114.85),
+        ('https://m.media-amazon.com/images/I/61w4qyZKF9L._SY522_.jpg','Tidy First?: Minirrefatorações para um melhor design de software', 46.50);
 
 -- 3. Vendas
 INSERT INTO venda (data, cliente_id)

@@ -214,6 +214,21 @@ mark {
   }
 }
 
+.card-img-top {
+  width: 100%;
+  height: 12rem;
+  object-fit: contain;
+  background-color: #f8f9fa;
+  padding: 0.5rem;
+}
+
+.card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .total {
   @extend .text-end;
   margin-right: 15%;

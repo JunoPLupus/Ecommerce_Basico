@@ -13,12 +13,17 @@
         <input type="hidden" th:field="*{id}">
 
         <div class="mb-4">
-            <label for="descricao" class="form-label">Descrição do Produto</label>
+            <label for="urlImagem" class="form-label">URL da Imagem</label>
+            <input type="text" class="form-control" th:field="*{urlImagem}" id="urlImagem" placeholder="Ex.: https://placehold.co/600x400">
+        </div>
+
+        <div class="mb-4">
+            <label for="descricao" class="form-label">Descrição do Produto*</label>
             <input type="text" class="form-control" th:field="*{descricao}" id="descricao" placeholder="Ex: Teclado Mecânico" required>
         </div>
 
         <div class="mb-4">
-            <label for="valor" class="form-label">Valor</label>
+            <label for="valor" class="form-label">Valor*</label>
             <div class="input-group">
                 <span>R$</span>
                 <input type="number" aria-label="Valor em Reais (R$)"
