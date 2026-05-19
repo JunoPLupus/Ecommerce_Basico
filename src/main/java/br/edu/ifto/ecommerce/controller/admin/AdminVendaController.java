@@ -5,7 +5,6 @@ import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
 import br.edu.ifto.ecommerce.model.repository.VendaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +19,6 @@ import static br.edu.ifto.ecommerce.config.Diretorios.*;
 import static br.edu.ifto.ecommerce.config.Rotas.*;
 import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.*;
 
-@Transactional
 @Controller
 @AllArgsConstructor
 @RequestMapping(ADMIN_VENDAS)

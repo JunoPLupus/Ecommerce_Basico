@@ -8,7 +8,6 @@ import br.edu.ifto.ecommerce.model.repository.VendaRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +16,6 @@ import java.time.LocalDateTime;
 
 import static br.edu.ifto.ecommerce.config.Rotas.*;
 
-@Transactional
 @Controller
 @AllArgsConstructor
 @RequestMapping(PEDIDOS)
