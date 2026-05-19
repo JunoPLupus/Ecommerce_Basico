@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -29,16 +30,17 @@ public class Venda implements Serializable {
 
     private LocalDateTime data;
 
+    public int qtdItensTotal() {
+        return this.itens.stream()
+                .mapToInt(ItemVenda::getQuantidade)
+                .sum();
+    }
+
     public Double total() {
-        double total = 0.0;
-
-        if (itens != null) {
-            for (ItemVenda item : itens) {
-                total += item.total().doubleValue();
-            }
-        }
-
-        return total;
+        return this.itens.stream()
+                .map(ItemVenda::total)
+                .mapToDouble(BigDecimal::doubleValue)
+                .sum();
     }
 
     @Override
