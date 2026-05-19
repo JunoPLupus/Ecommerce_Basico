@@ -33,7 +33,7 @@
                 </ul>
                 <a class = "button-outline-light" aria-current="page" th:href="@{/carrinho}">
                     <i class="icon-cart"></i> Carrinho
-                    <span th:text="${session.carrinho.qtdItensTotal()}">
+                    <span th:if="${session.carrinho != null && !#lists.isEmpty(session.carrinho.getItens())}" th:text="${session.carrinho.qtdItensTotal()}">
                                 <span class="visually-hidden"></span>
                               </span>
                 </a>
