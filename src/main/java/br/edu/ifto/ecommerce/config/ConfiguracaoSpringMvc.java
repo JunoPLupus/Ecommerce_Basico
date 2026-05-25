@@ -4,6 +4,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import static br.edu.ifto.ecommerce.config.Diretorios.HTML_LOGIN;
+import static br.edu.ifto.ecommerce.config.Rotas.LOGIN;
+
 /**
  * @Configuration para indicar ao Spring que essa é uma classe de configuração.
  * Em seguida, é preciso estender a classe WebMvcConfigurerAdapter.
@@ -21,8 +24,9 @@ public class ConfiguracaoSpringMvc implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
 //        registry.addViewController("/").setViewName("redirect:/vendas/lista"); // nova requisição, muda url
-//        registry.addRedirectViewController("/","/vendas/lista"); // aponta para a página, não muda url
-        registry.addViewController("/").setViewName("forward:/vendas/lista"); // carrega jsp, não muda url
+//        registry.addRedirectViewController(LOGIN,"/"); // aponta para a página, não muda url
+        registry.addViewController("/").setViewName(HTML_LOGIN); // carrega html, não muda url
+        registry.addViewController(LOGIN).setViewName(HTML_LOGIN);
 //
     }
 }

@@ -1,7 +1,7 @@
-<header class="pg-header" th:fragment="header">
+<header class="pg-header" th:fragment="header" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
     <nav>
         <div class="pg-nav-container">
-            <a class="pg-nav-brand" th:href="@{/admin/vendas}">
+            <a class="pg-nav-brand" th:href="@{/produtos}">
                 <img th:src="@{/images/logo.svg}" alt="IFTO" height="40">
             </a>
             <button class="pg-nav-toggler" type="button" data-bs-toggle="collapse"
@@ -10,35 +10,40 @@
             </button>
             <div class="pg-nav-collapse" id="navbarSupportedContent">
                 <ul>
-                    <li>
-                        <a aria-current="page" th:href="@{/admin/clientes}">
-                            <i class="icon-person"></i> Gerenciar Clientes
-                        </a>
-                    </li>
-                    <li>
+                    <li sec:authorize="hasAnyRole('ADMIN')">
                         <a aria-current="page" th:href="@{/admin/vendas}">
                             <i class="icon-bag"></i> Gerenciar Vendas
                         </a>
                     </li>
-                    <li>
+                    <li sec:authorize="hasAnyRole('ADMIN')">
+                        <a aria-current="page" th:href="@{/admin/clientes}">
+                            <i class="icon-person"></i> Gerenciar Clientes
+                        </a>
+                    </li>
+                    <li sec:authorize="hasAnyRole('ADMIN')">
                         <a aria-current="page" th:href="@{/admin/produtos}">
                             <i class="icon-box"></i> Gerenciar Produtos
                         </a>
                     </li>
-                    <li>
+                    <li sec:authorize="!hasAnyRole('ADMIN')">
                         <a aria-current="page" th:href="@{/produtos}">
                             <i class="icon-box"></i> Produtos
                         </a>
                     </li>
                 </ul>
-                <a class = "button-outline-light" aria-current="page" th:href="@{/carrinho}">
+                <a sec:authorize="hasAnyRole('USER')" class = "button-outline-light" aria-current="page" th:href="@{/carrinho}">
                     <i class="icon-cart"></i> Carrinho
                     <span th:if="${session.carrinho != null && !#lists.isEmpty(session.carrinho.getItens())}" th:text="${session.carrinho.qtdItensTotal()}">
                                 <span class="visually-hidden"></span>
                               </span>
                 </a>
-                <a class="button-outline-light" th:href="@{/clientes/cadastro}">Cadastrar Cliente</a>
-            </div>
+                <a sec:authorize="!isAuthenticated()" class="button-outline-light" th:href="@{/login}">Entre</a>
+                <a sec:authorize="!isAuthenticated()" class="button-primary" th:href="@{/clientes/cadastro}">Cadastre-se</a>
+
+                <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                    <button class="button-outline-light" type="submit">Sair</button>
+                </form>
+                </div>
         </div>
     </nav>
 </header>

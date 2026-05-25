@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
+<head th:replace="~{fragments/head :: head('Login',~{})}"></head>
+<body>
+<main class="pg-card">
+
+    <h1>Login</h1>
+    <p class="fw-light">Informe seu usuário e senha</p>
+
+    <div th:if="${param.error != null}"
+         class="alert alert-danger mt-3"
+         role="alert">
+        Usuário ou senha inválidos. Verifique suas credenciais e tente novamente.
+    </div>
+
+    <form th:action="@{/login}" method="post">
+        <div class="mb-4">
+            <label>Login<input class="form-control" type="text"
+                                name="username" placeholder="Usuário"/></label>
+        </div>
+        <div class="mb-4">
+            <label>Senha<input class="form-control"
+                                type="password" name="password" placeholder="Senha"/></label>
+        </div>
+        <button type="submit" class="button-primary">Login</button>
+    </form>
+</main>
+</body>
+</html>
