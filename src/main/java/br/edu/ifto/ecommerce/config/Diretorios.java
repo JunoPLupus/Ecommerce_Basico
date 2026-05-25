@@ -5,7 +5,9 @@ public final class Diretorios {
 
     private static final String HTML_ADMIN = "admin";
     private static final String HTML_CLIENTE = "cliente";
-    public static final String HTML_CARRINHO = HTML_CLIENTE + "/carrinho/list";
+    private static final String HTML_AUTH = "auth";
+
+    public static final String HTML_LOGIN = HTML_AUTH + "/login";
 
     private static final String HTML_ADMIN_PRODUTOS = HTML_ADMIN + "/produto";
     private static final String HTML_ADMIN_VENDAS = HTML_ADMIN + "/venda";
@@ -24,4 +26,5 @@ public final class Diretorios {
 
     public static final String HTML_CLIENTE_FORM = HTML_CLIENTE + HTML_FORM;
     public static final String HTML_CLIENTE_LISTA_PRODUTOS = HTML_CLIENTE + "/produto" + HTML_LISTA;
+    public static final String HTML_CARRINHO = HTML_CLIENTE + "/carrinho/list";
 }

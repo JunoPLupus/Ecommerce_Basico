@@ -64,6 +64,7 @@ mark {
 .button-primary {
   @extend .btn;
   @extend .btn-primary;
+  margin-left: 1rem;
 }
 
 .button-secondary {

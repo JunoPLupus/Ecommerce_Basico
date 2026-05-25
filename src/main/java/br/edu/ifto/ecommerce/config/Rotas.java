@@ -40,4 +40,5 @@ public final class Rotas {
     public static final String SAVE_PJ = SAVE + JURIDICA;
 
     public static final String CADASTRO_CLIENTE = CLIENTES + CADASTRO;
+    public static final String LOGIN = "/login";
 }
