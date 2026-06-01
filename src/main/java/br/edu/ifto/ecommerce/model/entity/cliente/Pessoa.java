@@ -23,13 +23,12 @@ public abstract class Pessoa {
     @NotNull (message = "{erro.pessoa.email.obrigatorio}")
     @NotBlank (message = "{erro.pessoa.email.obrigatorio}")
     @Email (message = "{erro.pessoa.email.invalido}")
+    @Column(unique = true)
     private String email;
 
     @NotNull (message = "{erro.pessoa.telefone.obrigatorio}")
     @NotBlank (message = "{erro.pessoa.telefone.obrigatorio}")
     private String telefone;
-
-    // TODO: adicionar atributo senha
 
     public abstract char getTipo();
 

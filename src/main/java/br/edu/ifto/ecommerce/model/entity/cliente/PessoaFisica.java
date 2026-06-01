@@ -1,5 +1,6 @@
 package br.edu.ifto.ecommerce.model.entity.cliente;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.*;
@@ -19,6 +20,7 @@ public class PessoaFisica extends Pessoa {
     @NotNull (message = "{erro.pessoafisica.cpf.obrigatorio}")
     @NotBlank (message = "{erro.pessoafisica.cpf.obrigatorio}")
     @Pattern(regexp = "^\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2}$", message = "{erro.pessoafisica.cpf.invalido}")
+    @Column(unique = true)
     private String cpf;
 
     @NotNull (message = "{erro.pessoafisica.nome.obrigatorio}")
