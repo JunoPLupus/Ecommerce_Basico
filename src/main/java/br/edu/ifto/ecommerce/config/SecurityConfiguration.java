@@ -9,8 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static br.edu.ifto.ecommerce.config.Rotas.*;
-import static br.edu.ifto.ecommerce.config.Roles.*;
+import static br.edu.ifto.ecommerce.utils.Rotas.*;
+import static br.edu.ifto.ecommerce.utils.Roles.*;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.security.config.Customizer.withDefaults;
 

@@ -15,8 +15,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static br.edu.ifto.ecommerce.config.Diretorios.*;
-import static br.edu.ifto.ecommerce.config.Rotas.*;
+import static br.edu.ifto.ecommerce.utils.Diretorios.*;
+import static br.edu.ifto.ecommerce.utils.Rotas.*;
 import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.*;
 
 @Controller

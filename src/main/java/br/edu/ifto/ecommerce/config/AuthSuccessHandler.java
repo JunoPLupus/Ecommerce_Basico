@@ -10,8 +10,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 import java.io.IOException;
 
-import static br.edu.ifto.ecommerce.config.Roles.ROLE_ADMIN;
-import static br.edu.ifto.ecommerce.config.Rotas.*;
+import static br.edu.ifto.ecommerce.utils.Roles.ROLE_ADMIN;
+import static br.edu.ifto.ecommerce.utils.Rotas.*;
 
 public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 

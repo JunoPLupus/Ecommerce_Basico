@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.ArrayList;
 import java.util.List;
 
-import static br.edu.ifto.ecommerce.config.Diretorios.HTML_CLIENTE_LISTA_PRODUTOS;
-import static br.edu.ifto.ecommerce.config.Rotas.*;
+import static br.edu.ifto.ecommerce.utils.Diretorios.HTML_CLIENTE_LISTA_PRODUTOS;
+import static br.edu.ifto.ecommerce.utils.Rotas.*;
 
 @Controller
 @AllArgsConstructor

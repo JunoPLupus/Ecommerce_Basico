@@ -11,9 +11,9 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 
 import java.io.IOException;
 
-import static br.edu.ifto.ecommerce.config.Roles.ROLE_ADMIN;
-import static br.edu.ifto.ecommerce.config.Rotas.ADMIN_PRODUTOS;
-import static br.edu.ifto.ecommerce.config.Rotas.PRODUTOS;
+import static br.edu.ifto.ecommerce.utils.Roles.ROLE_ADMIN;
+import static br.edu.ifto.ecommerce.utils.Rotas.ADMIN_PRODUTOS;
+import static br.edu.ifto.ecommerce.utils.Rotas.PRODUTOS;
 
 public class AcessoNegadoHandler implements AccessDeniedHandler {
 
