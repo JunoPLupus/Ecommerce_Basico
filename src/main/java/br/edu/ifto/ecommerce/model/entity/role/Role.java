@@ -28,6 +28,7 @@ public class Role implements Serializable, GrantedAuthority {
     @NotNull(message = "{erro.role.nome.obrigatorio}}}")
     @NotBlank(message = "{erro.role.nome.obrigatorio}}")
     @Pattern(regexp = "ROLE_ADMIN|ROLE_USER", message = "{erro.role.nome.pattern}")
+    @Column(unique = true)
     private String nome;
 
     @ManyToMany(mappedBy = "roles")
