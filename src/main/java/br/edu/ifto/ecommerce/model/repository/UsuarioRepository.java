@@ -19,4 +19,6 @@ public class UsuarioRepository {
                 .setParameter("login", login)
                 .getSingleResultOrNull();
     }
+
+    public void insert(Usuario usuario) { em.persist(usuario); }
 }

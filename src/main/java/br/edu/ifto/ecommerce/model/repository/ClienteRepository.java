@@ -30,7 +30,8 @@ public class ClienteRepository {
         return em.find(Pessoa.class, id);
     }
 
-    public void insert(Pessoa pessoa){
+    public Pessoa insert(Pessoa pessoa){
         em.persist(pessoa);
+        return pessoa;
     }
 }

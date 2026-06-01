@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -45,6 +46,13 @@ public class Usuario implements Serializable, UserDetails {
     @Size(min = 1, max = 2, message = "{erro.usuario.roles.tamanho}")
     @ManyToMany
     private List<Role> roles;
+
+    public Usuario(Pessoa pessoa, String login, String password, Role role) {
+        this.pessoa = pessoa;
+        this.login = login;
+        this.password = password;
+        this.roles = Arrays.asList(role);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
