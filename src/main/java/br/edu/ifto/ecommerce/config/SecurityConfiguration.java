@@ -5,11 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static br.edu.ifto.ecommerce.config.Rotas.*;
@@ -51,24 +48,13 @@ public class SecurityConfiguration {
                                 .passwordParameter("password")
                                 .successHandler(authSuccessHandler())
                 )
+                //.csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"))
+                //.headers(headers -> headers.frameOptions(frame -> frame.disable()))
                 .exceptionHandling(customizer ->
                         customizer.accessDeniedHandler(acessoNegadoHandler()))
                 .logout(LogoutConfigurer::permitAll) //configura a funcionalidade de logout no Spring Security.
                 .rememberMe(withDefaults()); //permite que os usuários permaneçam autenticados mesmo após o fechamento do navegador
         return http.build();
-    }
-
-    @Bean
-    public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails user1 = User.withUsername("user")
-                .password(passwordEncoder().encode("123"))
-                .roles(USER)
-                .build();
-        UserDetails admin = User.withUsername("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles(ADMIN)
-                .build();
-        return new InMemoryUserDetailsManager(user1, admin);
     }
 
     @Bean
