@@ -53,7 +53,10 @@ public class VendaRepository {
         return em.find(Venda.class, id);
     }
 
-    public void insert(Venda venda) { em.persist(venda);}
+    public Venda insert(Venda venda) {
+        em.persist(venda);
+        return venda;
+    }
 
     public void update(Venda venda) { em.merge(venda); }
 }

@@ -3,6 +3,8 @@ package br.edu.ifto.ecommerce.controller.cliente;
 import br.edu.ifto.ecommerce.model.entity.cliente.PessoaFisica;
 import br.edu.ifto.ecommerce.model.entity.cliente.PessoaJuridica;
 import br.edu.ifto.ecommerce.service.ClienteService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,14 +33,16 @@ public class ClienteController {
                              String login,
                              String password,
                              BindingResult result,
-                             Model model){
+                             Model model,
+                             HttpServletRequest request) throws ServletException {
         if (result.hasErrors()) {
             String mensagem = result.getAllErrors().getFirst().getDefaultMessage();
             model.addAttribute("erro", mensagem);
             return HTML_CLIENTE_FORM;
         }
         clienteService.insert(pessoa, login, password);
-        return "redirect:/" + CADASTRO_CLIENTE;
+        request.login(login, password);
+        return "redirect:/" + PRODUTOS;
     }
 
     @PostMapping(SAVE_PJ)
@@ -46,13 +50,15 @@ public class ClienteController {
                                String login,
                                String password,
                                BindingResult result,
-                               Model model){
+                               Model model,
+                               HttpServletRequest request) throws ServletException {
         if (result.hasErrors()) {
             String mensagem = result.getAllErrors().getFirst().getDefaultMessage();
             model.addAttribute("erro", mensagem);
             return HTML_CLIENTE_FORM;
         }
         clienteService.insert(pessoa, login, password);
-        return "redirect:/" + CADASTRO_CLIENTE;
+        request.login(login, password);
+        return "redirect:/" + PRODUTOS;
     }
 }

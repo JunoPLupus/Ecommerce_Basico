@@ -54,6 +54,19 @@ public class Usuario implements Serializable, UserDetails {
         this.roles = Arrays.asList(role);
     }
 
+    public String getNomeCurto() {
+        return pessoa != null ? pessoa.getNomeCurto() : login;
+    }
+
+    public String getNomeCompleto() {
+        return pessoa != null ? pessoa.getNomeExibicao() : login;
+    }
+
+    public String getAvatarLetter() {
+        String nome = getNomeCurto();
+        return nome.isEmpty() ? "?" : String.valueOf(nome.charAt(0)).toUpperCase();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;

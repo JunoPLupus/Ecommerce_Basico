@@ -8,11 +8,17 @@ import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import static br.edu.ifto.ecommerce.utils.Diretorios.HTML_CLIENTE_DETAIL_PEDIDO;
+import static br.edu.ifto.ecommerce.utils.Diretorios.HTML_CLIENTE_LISTA_PEDIDOS;
 import static br.edu.ifto.ecommerce.utils.Rotas.*;
 
 @Controller
@@ -33,9 +39,24 @@ public class VendaController {
             item.setVenda(carrinho);
         }
 
-        vendaRepository.insert(carrinho);
+        Venda vendaSalva = vendaRepository.insert(carrinho);
         session.removeAttribute(CARRINHO);
 
-        return "redirect:/" + PRODUTOS;
+        return "redirect:/" + PEDIDOS + DETALHES + "/" + vendaSalva.getId();
+    }
+
+    @GetMapping(LISTA)
+    public String meusPedidos(Model model) {
+        Usuario usuarioLogado = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Venda> pedidos = vendaRepository.findAllByClienteId(usuarioLogado.getPessoa().getId());
+        model.addAttribute("pedidos", pedidos);
+        return HTML_CLIENTE_LISTA_PEDIDOS;
+    }
+
+    @GetMapping(DETALHES_ID)
+    public String detalhesPedido(@PathVariable("id") Long id, Model model) {
+        Venda venda = vendaRepository.findById(id);
+        model.addAttribute("venda", venda);
+        return HTML_CLIENTE_DETAIL_PEDIDO;
     }
 }

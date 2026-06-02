@@ -294,3 +294,141 @@ mark {
 .icon-cart {
   @extend .bi-cart;
 }
+
+.icon-logout {
+  @extend .bi-box-arrow-right;
+}
+
+.pg-nav-user {
+  margin-left: 1rem;
+
+  &__toggle {
+    @extend .btn;
+    @extend .dropdown-toggle;
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.85);
+    background: transparent;
+    border: none;
+    padding: 0.375rem 0.5rem;
+
+    &:hover, &:focus, &.show {
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: none;
+    }
+
+    // Caret next to avatar
+    &::after {
+      margin-left: 0.4rem;
+    }
+  }
+
+  &__avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+    color: white;
+  }
+
+  &__menu {
+    display: none !important;
+    min-width: 260px;
+    padding: 0;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: none;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+    margin-top: 0.5rem;
+
+    &.show {
+      display: block !important;
+    }
+
+    li {
+      padding: 0 !important;
+    }
+  }
+
+  &__menu-header {
+    padding: 1.5rem 1.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  &__avatar-lg {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #198754;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: white;
+    margin: 0 auto 0.75rem;
+  }
+
+  &__full-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #212529;
+    margin-bottom: 0.125rem;
+  }
+
+  &__username {
+    font-size: 0.8rem;
+    color: #6c757d;
+  }
+
+  &__menu-item {
+    @extend .dropdown-item;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    padding: 0.875rem 1.5rem !important;
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    color: var(--bs-dropdown-link-color) !important;
+    font-size: 0.95rem;
+    line-height: 1 !important;
+
+    i {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      width: 1.25rem;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 1;
+    }
+
+    &--disabled {
+      @extend .dropdown-item;
+      @extend .disabled;
+      display: flex !important;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1.5rem;
+    }
+  }
+
+  &__menu-divider {
+    @extend .dropdown-divider;
+    margin: 0;
+  }
+}

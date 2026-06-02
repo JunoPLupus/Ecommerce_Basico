@@ -34,6 +34,12 @@ public abstract class Pessoa {
 
     public abstract String getNomeExibicao();
 
+    public String getNomeCurto() {
+        String[] partes = getNomeExibicao().split(" ");
+        if (partes.length >= 2) return partes[0] + " " + partes[1];
+        return partes[0];
+    }
+
     public abstract String getDocumento();
 
     public abstract String getDocumentoMascarado();
