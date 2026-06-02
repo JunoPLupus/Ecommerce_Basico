@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
+<head th:replace="~{fragments/head :: head('Detalhes do Pedido',~{})}"></head>
+<body>
+<main class="pg-card">
+
+    <h1>
+        <i class="icon-bag text-muted"></i>
+        Pedido
+        <small class="text-muted" th:text="'#' + ${venda.id}"></small>
+    </h1>
+    <p>
+        <mark>
+            <i class="icon-calendar"></i>
+            <span th:text="${#temporals.format(venda.data, 'dd/MM/yyyy HH:mm')}"></span>
+        </mark>
+    </p>
+    <br>
+    <table>
+        <thead>
+        <tr>
+            <th scope="col">Descrição do Produto</th>
+            <th scope="col">Valor Unitário</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col" class="text-end subtotal">Sub-Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${venda.itens}">
+            <td th:text="${item.produto.descricao}"></td>
+            <td th:text="'R$ ' + ${#numbers.formatDecimal(item.produto.valor, 1, 'POINT', 2, 'COMMA')}"></td>
+            <td th:text="${#numbers.formatDecimal(item.quantidade, 1, 0)}"></td>
+            <td class="text-end subtotal"
+                th:text="'R$ ' + ${#numbers.formatDecimal(item.total, 1, 'POINT', 2, 'COMMA')}">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="text-end"><strong>Total</strong></td>
+            <td class="text-end subtotal">
+                <strong th:text="'R$ ' + ${#numbers.formatDecimal(venda.total, 1, 'POINT', 2, 'COMMA')}"></strong>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <a class="button-outline-light" th:href="@{/pedidos/list}">Voltar para meus pedidos</a>
+
+</main>
+</body>
+</html>

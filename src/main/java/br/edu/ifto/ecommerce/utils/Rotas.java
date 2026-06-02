@@ -1,4 +1,4 @@
-package br.edu.ifto.ecommerce.config;
+package br.edu.ifto.ecommerce.utils;
 
 public final class Rotas {
 
@@ -12,7 +12,7 @@ public final class Rotas {
     public static final String CARRINHO = "carrinho";
 
     public static final String LISTA = "/list";
-    private static final String DETALHES = "/detalhes";
+    public static final String DETALHES = "/detalhes";
     public static final String CADASTRO = "/cadastro";
     public static final String INSERT = "/insert";
     public static final String SAVE = "/save";

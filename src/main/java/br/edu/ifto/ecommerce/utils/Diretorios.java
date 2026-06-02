@@ -1,4 +1,4 @@
-package br.edu.ifto.ecommerce.config;
+package br.edu.ifto.ecommerce.utils;
 
 public final class Diretorios {
     private Diretorios() {}
@@ -24,7 +24,11 @@ public final class Diretorios {
     public static final String HTML_ADMIN_LISTA_CLIENTES = HTML_ADMIN_CLIENTES + HTML_LISTA;
     public static final String HTML_ADMIN_DETAIL_CLIENTES = HTML_ADMIN_CLIENTES + HTML_DETAIL;
 
+    private static final String HTML_CLIENTE_PEDIDO = HTML_CLIENTE + "/pedido";
+
     public static final String HTML_CLIENTE_FORM = HTML_CLIENTE + HTML_FORM;
     public static final String HTML_CLIENTE_LISTA_PRODUTOS = HTML_CLIENTE + "/produto" + HTML_LISTA;
     public static final String HTML_CARRINHO = HTML_CLIENTE + "/carrinho/list";
+    public static final String HTML_CLIENTE_LISTA_PEDIDOS = HTML_CLIENTE_PEDIDO + HTML_LISTA;
+    public static final String HTML_CLIENTE_DETAIL_PEDIDO = HTML_CLIENTE_PEDIDO + HTML_DETAIL;
 }

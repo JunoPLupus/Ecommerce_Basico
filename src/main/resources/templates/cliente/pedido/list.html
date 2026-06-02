@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
+<head th:replace="~{fragments/head :: head('Meus Pedidos',~{})}"></head>
+<body>
+<main class="pg-card">
+
+    <h1>
+        <i class="icon-bag text-muted"></i>
+        Meus Pedidos
+    </h1>
+
+    <p th:if="${#lists.isEmpty(pedidos)}">Você ainda não realizou nenhum pedido.</p>
+
+    <table th:unless="${#lists.isEmpty(pedidos)}">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Data</th>
+            <th scope="col">Itens</th>
+            <th scope="col" class="text-end subtotal">Total</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pedido : ${pedidos}">
+            <td th:text="${pedido.id}"></td>
+            <td th:text="${#temporals.format(pedido.data, 'dd/MM/yyyy HH:mm')}"></td>
+            <td th:text="${pedido.qtdItensTotal()}"></td>
+            <td class="text-end subtotal"
+                th:text="'R$ ' + ${#numbers.formatDecimal(pedido.total(), 1, 'POINT', 2, 'COMMA')}">
+            </td>
+            <td>
+                <a class="button-primary" th:href="@{/pedidos/detalhes/{id}(id=${pedido.id})}">
+                    Ver detalhes
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</main>
+</body>
+</html>

@@ -15,8 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.ArrayList;
 import java.util.List;
 
-import static br.edu.ifto.ecommerce.config.Diretorios.*;
-import static br.edu.ifto.ecommerce.config.Rotas.*;
+import static br.edu.ifto.ecommerce.utils.Diretorios.*;
+import static br.edu.ifto.ecommerce.utils.Rotas.*;
 import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.*;
 
 @Controller

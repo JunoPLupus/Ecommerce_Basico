@@ -2,8 +2,9 @@ package br.edu.ifto.ecommerce.controller.cliente;
 
 import br.edu.ifto.ecommerce.model.entity.cliente.PessoaFisica;
 import br.edu.ifto.ecommerce.model.entity.cliente.PessoaJuridica;
-import br.edu.ifto.ecommerce.model.repository.ClienteRepository;
-
+import br.edu.ifto.ecommerce.service.ClienteService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,15 +13,15 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 
-import static br.edu.ifto.ecommerce.config.Diretorios.HTML_CLIENTE_FORM;
-import static br.edu.ifto.ecommerce.config.Rotas.*;
+import static br.edu.ifto.ecommerce.utils.Diretorios.HTML_CLIENTE_FORM;
+import static br.edu.ifto.ecommerce.utils.Rotas.*;
 
 @Controller
 @AllArgsConstructor
 @RequestMapping(CLIENTES)
 public class ClienteController {
 
-    ClienteRepository clienteRepository;
+    private final ClienteService clienteService;
 
     @GetMapping(CADASTRO)
     public String insert(){
@@ -28,24 +29,36 @@ public class ClienteController {
     }
 
     @PostMapping(SAVE_PF)
-    public String saveFisica(@Valid PessoaFisica pessoa, BindingResult result, Model model){
+    public String saveFisica(@Valid PessoaFisica pessoa,
+                             String login,
+                             String password,
+                             BindingResult result,
+                             Model model,
+                             HttpServletRequest request) throws ServletException {
         if (result.hasErrors()) {
             String mensagem = result.getAllErrors().getFirst().getDefaultMessage();
             model.addAttribute("erro", mensagem);
             return HTML_CLIENTE_FORM;
         }
-        clienteRepository.insert(pessoa);
-        return "redirect:/" + CADASTRO_CLIENTE;
+        clienteService.insert(pessoa, login, password);
+        request.login(login, password);
+        return "redirect:/" + PRODUTOS;
     }
 
     @PostMapping(SAVE_PJ)
-    public String saveJuridica(@Valid PessoaJuridica pessoa, BindingResult result, Model model){
+    public String saveJuridica(@Valid PessoaJuridica pessoa,
+                               String login,
+                               String password,
+                               BindingResult result,
+                               Model model,
+                               HttpServletRequest request) throws ServletException {
         if (result.hasErrors()) {
             String mensagem = result.getAllErrors().getFirst().getDefaultMessage();
             model.addAttribute("erro", mensagem);
             return HTML_CLIENTE_FORM;
         }
-        clienteRepository.insert(pessoa);
-        return "redirect:/" + CADASTRO_CLIENTE;
+        clienteService.insert(pessoa, login, password);
+        request.login(login, password);
+        return "redirect:/" + PRODUTOS;
     }
 }

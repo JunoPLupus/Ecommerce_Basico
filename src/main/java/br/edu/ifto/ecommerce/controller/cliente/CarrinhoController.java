@@ -1,8 +1,6 @@
 package br.edu.ifto.ecommerce.controller.cliente;
 
-import br.edu.ifto.ecommerce.model.entity.cliente.Pessoa;
 import br.edu.ifto.ecommerce.model.entity.venda.Venda;
-import br.edu.ifto.ecommerce.model.repository.ClienteRepository;
 import br.edu.ifto.ecommerce.service.CarrinhoService;
 
 import jakarta.servlet.http.HttpSession;
@@ -15,10 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static br.edu.ifto.ecommerce.config.Diretorios.HTML_CARRINHO;
-import static br.edu.ifto.ecommerce.config.Rotas.*;
+import static br.edu.ifto.ecommerce.utils.Diretorios.HTML_CARRINHO;
+import static br.edu.ifto.ecommerce.utils.Rotas.*;
 
 @Controller
 @AllArgsConstructor
@@ -26,14 +23,11 @@ import static br.edu.ifto.ecommerce.config.Rotas.*;
 public class CarrinhoController {
 
     private CarrinhoService carrinhoService;
-    private ClienteRepository clienteRepository;
 
     @GetMapping("")
     public String verCarrinho(HttpSession session, Model model) {
         Venda carrinho = getCarrinho(session);
         model.addAttribute(CARRINHO, carrinho);
-        List<Pessoa> clientes = clienteRepository.findAll();
-        model.addAttribute("clientes", clientes);
         return HTML_CARRINHO;
     }
 

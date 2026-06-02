@@ -1,4 +1,4 @@
-package br.edu.ifto.ecommerce.config;
+package br.edu.ifto.ecommerce.utils;
 
 public final class Roles {
     private Roles(){}

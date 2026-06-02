@@ -40,9 +40,36 @@
                 <a sec:authorize="!isAuthenticated()" class="button-outline-light" th:href="@{/login}">Entre</a>
                 <a sec:authorize="!isAuthenticated()" class="button-primary" th:href="@{/clientes/cadastro}">Cadastre-se</a>
 
-                <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-                    <button class="button-outline-light" type="submit">Sair</button>
-                </form>
+                <div sec:authorize="isAuthenticated()" class="pg-nav-user dropdown">
+                    <button class="pg-nav-user__toggle" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="pg-nav-user__avatar" sec:authentication="principal.avatarLetter"></span>
+                    </button>
+                    <ul class="pg-nav-user__menu dropdown-menu dropdown-menu-end">
+                        <li>
+                            <div class="pg-nav-user__menu-header">
+                                <div class="pg-nav-user__avatar-lg" sec:authentication="principal.avatarLetter"></div>
+                                <div class="pg-nav-user__full-name">
+                                    Olá, <span sec:authentication="principal.nomeCurto"></span>!
+                                </div>
+                                <div class="pg-nav-user__username">@<span sec:authentication="principal.username"></span></div>
+                            </div>
+                        </li>
+                        <li sec:authorize="hasAnyRole('USER')">
+                            <a class="pg-nav-user__menu-item" th:href="@{/pedidos/list}">
+                                <i class="icon-bag"></i> Meus pedidos
+                            </a>
+                        </li>
+                        <li sec:authorize="hasAnyRole('USER')" class="pg-nav-user__menu-divider"></li>
+                        <li>
+                            <form th:action="@{/logout}" method="post">
+                                <button type="submit" class="pg-nav-user__menu-item">
+                                    <i class="icon-logout"></i> Sair
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
                 </div>
         </div>
     </nav>

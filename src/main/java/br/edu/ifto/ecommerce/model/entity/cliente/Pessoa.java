@@ -23,17 +23,22 @@ public abstract class Pessoa {
     @NotNull (message = "{erro.pessoa.email.obrigatorio}")
     @NotBlank (message = "{erro.pessoa.email.obrigatorio}")
     @Email (message = "{erro.pessoa.email.invalido}")
+    @Column(unique = true)
     private String email;
 
     @NotNull (message = "{erro.pessoa.telefone.obrigatorio}")
     @NotBlank (message = "{erro.pessoa.telefone.obrigatorio}")
     private String telefone;
 
-    // TODO: adicionar atributo senha
-
     public abstract char getTipo();
 
     public abstract String getNomeExibicao();
+
+    public String getNomeCurto() {
+        String[] partes = getNomeExibicao().split(" ");
+        if (partes.length >= 2) return partes[0] + " " + partes[1];
+        return partes[0];
+    }
 
     public abstract String getDocumento();
 

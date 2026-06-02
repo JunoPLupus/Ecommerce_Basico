@@ -1,17 +1,17 @@
 package br.edu.ifto.ecommerce.config;
 
+import br.edu.ifto.ecommerce.model.entity.usuario.Usuario;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
+
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import java.io.IOException;
 
-import static br.edu.ifto.ecommerce.config.Roles.ROLE_ADMIN;
-import static br.edu.ifto.ecommerce.config.Rotas.*;
+import static br.edu.ifto.ecommerce.utils.Roles.ROLE_ADMIN;
+import static br.edu.ifto.ecommerce.utils.Rotas.*;
 
 public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 
@@ -21,11 +21,12 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
             HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
 
-        User authUser = (User) authentication.getPrincipal();
+        Usuario authUser = (Usuario) authentication.getPrincipal();
 
         assert authUser != null;
-        String defaultUrl = authUser.getAuthorities().contains(new SimpleGrantedAuthority(ROLE_ADMIN))? ADMIN_VENDAS : PRODUTOS;
+        String defaultUrl = authUser.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals(ROLE_ADMIN)) ? ADMIN_VENDAS : PRODUTOS;
 
-        response.sendRedirect(defaultUrl);
+        response.sendRedirect("/" + defaultUrl);
     }
 }
