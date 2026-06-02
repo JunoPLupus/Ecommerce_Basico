@@ -44,7 +44,7 @@ public class Usuario implements Serializable, UserDetails {
 
     @NotNull(message = "{erro.usuario.roles.obrigatorio}")
     @Size(min = 1, max = 2, message = "{erro.usuario.roles.tamanho}")
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
 
     public Usuario(Pessoa pessoa, String login, String password, Role role) {
