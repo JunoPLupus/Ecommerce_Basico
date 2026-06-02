@@ -14,10 +14,6 @@
             Meu Carrinho
         </h1>
         <form th:action="@{/pedidos/insert}" method="post" th:unless="${carrinho.getItens() == null || #lists.isEmpty(carrinho.getItens())}">
-            <select name="clienteId" class="form-select" aria-label="Default select example">
-                <option selected>Selecione um cliente</option>
-                <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.getNomeExibicao()}"></option>
-            </select>
             <button
                type="submit" class="button-primary"
                data-bs-toggle="tooltip"
