@@ -1,0 +1,35 @@
+@use "../../../node_modules/bootstrap/scss/bootstrap";
+
+.search-bar {
+  @extend .input-group;
+  @extend .mt-4;
+  @extend .mb-4;
+}
+
+.dropdown {
+  .filter-btn {
+    @extend .btn;
+    @extend .btn-outline-secondary;
+    @extend .rounded-0;
+    @extend .dropdown-toggle;
+  }
+  .dropdown-menu {
+    @extend .dropdown-menu-end;
+    min-width: max-content;
+
+    li {
+      padding: 1rem;
+    }
+  }
+}
+
+.date-picker input {
+  min-width: 215px;
+}
+
+.input-group {
+  flex-flow: row;
+  span {
+    @extend .input-group-text;
+  }
+}

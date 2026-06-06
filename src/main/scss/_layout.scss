@@ -1,0 +1,54 @@
+@use "../../../node_modules/bootstrap/scss/bootstrap";
+
+.pg-card {
+  @extend .container;
+  @extend .card;
+  @extend .mt-3;
+  background-color: white;
+  padding: 2rem;
+}
+
+.pg-footer {
+  @extend .pt-3;
+}
+
+.nav-tab {
+  @extend .nav;
+  @extend .nav-tabs;
+  @extend .mt-3;
+
+  li {
+    @extend .nav-item;
+    a {
+      @extend .nav-link;
+    }
+  }
+}
+
+.mt-navbar {
+  margin-top: 1rem;
+}
+
+.main-double-collumns {
+  @extend .d-flex;
+  @extend .justify-content-between;
+  @extend .flex-wrap;
+  @extend .flex-md-nowrap;
+  @extend .align-items-center;
+  @extend .pt-3;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 12rem;
+  object-fit: contain;
+  background-color: #f8f9fa;
+  padding: 0.5rem;
+}
+
+.card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
