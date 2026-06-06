@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
+import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.breadcrumb;
 import static br.edu.ifto.ecommerce.utils.Diretorios.HTML_CLIENTE_DETAIL_PEDIDO;
 import static br.edu.ifto.ecommerce.utils.Diretorios.HTML_CLIENTE_LISTA_PEDIDOS;
 import static br.edu.ifto.ecommerce.utils.Rotas.*;
@@ -57,6 +59,10 @@ public class VendaController {
     public String detalhesPedido(@PathVariable("id") Long id, Model model) {
         Venda venda = vendaRepository.findById(id);
         model.addAttribute("venda", venda);
+        model.addAttribute("breadcrumbItems", breadcrumb(
+                new BreadcrumbItem("Meus Pedidos", "/" + PEDIDOS + LISTA),
+                new BreadcrumbItem("Pedido #" + venda.getId(), null)
+        ));
         return HTML_CLIENTE_DETAIL_PEDIDO;
     }
 }
