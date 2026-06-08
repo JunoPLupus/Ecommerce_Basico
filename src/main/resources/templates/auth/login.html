@@ -2,7 +2,7 @@
 <html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
 <head th:replace="~{fragments/head :: head('Login',~{})}"></head>
 <body>
-<main class="pg-card">
+<main class="pg-card pg-card--form">
 
     <h1>Login</h1>
     <p class="fw-light">Informe seu usuário e senha</p>
@@ -22,7 +22,10 @@
             <label>Senha<input class="form-control"
                                 type="password" name="password" placeholder="Senha"/></label>
         </div>
-        <button type="submit" class="button-primary">Login</button>
+        <div class="form-actions">
+            <button type="submit" class="button-primary">Login</button>
+            <span class="fw-light">Ainda não têm uma conta? <a th:href="@{/clientes/cadastro}">Se cadastre!</a></span>
+        </div>
     </form>
 </main>
 </body>

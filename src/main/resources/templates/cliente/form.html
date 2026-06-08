@@ -6,7 +6,7 @@
 
 <body>
 
-<main class="pg-card">
+<main class="pg-card pg-card--form">
 
     <h1>Cadastrar Cliente</h1>
     <p class="fw-light">Todos os campos são obrigatórios*</p>
@@ -72,7 +72,10 @@
 
         <hr>
 
-        <button type="submit" class="button-primary">Cadastrar Cliente</button>
+        <div class="form-actions">
+            <button type="submit" class="button-primary">Cadastrar Cliente</button>
+            <span class="fw-light">Já têm uma conta? <a th:href="@{/login}">Entre agora!</a></span>
+        </div>
     </form>
 
 </main>

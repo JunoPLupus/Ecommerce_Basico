@@ -33,3 +33,14 @@
     @extend .input-group-text;
   }
 }
+
+.form-actions {
+  @extend .d-flex;
+  @extend .align-items-center;
+  @extend .gap-3;
+  @extend .mt-3;
+
+  .button-primary {
+    margin-left: 0;
+  }
+}
