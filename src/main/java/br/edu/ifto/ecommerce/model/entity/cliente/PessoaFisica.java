@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 import lombok.*;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 @Getter
@@ -17,13 +16,11 @@ import jakarta.validation.constraints.Pattern;
 @DiscriminatorValue("F")
 public class PessoaFisica extends Pessoa {
 
-    @NotNull (message = "{erro.pessoafisica.cpf.obrigatorio}")
     @NotBlank (message = "{erro.pessoafisica.cpf.obrigatorio}")
     @Pattern(regexp = "^\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2}$", message = "{erro.pessoafisica.cpf.invalido}")
     @Column(unique = true)
     private String cpf;
 
-    @NotNull (message = "{erro.pessoafisica.nome.obrigatorio}")
     @NotBlank (message = "{erro.pessoafisica.nome.obrigatorio}")
     private String nome;
 

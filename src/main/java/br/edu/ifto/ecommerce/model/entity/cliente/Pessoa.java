@@ -5,7 +5,6 @@ import lombok.*;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -20,13 +19,11 @@ public abstract class Pessoa {
     @Id
     private Long id;
 
-    @NotNull (message = "{erro.pessoa.email.obrigatorio}")
     @NotBlank (message = "{erro.pessoa.email.obrigatorio}")
     @Email (message = "{erro.pessoa.email.invalido}")
     @Column(unique = true)
     private String email;
 
-    @NotNull (message = "{erro.pessoa.telefone.obrigatorio}")
     @NotBlank (message = "{erro.pessoa.telefone.obrigatorio}")
     private String telefone;
 

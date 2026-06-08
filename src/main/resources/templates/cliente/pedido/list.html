@@ -9,6 +9,8 @@
         Meus Pedidos
     </h1>
 
+    <div th:replace="~{fragments/alert :: alert(${erro})}"></div>
+
     <p th:if="${#lists.isEmpty(pedidos)}">Você ainda não realizou nenhum pedido.</p>
 
     <table th:unless="${#lists.isEmpty(pedidos)}">
