@@ -52,3 +52,57 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.pg-card.pg-card--form {
+  max-width: 30%;
+}
+
+// Carrinho - layout dois painéis
+.pg-cart-layout {
+  @extend .container;
+  @extend .d-flex;
+  @extend .gap-3;
+  @extend .align-items-start;
+  @extend .mt-3;
+}
+
+.pg-cart-main {
+  flex: 1; // flex-basis: 0 — ignora width: 100% do .container (via .pg-card)
+  margin: 0;
+}
+
+.pg-cart-aside {
+  flex: 0 0 260px; // fixo em 260px, não cresce nem encolhe
+  margin: 0;
+  text-align: center;
+
+  .button-primary {
+    @extend .w-100;
+    margin-left: 0;
+  }
+}
+
+.pg-cart-price {
+  @extend .fs-3;
+  @extend .fw-bold;
+  @extend .my-2;
+}
+
+.cart-img-thumbnail {
+  @extend .rounded;
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  background-color: #f8f9fa;
+  padding: 0.25rem;
+}
+
+.cart-qty {
+  @extend .d-flex;
+  @extend .align-items-center;
+  @extend .gap-2;
+
+  .button-primary {
+    margin-left: 0;
+  }
+}
