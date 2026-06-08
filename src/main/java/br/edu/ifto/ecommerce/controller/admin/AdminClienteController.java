@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -46,8 +47,14 @@ public class AdminClienteController {
     }
 
     @GetMapping(DETALHES_ID)
-    public String detail(@PathVariable("id") Long id, Model model){
+    public String detail(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
         Pessoa cliente = clienteRepository.findById(id);
+
+        if (cliente == null) {
+            redirectAttributes.addFlashAttribute("erro", "Cliente #" + id + " não encontrado.");
+            return "redirect:/" + ADMIN_CLIENTES;
+        }
+
         List<Venda> vendas = vendaRepository.findAllByClienteId(id);
 
         model.addAttribute("cliente", cliente);
