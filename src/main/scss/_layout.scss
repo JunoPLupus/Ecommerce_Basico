@@ -48,16 +48,22 @@
 
 .card-title {
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.pg-card.pg-card--form {
-  max-width: 30%;
+.produto-card {
+  @extend .card;
+  @extend .h-100;
+  --bs-card-cap-bg: white;
 }
 
-// Carrinho - layout dois painéis
+.pg-card.pg-card--form {
+  max-width: 40%;
+}
+
+// Carrinho - layout dois paineis
 .pg-cart-layout {
   @extend .container;
   @extend .d-flex;
@@ -67,12 +73,12 @@
 }
 
 .pg-cart-main {
-  flex: 1; // flex-basis: 0 — ignora width: 100% do .container (via .pg-card)
+  flex: 1;
   margin: 0;
 }
 
 .pg-cart-aside {
-  flex: 0 0 260px; // fixo em 260px, não cresce nem encolhe
+  flex: 0 0 260px;
   margin: 0;
   text-align: center;
 

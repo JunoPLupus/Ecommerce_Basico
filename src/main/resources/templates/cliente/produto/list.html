@@ -8,7 +8,7 @@
 
     <div th:unless="${produtos == null || #lists.isEmpty(produtos)}" class="row row-cols-1 row-cols-md-4 g-4">
         <div class="col" th:each="produto : ${produtos}">
-            <div class="card h-100">
+            <div class="produto-card">
                 <img th:src="${produto.urlImagem}" class="card-img-top" alt="Foto do produto">
                 <div class="card-body">
                     <h6 class="card-title" th:text="${produto.descricao}">Descrição</h6>
