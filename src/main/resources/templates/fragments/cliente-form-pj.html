@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<form th:fragment="form-pj"
+      th:action="@{/clientes/save/juridica}"
+      th:object="${pessoaJuridica}"
+      method="post"
+      class="mt-3">
+
+    <input type="hidden" th:field="*{id}">
+
+    <div class="mb-4">
+        <label for="cnpj">CNPJ</label>
+        <input type="text" th:field="*{cnpj}" id="cnpj" placeholder="Ex: 00.000.000/0000-00">
+        <span th:if="${#fields.hasErrors('cnpj')}" th:errors="*{cnpj}" class="text-danger"></span>
+    </div>
+
+    <div class="mb-4">
+        <label for="razaoSocial">Razão Social</label>
+        <input type="text" th:field="*{razaoSocial}" id="razaoSocial" placeholder="Ex: Empresa LTDA.">
+        <span th:if="${#fields.hasErrors('razaoSocial')}" th:errors="*{razaoSocial}" class="text-danger"></span>
+    </div>
+
+    <div class="mb-4">
+        <label for="email-pj">E-mail</label>
+        <input type="email" th:field="*{email}" id="email-pj" placeholder="Ex: contato@empresa.com">
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
+    </div>
+
+    <div class="mb-4">
+        <label for="telefone-pj">Telefone</label>
+        <input type="text" th:field="*{telefone}" id="telefone-pj" placeholder="Ex: (00) 1234-5678">
+        <span th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="text-danger"></span>
+    </div>
+
+    <hr>
+
+    <div class="mb-4">
+        <label for="login-pj">Login</label>
+        <input type="text" name="login" id="login-pj" placeholder="Ex: empresa.ltda">
+    </div>
+
+    <div class="mb-4">
+        <label for="password-pj">Senha</label>
+        <input type="password" name="password" id="password-pj" placeholder="Mínimo 6 caracteres">
+    </div>
+
+    <hr>
+
+    <div class="form-actions">
+        <button type="submit" class="button-primary">Cadastrar Cliente</button>
+        <span class="fw-light">Já têm uma conta? <a th:href="@{/login}">Entre agora!</a></span>
+    </div>
+
+</form>
+
+</body>
+</html>

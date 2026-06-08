@@ -1,0 +1,40 @@
+@use "../../../node_modules/bootstrap/scss/bootstrap";
+
+.button-danger {
+  @extend .btn;
+  @extend .btn-danger;
+}
+
+.button-primary {
+  @extend .btn;
+  @extend .btn-primary;
+  margin-left: 1rem;
+}
+
+.button-secondary {
+  @extend .btn;
+  @extend .btn-outline-secondary;
+}
+
+.button-outline-light {
+  @extend .btn;
+  @extend .btn-outline-light;
+  @extend .position-relative;
+  margin-left: 1rem;
+
+  span {
+    @extend .position-absolute;
+    @extend .top-0;
+    @extend .start-100;
+    @extend .translate-middle;
+    @extend .badge;
+    @extend .rounded-pill;
+    @extend .bg-danger;
+  }
+}
+
+.button-group {
+  @extend .d-flex;
+  @extend .gap-2;
+  @extend .justify-content-end;
+}

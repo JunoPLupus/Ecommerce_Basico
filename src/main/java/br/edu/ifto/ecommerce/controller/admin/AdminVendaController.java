@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -60,8 +61,13 @@ public class AdminVendaController {
     }
 
     @GetMapping(DETALHES_ID)
-    public String detail(@PathVariable("id") Long id, Model model) {
+    public String detail(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
         Venda venda = vendaRepository.findById(id);
+
+        if (venda == null) {
+            redirectAttributes.addFlashAttribute("erro", "Venda #" + id + " não encontrada.");
+            return "redirect:/" + ADMIN_VENDAS;
+        }
 
         model.addAttribute("venda", venda);
         model.addAttribute("breadcrumbItems", breadcrumb(

@@ -1,42 +1,19 @@
-function selecionarnavLink(campoA, campoB, linkA, linkB, action) {
-    campoA.hidden = false;
-    campoB.hidden = true;
-    campoB.querySelectorAll('input').forEach(input => input.disabled = true);
-    campoA.querySelectorAll('input').forEach(input => input.disabled = false);
+function selecionarTab(mostrar, esconder, linkAtivo, linkInativo) {
+    mostrar.removeAttribute('hidden');
+    esconder.setAttribute('hidden', '');
 
-    linkA.classList.add("active");
-    linkB.classList.remove("active");
+    linkAtivo.classList.add('active');
+    linkInativo.classList.remove('active');
 
-    linkA.ariaCurrent = "page";
-    linkB.ariaCurrent = null;
-
-    document.getElementById("form-cadastro-cliente").action = action;
+    linkAtivo.ariaCurrent = 'page';
+    linkInativo.ariaCurrent = null;
 }
 
-const navLinkPf = document.getElementById("nav-item-pf");
-const navLinkPj = document.getElementById("nav-item-pj");
+const navLinkPf = document.getElementById('nav-item-pf');
+const navLinkPj = document.getElementById('nav-item-pj');
 
-const camposPf = document.getElementById("campos-pf");
-const camposPj = document.getElementById("campos-pj");
+const containerPf = document.getElementById('container-pf');
+const containerPj = document.getElementById('container-pj');
 
-navLinkPf.addEventListener(
-    "click",
-    () =>
-        selecionarnavLink(
-            camposPf,
-            camposPj,
-            navLinkPf,
-            navLinkPj,
-            '/clientes/save/fisica'
-        ));
-
-navLinkPj.addEventListener(
-    "click",
-    () =>
-        selecionarnavLink(
-            camposPj,
-            camposPf,
-            navLinkPj,
-            navLinkPf,
-            '/clientes/save/juridica'
-        ));
+navLinkPf.addEventListener('click', () => selecionarTab(containerPf, containerPj, navLinkPf, navLinkPj));
+navLinkPj.addEventListener('click', () => selecionarTab(containerPj, containerPf, navLinkPj, navLinkPf));

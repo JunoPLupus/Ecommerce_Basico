@@ -22,7 +22,6 @@
             </span>
         </mark>
     </p>
-    <br>
     <table>
         <thead>
         <tr>
@@ -36,7 +35,7 @@
         <tbody>
         <tr th:each="item : ${venda.itens}">
             <td scope="row" th:text="${item.produto.id}"></td>
-            <td th:text="${item.produto.descricao}"></td>
+            <td class="col-descricao" th:text="${item.produto.descricao}"></td>
             <td th:text="'R$ ' + ${#numbers.formatDecimal(item.produto.valor, 1, 'POINT', 2, 'COMMA')}"></td>
             <td th:text="${#numbers.formatDecimal(item.quantidade, 1, 0)}"></td>
             <td class="text-end subtotal"

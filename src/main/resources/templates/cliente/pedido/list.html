@@ -9,6 +9,8 @@
         Meus Pedidos
     </h1>
 
+    <div th:replace="~{fragments/alert :: alert(${erro})}"></div>
+
     <p th:if="${#lists.isEmpty(pedidos)}">Você ainda não realizou nenhum pedido.</p>
 
     <table th:unless="${#lists.isEmpty(pedidos)}">
@@ -29,9 +31,12 @@
             <td class="text-end subtotal"
                 th:text="'R$ ' + ${#numbers.formatDecimal(pedido.total(), 1, 'POINT', 2, 'COMMA')}">
             </td>
-            <td>
-                <a class="button-primary" th:href="@{/pedidos/detalhes/{id}(id=${pedido.id})}">
-                    Ver detalhes
+            <td class="text-end">
+                <a class="button-primary" th:href="@{/pedidos/detalhes/{id}(id=${pedido.id})}"
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="top"
+                   title="Ver detalhes do pedido">
+                    <i class="icon-document"></i>
                 </a>
             </td>
         </tr>

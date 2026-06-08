@@ -24,40 +24,42 @@ public class ClienteController {
     private final ClienteService clienteService;
 
     @GetMapping(CADASTRO)
-    public String insert(){
+    public String insert(Model model) {
+        model.addAttribute("pessoaFisica", new PessoaFisica());
+        model.addAttribute("pessoaJuridica", new PessoaJuridica());
         return HTML_CLIENTE_FORM;
     }
 
     @PostMapping(SAVE_PF)
-    public String saveFisica(@Valid PessoaFisica pessoa,
+    public String saveFisica(@Valid PessoaFisica pessoaFisica,
+                             BindingResult result,
                              String login,
                              String password,
-                             BindingResult result,
                              Model model,
                              HttpServletRequest request) throws ServletException {
         if (result.hasErrors()) {
-            String mensagem = result.getAllErrors().getFirst().getDefaultMessage();
-            model.addAttribute("erro", mensagem);
+            model.addAttribute("pessoaJuridica", new PessoaJuridica());
+            model.addAttribute("activeTab", "pf");
             return HTML_CLIENTE_FORM;
         }
-        clienteService.insert(pessoa, login, password);
+        clienteService.insert(pessoaFisica, login, password);
         request.login(login, password);
         return "redirect:/" + PRODUTOS;
     }
 
     @PostMapping(SAVE_PJ)
-    public String saveJuridica(@Valid PessoaJuridica pessoa,
+    public String saveJuridica(@Valid PessoaJuridica pessoaJuridica,
+                               BindingResult result,
                                String login,
                                String password,
-                               BindingResult result,
                                Model model,
                                HttpServletRequest request) throws ServletException {
         if (result.hasErrors()) {
-            String mensagem = result.getAllErrors().getFirst().getDefaultMessage();
-            model.addAttribute("erro", mensagem);
+            model.addAttribute("pessoaFisica", new PessoaFisica());
+            model.addAttribute("activeTab", "pj");
             return HTML_CLIENTE_FORM;
         }
-        clienteService.insert(pessoa, login, password);
+        clienteService.insert(pessoaJuridica, login, password);
         request.login(login, password);
         return "redirect:/" + PRODUTOS;
     }

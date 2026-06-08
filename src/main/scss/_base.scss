@@ -1,0 +1,57 @@
+@use "../../../node_modules/bootstrap/scss/bootstrap";
+@use "../../../node_modules/bootstrap-icons/font/bootstrap-icons";
+
+h1 {
+  @extend .display-6;
+}
+
+form {
+  label {
+    @extend .form-label;
+  }
+  input {
+    @extend .form-control;
+  }
+}
+
+hr {
+  @extend .border-light-subtle;
+  @extend .mt-5;
+  @extend .mb-3;
+}
+
+table {
+  @extend .table;
+  @extend .table-striped;
+  @extend .table-hover;
+  @extend .align-middle;
+  @extend .mt-3;
+
+  th {
+    @extend .fw-light;
+  }
+}
+
+footer {
+  @extend .container;
+  @extend .mt-auto;
+  @extend .pt-3;
+}
+
+a {
+  text-decoration: none;
+}
+
+i {
+  @extend .bi;
+}
+
+mark {
+  @extend .badge;
+  @extend .rounded-pill;
+  @extend .bg-light;
+  @extend .text-dark;
+  span {
+    @extend .fw-normal;
+  }
+}

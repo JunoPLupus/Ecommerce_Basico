@@ -1,0 +1,65 @@
+@use "../../../node_modules/bootstrap-icons/font/bootstrap-icons";
+
+.icon-bag {
+  @extend .bi-bag;
+}
+
+.icon-box {
+  @extend .bi-box-seam;
+}
+
+.icon-search {
+  @extend .bi-search;
+}
+
+.icon-pen {
+  @extend .bi-pen;
+}
+
+.icon-trash {
+  @extend .bi-trash;
+}
+
+.icon-plus {
+  @extend .bi-plus-lg;
+}
+
+.icon-minus {
+  @extend .bi-dash;
+}
+
+.icon-person {
+  @extend .bi-person;
+}
+
+.icon-calendar {
+  @extend .bi-calendar;
+}
+
+.icon-numbers {
+  @extend .bi-123;
+}
+
+.icon-person-identity {
+  @extend .bi-person-vcard;
+}
+
+.icon-email {
+  @extend .bi-envelope-at;
+}
+
+.icon-phone {
+  @extend .bi-telephone;
+}
+
+.icon-document {
+  @extend .bi-file-earmark-text;
+}
+
+.icon-cart {
+  @extend .bi-cart;
+}
+
+.icon-logout {
+  @extend .bi-box-arrow-right;
+}

@@ -1,0 +1,114 @@
+@use "../../../node_modules/bootstrap/scss/bootstrap";
+
+.pg-card {
+  @extend .container;
+  @extend .card;
+  @extend .mt-3;
+  background-color: white;
+  padding: 2rem;
+}
+
+.pg-footer {
+  @extend .pt-3;
+}
+
+.nav-tab {
+  @extend .nav;
+  @extend .nav-tabs;
+  @extend .mt-3;
+
+  li {
+    @extend .nav-item;
+    a {
+      @extend .nav-link;
+    }
+  }
+}
+
+.mt-navbar {
+  margin-top: 1rem;
+}
+
+.main-double-collumns {
+  @extend .d-flex;
+  @extend .justify-content-between;
+  @extend .flex-wrap;
+  @extend .flex-md-nowrap;
+  @extend .align-items-center;
+  @extend .pt-3;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 12rem;
+  object-fit: contain;
+  background-color: #f8f9fa;
+  padding: 0.5rem;
+}
+
+.card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.produto-card {
+  @extend .card;
+  @extend .h-100;
+  --bs-card-cap-bg: white;
+}
+
+.pg-card.pg-card--form {
+  max-width: 40%;
+}
+
+// Carrinho - layout dois paineis
+.pg-cart-layout {
+  @extend .container;
+  @extend .d-flex;
+  @extend .gap-3;
+  @extend .align-items-start;
+  @extend .mt-3;
+}
+
+.pg-cart-main {
+  flex: 1;
+  margin: 0;
+}
+
+.pg-cart-aside {
+  flex: 0 0 260px;
+  margin: 0;
+  text-align: center;
+
+  .button-primary {
+    @extend .w-100;
+    margin-left: 0;
+  }
+}
+
+.pg-cart-price {
+  @extend .fs-3;
+  @extend .fw-bold;
+  @extend .my-2;
+}
+
+.cart-img-thumbnail {
+  @extend .rounded;
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  background-color: #f8f9fa;
+  padding: 0.25rem;
+}
+
+.cart-qty {
+  @extend .d-flex;
+  @extend .align-items-center;
+  @extend .gap-2;
+
+  .button-primary {
+    margin-left: 0;
+  }
+}

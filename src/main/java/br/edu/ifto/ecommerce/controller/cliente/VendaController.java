@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
+import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.breadcrumb;
 import static br.edu.ifto.ecommerce.utils.Diretorios.HTML_CLIENTE_DETAIL_PEDIDO;
 import static br.edu.ifto.ecommerce.utils.Diretorios.HTML_CLIENTE_LISTA_PEDIDOS;
 import static br.edu.ifto.ecommerce.utils.Rotas.*;
@@ -54,9 +57,19 @@ public class VendaController {
     }
 
     @GetMapping(DETALHES_ID)
-    public String detalhesPedido(@PathVariable("id") Long id, Model model) {
+    public String detalhesPedido(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
         Venda venda = vendaRepository.findById(id);
+
+        if (venda == null) {
+            redirectAttributes.addFlashAttribute("erro", "Pedido #" + id + " não encontrado.");
+            return "redirect:/" + PEDIDOS + LISTA;
+        }
+
         model.addAttribute("venda", venda);
+        model.addAttribute("breadcrumbItems", breadcrumb(
+                new BreadcrumbItem("Meus Pedidos", "/" + PEDIDOS + LISTA),
+                new BreadcrumbItem("Pedido #" + venda.getId(), null)
+        ));
         return HTML_CLIENTE_DETAIL_PEDIDO;
     }
 }
