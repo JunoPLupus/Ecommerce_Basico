@@ -22,7 +22,6 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests(
                         customizer ->
                                 customizer
-//                                        .requestMatchers("/h2-console/**").permitAll()
                                         .requestMatchers("/" + CADASTRO_CLIENTE).anonymous()
                                         .requestMatchers(POST, "/" + CLIENTES + SAVE + "/**").anonymous()
 
@@ -49,8 +48,6 @@ public class SecurityConfiguration {
                                 .passwordParameter("password")
                                 .successHandler(authSuccessHandler())
                 )
-//                .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"))
-//                .headers(headers -> headers.frameOptions(frame -> frame.disable()))
                 .exceptionHandling(customizer ->
                         customizer.accessDeniedHandler(acessoNegadoHandler()))
                 .logout(LogoutConfigurer::permitAll) //configura a funcionalidade de logout no Spring Security.
