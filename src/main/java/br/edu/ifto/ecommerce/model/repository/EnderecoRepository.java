@@ -47,13 +47,12 @@ public class EnderecoRepository {
     }
 
     public boolean delete(Long id) {
-        Endereco endereco = em.find(Endereco.class, id);
+        if (existsVendaByEnderecoId(id)) return false;
 
-        if (!existsVendaByEnderecoId(id)) {
-            em.remove(endereco);
-            return true;
-        }
+        em.createQuery("DELETE FROM Endereco e WHERE e.id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
 
-        return false;
+        return true;
     }
 }
