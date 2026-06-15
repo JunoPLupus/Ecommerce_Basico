@@ -34,6 +34,15 @@
   }
 }
 
+.pg-form-row {
+  @extend .d-flex;
+  @extend .gap-3;
+
+  > div {
+    flex: 1;
+  }
+}
+
 .form-actions {
   @extend .d-flex;
   @extend .align-items-center;

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
+<head th:replace="~{fragments/head :: head(${endereco.id == null ? 'Cadastrar Endereço' : 'Editar Endereço'},~{})}"></head>
+<body>
+<main class="pg-card pg-card--form">
+
+    <h1 th:text="${endereco.id == null ? 'Cadastrar Endereço de Entrega' : 'Editar Endereço de Entrega'}"></h1>
+
+    <form class="mt-3"
+          th:action="@{${endereco.id == null ? '/enderecos/save' : '/enderecos/update'}}"
+          th:object="${endereco}" method="post">
+
+        <input type="hidden" th:field="*{id}">
+        <input type="hidden" name="origem" th:value="${origem}">
+
+        <div class="mb-4">
+            <label for="cep">CEP*</label>
+            <input type="text" th:field="*{cep}" id="cep" placeholder="00000-000" required>
+            <span th:if="${#fields.hasErrors('cep')}" th:errors="*{cep}" class="text-danger"></span>
+        </div>
+
+        <div class="mb-4">
+            <label for="logradouro">Logradouro*</label>
+            <input type="text" th:field="*{logradouro}" id="logradouro" placeholder="Ex: Avenida Paulista" required>
+            <span th:if="${#fields.hasErrors('logradouro')}" th:errors="*{logradouro}" class="text-danger"></span>
+        </div>
+
+        <div class="pg-form-row mb-4">
+            <div>
+                <label for="bairro">Bairro*</label>
+                <input type="text" th:field="*{bairro}" id="bairro" placeholder="Ex: Zona Norte" required>
+                <span th:if="${#fields.hasErrors('bairro')}" th:errors="*{bairro}" class="text-danger"></span>
+            </div>
+            <div>
+                <label for="numero">Número (opcional)</label>
+                <input type="text" th:field="*{numero}" id="numero" placeholder="Ex: 123">
+            </div>
+        </div>
+
+        <div class="pg-form-row mb-4">
+            <div>
+                <label for="cidade">Cidade*</label>
+                <input type="text" th:field="*{cidade}" id="cidade" placeholder="Ex: São Paulo" required>
+                <span th:if="${#fields.hasErrors('cidade')}" th:errors="*{cidade}" class="text-danger"></span>
+            </div>
+            <div>
+                <label for="estado">Estado*</label>
+                <select th:field="*{estado}" id="estado" required>
+                    <option value="" disabled th:selected="${endereco.estado == null}">Selecione o estado</option>
+                    <option th:each="uf : ${estados}" th:value="${uf}" th:text="${uf.nomeExibicao}"></option>
+                </select>
+                <span th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}" class="text-danger"></span>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="form-actions">
+            <a class="button-secondary" th:href="${origem != null ? origem : '/enderecos'}">Cancelar</a>
+            <button type="submit" class="button-primary"
+                    th:text="${endereco.id == null ? 'Cadastrar Endereço' : 'Salvar Alterações'}"></button>
+        </div>
+    </form>
+
+</main>
+</body>
+</html>

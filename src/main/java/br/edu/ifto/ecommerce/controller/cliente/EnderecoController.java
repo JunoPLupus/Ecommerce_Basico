@@ -4,6 +4,7 @@ import br.edu.ifto.ecommerce.model.entity.endereco.Endereco;
 import br.edu.ifto.ecommerce.model.enums.Estado;
 import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
 import br.edu.ifto.ecommerce.model.repository.EnderecoRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.net.URI;
 import java.util.List;
 
 import static br.edu.ifto.ecommerce.utils.AutenticacaoUtils.getPessoaLogada;
@@ -39,8 +41,9 @@ public class EnderecoController {
      * @return html de cadastro de endereço
      */
     @GetMapping(INSERT)
-    public String insert(Endereco endereco, ModelMap model) {
+    public String insert(Endereco endereco, ModelMap model, HttpServletRequest request) {
         model.addAttribute("estados", Estado.values());
+        model.addAttribute("origem", origemRequisicao(request));
         model.addAttribute("breadcrumbItems", breadcrumb(
                 new BreadcrumbItem("Meus Endereços", "/" + ENDERECOS),
                 new BreadcrumbItem("Cadastrar Endereço", null)
@@ -49,19 +52,21 @@ public class EnderecoController {
     }
 
     @PostMapping(SAVE)
-    public String save(@Valid Endereco endereco, BindingResult result, ModelMap model) {
+    public String save(@Valid Endereco endereco, BindingResult result, ModelMap model,
+                        @RequestParam(value = "origem", required = false) String origem) {
         if (result.hasErrors()) {
             model.addAttribute("estados", Estado.values());
+            model.addAttribute("origem", origem);
             return HTML_CLIENTE_FORM_ENDERECO;
         }
 
         endereco.setPessoa(getPessoaLogada());
         enderecoRepository.insert(endereco);
-        return "redirect:/" + ENDERECOS;
+        return redirecionarParaOrigem(origem);
     }
 
     @GetMapping(EDIT_ID)
-    public String edit(@PathVariable("id") Long id, ModelMap model, RedirectAttributes redirectAttributes) {
+    public String edit(@PathVariable("id") Long id, ModelMap model, RedirectAttributes redirectAttributes, HttpServletRequest request) {
         Endereco endereco = enderecoRepository.findById(id);
 
         if (endereco == null || !endereco.pertenceA(getPessoaLogada())) {
@@ -71,6 +76,7 @@ public class EnderecoController {
 
         model.addAttribute("endereco", endereco);
         model.addAttribute("estados", Estado.values());
+        model.addAttribute("origem", origemRequisicao(request));
         model.addAttribute("breadcrumbItems", breadcrumb(
                 new BreadcrumbItem("Meus Endereços", "/" + ENDERECOS),
                 new BreadcrumbItem("Editar Endereço", null)
@@ -79,7 +85,8 @@ public class EnderecoController {
     }
 
     @PostMapping(UPDATE)
-    public String update(@Valid Endereco endereco, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes) {
+    public String update(@Valid Endereco endereco, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes,
+                          @RequestParam(value = "origem", required = false) String origem) {
         Endereco enderecoExistente = enderecoRepository.findById(endereco.getId());
 
         if (enderecoExistente == null || !enderecoExistente.pertenceA(getPessoaLogada())) {
@@ -89,12 +96,13 @@ public class EnderecoController {
 
         if (result.hasErrors()) {
             model.addAttribute("estados", Estado.values());
+            model.addAttribute("origem", origem);
             return HTML_CLIENTE_FORM_ENDERECO;
         }
 
         endereco.setPessoa(enderecoExistente.getPessoa());
         enderecoRepository.update(endereco);
-        return "redirect:/" + ENDERECOS;
+        return redirecionarParaOrigem(origem);
     }
 
     @PostMapping(DELETE_ID)
@@ -111,5 +119,34 @@ public class EnderecoController {
         if (!sucesso) redirectAttributes.addFlashAttribute("erro", "Não é possível excluir! Existem pedidos associados a este endereço.");
 
         return "redirect:/" + ENDERECOS;
+    }
+
+    /**
+     * Extrai o caminho (path + query) da página que originou a requisição, a partir do header "Referer".
+     * Usado para que o formulário de endereço retorne o usuário para a tela de onde ele veio.
+     */
+    private String origemRequisicao(HttpServletRequest request) {
+        String referer = request.getHeader("Referer");
+        if (referer == null || referer.isBlank()) return null;
+
+        try {
+            URI uri = URI.create(referer);
+            String path = uri.getRawPath();
+            if (path == null || path.isBlank()) return null;
+
+            String query = uri.getRawQuery();
+            return query != null ? path + "?" + query : path;
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+    }
+
+    /**
+     * Monta o redirecionamento para a origem informada, validando que se trata de um caminho interno
+     * (evitando open redirect). Caso a origem seja inválida ou ausente, retorna para "Meus Endereços".
+     */
+    private String redirecionarParaOrigem(String origem) {
+        boolean origemValida = origem != null && origem.startsWith("/") && !origem.startsWith("//");
+        return "redirect:" + (origemValida ? origem : "/" + ENDERECOS);
     }
 }
