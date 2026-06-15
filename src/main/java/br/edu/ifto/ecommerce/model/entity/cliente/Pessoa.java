@@ -1,10 +1,13 @@
 package br.edu.ifto.ecommerce.model.entity.cliente;
 
+import br.edu.ifto.ecommerce.model.entity.endereco.Endereco;
 import jakarta.persistence.*;
 import lombok.*;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,6 +29,9 @@ public abstract class Pessoa {
 
     @NotBlank (message = "{erro.pessoa.telefone.obrigatorio}")
     private String telefone;
+
+    @OneToMany (mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Endereco> enderecos;
 
     public abstract char getTipo();
 
