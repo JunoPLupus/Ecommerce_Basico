@@ -2,48 +2,78 @@
 <html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
 <head th:replace="~{fragments/head :: head('Detalhes do Pedido',~{})}"></head>
 <body>
-<main class="pg-card">
+<main class="pg-checkout-page">
 
-    <h1>
-        <i class="icon-bag text-muted"></i>
-        Pedido
-        <small class="text-muted" th:text="'#' + ${venda.id}"></small>
-    </h1>
-    <p>
-        <mark>
-            <i class="icon-calendar"></i>
-            <span th:text="${#temporals.format(venda.data, 'dd/MM/yyyy HH:mm')}"></span>
-        </mark>
-    </p>
-    <table>
-        <thead>
-        <tr>
-            <th scope="col">Descrição do Produto</th>
-            <th scope="col">Valor Unitário</th>
-            <th scope="col">Quantidade</th>
-            <th scope="col" class="text-end subtotal">Sub-Total</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item : ${venda.itens}">
-            <td class="col-descricao" th:text="${item.produto.descricao}"></td>
-            <td th:text="'R$ ' + ${#numbers.formatDecimal(item.produto.valor, 1, 'POINT', 2, 'COMMA')}"></td>
-            <td th:text="${#numbers.formatDecimal(item.quantidade, 1, 0)}"></td>
-            <td class="text-end subtotal"
-                th:text="'R$ ' + ${#numbers.formatDecimal(item.total, 1, 'POINT', 2, 'COMMA')}">
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3" class="text-end"><strong>Total</strong></td>
-            <td class="text-end subtotal">
-                <strong th:text="'R$ ' + ${#numbers.formatDecimal(venda.total, 1, 'POINT', 2, 'COMMA')}"></strong>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <section class="pg-card">
+        <h1>
+            Pedido
+            <small class="text-muted" th:text="'#' + ${venda.id}"></small>
+        </h1>
+        <p class="text-muted">
+            Realizado em <span th:text="${#temporals.format(venda.data, 'dd ''de'' MMMM ''de'' yyyy')}"></span>
+        </p>
+    </section>
 
-    <br>
-    <a class="button-outline-light" th:href="@{/pedidos/list}">Voltar para meus pedidos</a>
+    <div class="pg-checkout-layout">
+
+        <div class="pg-checkout-main">
+            <section class="pg-card">
+                <h2><i class="icon-bag"></i> Itens do Pedido</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th scope="col">Descrição do Produto</th>
+                        <th scope="col">Valor Unitário</th>
+                        <th scope="col">Quantidade</th>
+                        <th scope="col" class="subtotal">Sub-Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${venda.itens}">
+                        <td class="col-descricao"><span th:text="${item.produto.descricao}"></span></td>
+                        <td th:text="'R$ ' + ${#numbers.formatDecimal(item.produto.valor, 1, 'POINT', 2, 'COMMA')}"></td>
+                        <td th:text="${#numbers.formatDecimal(item.quantidade, 1, 0)}"></td>
+                        <td class="subtotal"
+                            th:text="'R$ ' + ${#numbers.formatDecimal(item.total, 1, 'POINT', 2, 'COMMA')}">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+
+        <aside class="pg-card pg-checkout-aside">
+            <h2>Resumo do Pagamento</h2>
+
+            <div class="pg-summary-row">
+                <span th:text="${'Subtotal (' + venda.qtdItensTotal() + ' itens)'}"></span>
+                <span th:text="'R$ ' + ${#numbers.formatDecimal(venda.total, 1, 'POINT', 2, 'COMMA')}"></span>
+            </div>
+            <div class="pg-summary-row">
+                <span>Frete</span>
+                <span class="pg-summary-free">Grátis</span>
+            </div>
+
+            <hr>
+
+            <div class="pg-summary-row pg-summary-total">
+                <span>Total</span>
+                <span th:text="'R$ ' + ${#numbers.formatDecimal(venda.total, 1, 'POINT', 2, 'COMMA')}"></span>
+            </div>
+
+            <div class="pg-order-info">
+                <h3><i class="icon-truck"></i> Endereço de Entrega</h3>
+                <p th:text="${venda.endereco.logradouro + (venda.endereco.numero != null ? ', ' + venda.endereco.numero : '') + ' - ' + venda.endereco.bairro}"></p>
+                <p th:text="${venda.endereco.cidade + ' - ' + venda.endereco.estado + ', CEP: ' + venda.endereco.cep}"></p>
+            </div>
+
+            <div class="pg-order-info">
+                <h3><i class="icon-wallet"></i> Método de Pagamento</h3>
+                <p th:text="${venda.formaPagamento.descricao}"></p>
+            </div>
+        </aside>
+
+    </div>
 
 </main>
 </body>

@@ -15,8 +15,6 @@
             Meu Carrinho
         </h1>
 
-        <div th:replace="~{fragments/alert :: alert(${erro})}"></div>
-
         <p th:if="${carrinho.getItens() == null || #lists.isEmpty(carrinho.getItens())}">
             Seu carrinho está vazio. Vá às compras!
         </p>
@@ -40,7 +38,7 @@
                          th:src="${item.produto.urlImagem}"
                          th:alt="${item.produto.descricao}">
                 </td>
-                <td class="col-descricao" th:text="${item.produto.descricao}"></td>
+                <td class="col-descricao"><span th:text="${item.produto.descricao}"></span></td>
                 <td th:text="'R$ ' + ${#numbers.formatDecimal(item.produto.valor, 1, 'POINT', 2, 'COMMA')}"></td>
                 <td>
                     <div class="cart-qty">
@@ -87,11 +85,9 @@
         </p>
         <p class="pg-cart-price"
            th:text="'R$ ' + ${#numbers.formatDecimal(carrinho.total(), 1, 'POINT', 2, 'COMMA')}"></p>
-        <form th:action="@{/pedidos/insert}" method="post">
-            <button type="submit" class="button-primary">
-                Finalizar Compra
-            </button>
-        </form>
+        <a class="button-primary" th:href="@{/pedidos/finalizar}">
+            Fechar Pedido
+        </a>
     </aside>
 
 </main>
