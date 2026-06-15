@@ -10,6 +10,7 @@ public final class Rotas {
     private static final String VENDAS = "vendas";
     public static final String PEDIDOS = "pedidos";
     public static final String CARRINHO = "carrinho";
+    public static final String ENDERECOS = "enderecos";
 
     public static final String LISTA = "/list";
     public static final String DETALHES = "/detalhes";
@@ -24,6 +25,7 @@ public final class Rotas {
     private static final String FISICA = "/fisica";
     private static final String JURIDICA = "/juridica";
     private static final String ID = "/{id}";
+    public static final String FINALIZAR = "/finalizar";
 
     public static final String ADMIN_PRODUTOS = ADMIN + "/" + PRODUTOS;
     public static final String ADMIN_CLIENTES = ADMIN + "/" + CLIENTES;
