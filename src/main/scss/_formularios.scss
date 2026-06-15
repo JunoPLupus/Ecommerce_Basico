@@ -44,3 +44,38 @@
     margin-left: 0;
   }
 }
+
+.pg-address-options {
+  @extend .d-flex;
+  @extend .flex-column;
+  @extend .gap-2;
+  @extend .mb-3;
+}
+
+.pg-address-option {
+  @extend .form-check;
+  @extend .border;
+  @extend .rounded-3;
+  @extend .m-0;
+  padding: 1rem 1rem 1rem 2.5rem !important;
+
+  .form-check-input {
+    @extend .mt-1;
+  }
+
+  .form-check-label {
+    @extend .ms-2;
+    @extend .d-flex;
+    @extend .flex-column;
+    cursor: pointer;
+
+    small {
+      @extend .text-muted;
+    }
+  }
+
+  &:has(.form-check-input:checked) {
+    border-color: var(--bs-primary);
+    background-color: var(--bs-tertiary-bg);
+  }
+}

@@ -63,3 +63,19 @@
 .icon-logout {
   @extend .bi-box-arrow-right;
 }
+
+.icon-pin {
+  @extend .bi-geo-alt;
+}
+
+.icon-wallet {
+  @extend .bi-wallet;
+}
+
+.icon-truck {
+  @extend .bi-truck;
+}
+
+.icon-arrow-right {
+  @extend .bi-arrow-right-short;
+}

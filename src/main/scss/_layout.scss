@@ -112,3 +112,100 @@
     margin-left: 0;
   }
 }
+
+// Checkout - layout principal + resumo lateral
+.pg-checkout-page {
+  @extend .container;
+  @extend .mt-3;
+}
+
+.pg-checkout-header {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.pg-checkout-layout {
+  @extend .pg-cart-layout;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.pg-checkout-main {
+  @extend .pg-cart-main;
+  @extend .d-flex;
+  @extend .flex-column;
+  @extend .gap-3;
+
+  .pg-card {
+    margin-top: 0;
+  }
+}
+
+.pg-checkout-aside {
+  @extend .pg-cart-aside;
+  flex-basis: 360px;
+  text-align: start;
+  position: sticky;
+  top: 1rem;
+
+  hr {
+    margin: 0.5rem 0;
+  }
+}
+
+.pg-card-header {
+  @extend .d-flex;
+  @extend .justify-content-between;
+  @extend .align-items-center;
+  @extend .mb-3;
+
+  h2 {
+    @extend .mb-0;
+  }
+}
+
+.pg-card h2 {
+  @extend .fs-5;
+  @extend .fw-bold;
+  @extend .mb-3;
+
+  i {
+    @extend .text-muted;
+    @extend .me-2;
+  }
+}
+
+.pg-summary-row {
+  @extend .d-flex;
+  @extend .justify-content-between;
+  @extend .mb-2;
+}
+
+.pg-summary-total {
+  @extend .fs-5;
+  @extend .fw-bold;
+}
+
+.pg-summary-free {
+  @extend .text-success;
+}
+
+.pg-order-info {
+  @extend .mt-3;
+
+  h3 {
+    @extend .fs-6;
+    @extend .fw-bold;
+    @extend .mb-1;
+
+    i {
+      @extend .text-muted;
+      @extend .me-2;
+    }
+  }
+
+  p {
+    @extend .mb-0;
+    @extend .text-muted;
+  }
+}
