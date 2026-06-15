@@ -55,12 +55,17 @@
                                 <div class="pg-nav-user__username">@<span sec:authentication="principal.username"></span></div>
                             </div>
                         </li>
+                        <li>
+                            <a class="pg-nav-user__menu-profile" th:href="@{/clientes/perfil}">
+                                <i class="icon-person"></i> Meu Perfil
+                            </a>
+                        </li>
                         <li sec:authorize="hasAnyRole('USER')">
                             <a class="pg-nav-user__menu-item" th:href="@{/pedidos/list}">
                                 <i class="icon-bag"></i> Meus pedidos
                             </a>
                         </li>
-                        <li sec:authorize="hasAnyRole('USER')" class="pg-nav-user__menu-divider"></li>
+                        <li class="pg-nav-user__menu-divider"></li>
                         <li>
                             <form th:action="@{/logout}" method="post">
                                 <button type="submit" class="pg-nav-user__menu-item">
