@@ -29,6 +29,8 @@ public class SecurityConfiguration {
                                         .requestMatchers("/" + ADMIN_PRODUTOS + "/**").hasAnyRole(ADMIN)
                                         .requestMatchers("/" + ADMIN_VENDAS + "/**").hasAnyRole(ADMIN)
 
+                                        .requestMatchers("/" + CLIENTES + PERFIL).authenticated()
+
                                         .requestMatchers("/" + CARRINHO + "/**").hasAnyRole(USER)
                                         .requestMatchers("/" + PEDIDOS + "/**").hasAnyRole(USER)
                                         .requestMatchers("/" + ENDERECOS + "/**").hasAnyRole(USER)

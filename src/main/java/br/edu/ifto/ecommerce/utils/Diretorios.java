@@ -36,4 +36,5 @@ public final class Diretorios {
 
     public static final String HTML_CLIENTE_LISTA_ENDERECOS = HTML_CLIENTE_ENDERECO + HTML_LISTA;
     public static final String HTML_CLIENTE_FORM_ENDERECO = HTML_CLIENTE_ENDERECO + HTML_FORM;
+    public static final String HTML_CLIENTE_PERFIL = HTML_CLIENTE + "/perfil";
 }

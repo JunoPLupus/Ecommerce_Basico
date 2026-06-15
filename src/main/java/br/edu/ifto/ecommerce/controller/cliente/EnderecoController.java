@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.net.URI;
-import java.util.List;
 
 import static br.edu.ifto.ecommerce.utils.AutenticacaoUtils.getPessoaLogada;
 import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.breadcrumb;
@@ -28,14 +27,6 @@ public class EnderecoController {
 
     private final EnderecoRepository enderecoRepository;
 
-    @GetMapping({"", LISTA})
-    public String listar(ModelMap model) {
-        List<Endereco> enderecos = enderecoRepository.findAllByPessoaId(getPessoaLogada().getId());
-
-        model.addAttribute("enderecos", enderecos);
-        return HTML_CLIENTE_LISTA_ENDERECOS;
-    }
-
     /**
      * @param endereco necessário devido utilizar no form.html o th:object que faz referência ao objeto esperado no controller.
      * @return html de cadastro de endereço
@@ -45,7 +36,7 @@ public class EnderecoController {
         model.addAttribute("estados", Estado.values());
         model.addAttribute("origem", origemRequisicao(request));
         model.addAttribute("breadcrumbItems", breadcrumb(
-                new BreadcrumbItem("Meus Endereços", "/" + ENDERECOS),
+                new BreadcrumbItem("Meu Perfil", "/" + CLIENTES + PERFIL),
                 new BreadcrumbItem("Cadastrar Endereço", null)
         ));
         return HTML_CLIENTE_FORM_ENDERECO;
@@ -71,14 +62,14 @@ public class EnderecoController {
 
         if (endereco == null || !endereco.pertenceA(getPessoaLogada())) {
             redirectAttributes.addFlashAttribute("erro", "Endereço não encontrado.");
-            return "redirect:/" + ENDERECOS;
+            return "redirect:/" + CLIENTES + PERFIL;
         }
 
         model.addAttribute("endereco", endereco);
         model.addAttribute("estados", Estado.values());
         model.addAttribute("origem", origemRequisicao(request));
         model.addAttribute("breadcrumbItems", breadcrumb(
-                new BreadcrumbItem("Meus Endereços", "/" + ENDERECOS),
+                new BreadcrumbItem("Meu Perfil", "/" + CLIENTES + PERFIL),
                 new BreadcrumbItem("Editar Endereço", null)
         ));
         return HTML_CLIENTE_FORM_ENDERECO;
@@ -91,7 +82,7 @@ public class EnderecoController {
 
         if (enderecoExistente == null || !enderecoExistente.pertenceA(getPessoaLogada())) {
             redirectAttributes.addFlashAttribute("erro", "Endereço não encontrado.");
-            return "redirect:/" + ENDERECOS;
+            return "redirect:/" + CLIENTES + PERFIL;
         }
 
         if (result.hasErrors()) {
@@ -111,14 +102,14 @@ public class EnderecoController {
 
         if (endereco == null || !endereco.pertenceA(getPessoaLogada())) {
             redirectAttributes.addFlashAttribute("erro", "Endereço não encontrado.");
-            return "redirect:/" + ENDERECOS;
+            return "redirect:/" + CLIENTES + PERFIL;
         }
 
         boolean sucesso = enderecoRepository.delete(id);
 
         if (!sucesso) redirectAttributes.addFlashAttribute("erro", "Não é possível excluir! Existem pedidos associados a este endereço.");
 
-        return "redirect:/" + ENDERECOS;
+        return "redirect:/" + CLIENTES + PERFIL;
     }
 
     /**
@@ -147,6 +138,6 @@ public class EnderecoController {
      */
     private String redirecionarParaOrigem(String origem) {
         boolean origemValida = origem != null && origem.startsWith("/") && !origem.startsWith("//");
-        return "redirect:" + (origemValida ? origem : "/" + ENDERECOS);
+        return "redirect:" + (origemValida ? origem : "/" + CLIENTES + PERFIL);
     }
 }
