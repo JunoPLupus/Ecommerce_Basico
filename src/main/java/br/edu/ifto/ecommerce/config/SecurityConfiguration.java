@@ -31,6 +31,7 @@ public class SecurityConfiguration {
 
                                         .requestMatchers("/" + CARRINHO + "/**").hasAnyRole(USER)
                                         .requestMatchers("/" + PEDIDOS + "/**").hasAnyRole(USER)
+                                        .requestMatchers("/" + ENDERECOS + "/**").hasAnyRole(USER)
                                         .requestMatchers("/" + PRODUTOS + "/**").hasAnyRole("ANONYMOUS", USER)
 
                                         .requestMatchers("/css/**").permitAll()

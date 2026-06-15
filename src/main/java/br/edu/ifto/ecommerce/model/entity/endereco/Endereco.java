@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -47,4 +48,8 @@ public class Endereco implements Serializable {
 
     @ManyToOne
     private Pessoa pessoa;
+
+    public boolean pertenceA(Pessoa pessoa) {
+        return pessoa != null && this.pessoa != null && Objects.equals(this.pessoa.getId(), pessoa.getId());
+    }
 }
