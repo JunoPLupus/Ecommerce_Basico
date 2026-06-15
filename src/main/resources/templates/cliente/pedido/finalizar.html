@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
+<head th:replace="~{fragments/head :: head('Finalizar Compra',~{})}"></head>
+<body>
+<main class="pg-checkout-page">
+
+    <div class="pg-checkout-header">
+        <h1>Finalizar Compra</h1>
+        <p>Revise seus itens e selecione o endereço de entrega e a forma de pagamento.</p>
+
+        <div th:replace="~{fragments/alert :: alert(${erro})}"></div>
+    </div>
+
+    <form th:action="@{/pedidos/finalizar}" method="post" class="pg-checkout-layout">
+
+        <div class="pg-checkout-main">
+
+            <section class="pg-card">
+                <h2><i class="icon-bag"></i> Resumo dos Produtos</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Qtd</th>
+                        <th scope="col">Valor Unitário</th>
+                        <th scope="col" class="subtotal">Subtotal</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${carrinho.getItens()}">
+                        <td>
+                            <img class="cart-img-thumbnail"
+                                 th:if="${item.produto.urlImagem != null}"
+                                 th:src="${item.produto.urlImagem}"
+                                 th:alt="${item.produto.descricao}">
+                        </td>
+                        <td class="col-descricao"><span th:text="${item.produto.descricao}"></span></td>
+                        <td th:text="${item.quantidade}"></td>
+                        <td th:text="'R$ ' + ${#numbers.formatDecimal(item.produto.valor, 1, 'POINT', 2, 'COMMA')}"></td>
+                        <td class="subtotal"
+                            th:text="'R$ ' + ${#numbers.formatDecimal(item.total(), 1, 'POINT', 2, 'COMMA')}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="pg-card">
+                <div class="pg-card-header">
+                    <h2><i class="icon-pin"></i> Endereço de Entrega</h2>
+                    <a class="button-secondary" th:href="@{/enderecos/insert}">
+                        <i class="icon-plus"></i> Adicionar novo endereço
+                    </a>
+                </div>
+
+                <p th:if="${#lists.isEmpty(enderecos)}">
+                    Você ainda não possui endereços cadastrados. Cadastre um endereço para continuar.
+                </p>
+
+                <div class="pg-address-options" th:unless="${#lists.isEmpty(enderecos)}">
+                    <div class="pg-address-option" th:each="endereco, status : ${enderecos}">
+                        <input class="form-check-input" type="radio" name="enderecoId"
+                               th:id="'endereco-' + ${endereco.id}"
+                               th:value="${endereco.id}"
+                               th:checked="${status.first}">
+                        <label class="form-check-label" th:for="'endereco-' + ${endereco.id}">
+                            <strong th:text="${endereco.logradouro + (endereco.numero != null ? ', ' + endereco.numero : '')}"></strong>
+                            <span th:text="${endereco.bairro + ', ' + endereco.cidade + ' - ' + endereco.estado}"></span>
+                            <small th:text="${'CEP: ' + endereco.cep}"></small>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pg-card">
+                <h2><i class="icon-wallet"></i> Forma de Pagamento</h2>
+                <label for="formaPagamento">Selecione como deseja pagar</label>
+                <select name="formaPagamento" id="formaPagamento" required>
+                    <option value="" disabled selected>Selecione...</option>
+                    <option th:each="forma : ${formasPagamento}" th:value="${forma}" th:text="${forma.descricao}"></option>
+                </select>
+            </section>
+
+        </div>
+
+        <aside class="pg-card pg-checkout-aside">
+            <h2>Resumo do Pedido</h2>
+
+            <div class="pg-summary-row">
+                <span th:text="${'Subtotal (' + carrinho.qtdItensTotal() + ' itens)'}"></span>
+                <span th:text="'R$ ' + ${#numbers.formatDecimal(carrinho.total(), 1, 'POINT', 2, 'COMMA')}"></span>
+            </div>
+            <div class="pg-summary-row">
+                <span>Frete</span>
+                <span class="pg-summary-free">Grátis</span>
+            </div>
+
+            <hr>
+
+            <div class="pg-summary-row pg-summary-total">
+                <span>Total</span>
+                <span th:text="'R$ ' + ${#numbers.formatDecimal(carrinho.total(), 1, 'POINT', 2, 'COMMA')}"></span>
+            </div>
+
+            <button type="submit" class="button-primary" th:disabled="${#lists.isEmpty(enderecos)}">
+                Finalizar Compra <i class="icon-arrow-right"></i>
+            </button>
+        </aside>
+
+    </form>
+
+</main>
+</body>
+</html>
