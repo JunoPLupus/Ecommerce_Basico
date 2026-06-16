@@ -39,11 +39,13 @@
     <div class="mb-4">
         <label for="login-pj">Login</label>
         <input type="text" name="login" id="login-pj" placeholder="Ex: empresa.ltda">
+        <span th:if="${erroLogin}" th:text="${erroLogin}" class="text-danger"></span>
     </div>
 
     <div class="mb-4">
         <label for="password-pj">Senha</label>
         <input type="password" name="password" id="password-pj" placeholder="Mínimo 6 caracteres">
+        <span th:if="${erroSenha}" th:text="${erroSenha}" class="text-danger"></span>
     </div>
 
     <hr>

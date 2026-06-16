@@ -1,7 +1,6 @@
 package br.edu.ifto.ecommerce.model.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +15,10 @@ public class EditarPerfilDTO {
 
     private String telefone;
 
-    @Size(min = 6, message = "{erro.usuario.senha.tamanho.min}")
+    /**
+     * Senha opcional: quando em branco, mantém a atual. O tamanho mínimo é validado
+     * condicionalmente no controller (apenas quando informada), por isso não há
+     * {@code @Size} aqui — caso contrário um campo vazio seria rejeitado.
+     */
     private String senha;
 }

@@ -12,7 +12,7 @@
         <form th:action="@{/clientes/editar/save}" method="post" th:object="${editarPerfilDTO}">
             <div class="pg-form-fields">
                 <div>
-                    <label for="nomeOuRazaoSocial">Nome</label>
+                    <label for="nomeOuRazaoSocial" >Nome</label>
                     <input type="text" id="nomeOuRazaoSocial" th:field="*{nomeOuRazaoSocial}">
                     <span th:if="${#fields.hasErrors('nomeOuRazaoSocial')}" th:errors="*{nomeOuRazaoSocial}" class="text-danger"></span>
                 </div>
@@ -24,7 +24,7 @@
                 <div>
                     <label for="senha">Senha</label>
                     <div class="pg-senha-field">
-                        <input type="password" id="senha" th:field="*{senha}" placeholder="Mínimo 8 caracteres">
+                        <input type="password" id="senha" th:field="*{senha}" placeholder="Mínimo 6 caracteres">
                         <button type="button" class="pg-senha-field__toggle" onclick="alternarSenha()">
                             <i id="icon-senha" class="icon-eye"></i>
                         </button>
