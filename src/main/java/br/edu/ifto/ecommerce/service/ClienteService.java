@@ -1,5 +1,6 @@
 package br.edu.ifto.ecommerce.service;
 
+import br.edu.ifto.ecommerce.model.dto.ClienteResumoDTO;
 import br.edu.ifto.ecommerce.model.dto.PessoaDTO;
 import br.edu.ifto.ecommerce.model.entity.cliente.Pessoa;
 import br.edu.ifto.ecommerce.model.entity.role.Role;
@@ -38,11 +39,11 @@ public class ClienteService {
     }
 
     @Transactional(readOnly = true)
-    public List<PessoaDTO> listar(String nome) {
+    public List<ClienteResumoDTO> listar(String nome) {
         List<Pessoa> clientes = (nome != null && !nome.isEmpty())
                 ? clienteRepository.findAllByNomeOuRazaoSocial(nome)
                 : clienteRepository.findAll();
-        return PessoaMapper.toDTOList(clientes);
+        return PessoaMapper.toResumoList(clientes);
     }
 
     /**

@@ -1,5 +1,6 @@
 package br.edu.ifto.ecommerce.controller.admin;
 
+import br.edu.ifto.ecommerce.model.dto.ClienteResumoDTO;
 import br.edu.ifto.ecommerce.model.dto.PessoaDTO;
 import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
 import br.edu.ifto.ecommerce.service.ClienteService;
@@ -29,7 +30,7 @@ public class AdminClienteController {
 
     @GetMapping("")
     public String list(@RequestParam(required = false) String nome, Model model) {
-        List<PessoaDTO> clientes = clienteService.listar(nome);
+        List<ClienteResumoDTO> clientes = clienteService.listar(nome);
 
         if (nome != null && !nome.isEmpty()) {
             model.addAttribute("nome", nome);

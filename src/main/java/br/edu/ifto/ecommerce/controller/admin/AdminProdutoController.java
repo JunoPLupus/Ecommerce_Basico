@@ -1,5 +1,6 @@
 package br.edu.ifto.ecommerce.controller.admin;
 
+import br.edu.ifto.ecommerce.model.dto.ProdutoDTO;
 import br.edu.ifto.ecommerce.model.entity.produto.Produto;
 import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
 import br.edu.ifto.ecommerce.service.ProdutoService;
@@ -32,7 +33,7 @@ public class AdminProdutoController {
                          ModelMap model) {
 
         // TODO: ajustar filtro de pesquisa para aceitar descrição ou id como input
-        List<Produto> produtos = produtoService.listarComFiltros(descricao, precoMinimo, precoMaximo);
+        List<ProdutoDTO> produtos = produtoService.listarComFiltros(descricao, precoMinimo, precoMaximo);
         int filtrosAplicados = 0;
 
         if (descricao != null) {

@@ -40,7 +40,7 @@
         <tbody>
         <tr th:each="cliente : ${clientes}">
             <td scope="row" th:text="${cliente.id}"></td>
-            <td th:text="${cliente.getNomeExibicao()}"></td>
+            <td th:text="${cliente.nomeExibicao}"></td>
             <td class="text-end">
                 <div class="button-group">
                     <a th:href="@{/admin/clientes/detalhes/{id}(id=${cliente.id})}"

@@ -1,7 +1,9 @@
 package br.edu.ifto.ecommerce.service;
 
+import br.edu.ifto.ecommerce.model.dto.ProdutoDTO;
 import br.edu.ifto.ecommerce.model.entity.produto.Produto;
 import br.edu.ifto.ecommerce.model.repository.ProdutoRepository;
+import br.edu.ifto.ecommerce.utils.ProdutoMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,15 +20,18 @@ public class ProdutoService {
     private final ProdutoRepository produtoRepository;
 
     @Transactional(readOnly = true)
-    public List<Produto> listarComFiltros(String descricao, Double precoMinimo, Double precoMaximo) {
-        return produtoRepository.findAllByDynamicFilters(descricao, precoMinimo, precoMaximo);
+    public List<ProdutoDTO> listarComFiltros(String descricao, Double precoMinimo, Double precoMaximo) {
+        return ProdutoMapper.toDTOList(
+                produtoRepository.findAllByDynamicFilters(descricao, precoMinimo, precoMaximo));
     }
 
     @Transactional(readOnly = true)
-    public List<Produto> listarTodos() {
-        return produtoRepository.findAllByDynamicFilters(null, null, null);
+    public List<ProdutoDTO> listarTodos() {
+        return ProdutoMapper.toDTOList(
+                produtoRepository.findAllByDynamicFilters(null, null, null));
     }
 
+    /** Retorna a entidade, usada pelo formulário de edição (binding via th:field). */
     @Transactional(readOnly = true)
     public Produto buscarPorId(Long id) {
         return produtoRepository.findById(id);
