@@ -2,28 +2,27 @@
 <html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
 <head th:replace="~{fragments/head :: head('Produtos',~{})}"></head>
 <body>
-<main class="pg-card">
+<main class="pg-produtos-page">
 
     <p th:if="${produtos == null || #lists.isEmpty(produtos)}">Nenhum produto encontrado.</p>
 
-    <div th:unless="${produtos == null || #lists.isEmpty(produtos)}" class="row row-cols-1 row-cols-md-4 g-4">
-        <div class="col" th:each="produto : ${produtos}">
+    <div th:unless="${produtos == null || #lists.isEmpty(produtos)}" class="pg-produtos-grid">
+        <div class="pg-produto-col" th:each="produto : ${produtos}">
             <div class="produto-card">
                 <img th:src="${produto.urlImagem}" class="card-img-top" alt="Foto do produto">
-                <div class="card-body">
-                    <h6 class="card-title" th:text="${produto.descricao}">Descrição</h6>
-                    <h4 class="card-text" th:text="'R$ ' + ${#numbers.formatDecimal(produto.valor, 1, 'POINT', 2, 'COMMA')}">Preço</h4>
-                </div>
-                <div class="card-footer text-center">
-                    <form th:action="@{/carrinho/insert/{id}(id=${produto.id})}" method="post">
-                        <button type="submit" class="button-primary"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="top"
-                                title="Adicionar produto no Carrinho">
-                            <i class="icon-plus"></i>
-                            Adicionar no Carrinho
-                        </button>
-                    </form>
+                <div class="produto-card__body">
+                    <p class="card-title" th:text="${produto.descricao}">Descrição</p>
+                    <div class="produto-card__footer">
+                        <span class="produto-card__preco"
+                              th:text="'R$ ' + ${#numbers.formatDecimal(produto.valor, 1, 'POINT', 2, 'COMMA')}">Preço</span>
+                        <form th:action="@{/carrinho/insert/{id}(id=${produto.id})}" method="post">
+                            <button type="submit" class="button-icon-dark"
+                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Adicionar ao carrinho">
+                                <i class="icon-cart-plus"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
