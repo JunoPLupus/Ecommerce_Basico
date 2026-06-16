@@ -28,12 +28,6 @@
         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
     </div>
 
-    <div class="mb-4">
-        <label for="telefone-pf">Telefone</label>
-        <input type="text" th:field="*{telefone}" id="telefone-pf" placeholder="Ex: (00) 1234-5678">
-        <span th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="text-danger"></span>
-    </div>
-
     <hr>
 
     <div class="mb-4">

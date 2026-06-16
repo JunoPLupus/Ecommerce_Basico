@@ -12,7 +12,7 @@
         <form th:action="@{/clientes/editar/save}" method="post" th:object="${editarPerfilDTO}">
             <div class="pg-form-fields">
                 <div>
-                    <label for="nomeOuRazaoSocial" >Nome</label>
+                    <label for="nomeOuRazaoSocial" th:text="${ehPessoaFisica} ? 'Nome' : 'Razão Social'">Nome</label>
                     <input type="text" id="nomeOuRazaoSocial" th:field="*{nomeOuRazaoSocial}">
                     <span th:if="${#fields.hasErrors('nomeOuRazaoSocial')}" th:errors="*{nomeOuRazaoSocial}" class="text-danger"></span>
                 </div>

@@ -19,6 +19,13 @@ import java.util.List;
 @DiscriminatorColumn(name = "tipo")
 public abstract class Pessoa implements PessoaView {
 
+    /**
+     * Telefone BR com separadores opcionais (espaço, "-", "()"):
+     * DDD de 2 ou 3 dígitos + número de 8 ou 9 dígitos (o 9 extra do celular).
+     * Aceita, ex.: 6332165400, (63) 3216-5400, 63 99216 5400, (63)99216-5400.
+     */
+    public static final String TELEFONE_REGEX = "\\(?\\d{2,3}\\)?[\\s-]?\\d{4,5}[\\s-]?\\d{4}";
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
@@ -28,7 +35,6 @@ public abstract class Pessoa implements PessoaView {
     @Column(unique = true)
     private String email;
 
-    @NotBlank (message = "{erro.pessoa.telefone.obrigatorio}")
     private String telefone;
 
     @OneToMany (mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -47,11 +53,12 @@ public abstract class Pessoa implements PessoaView {
     @Override
     public abstract String getNomeExibicao();
 
+    /**
+     * Primeiro nome (ou primeira palavra da razão social), usado na saudação do menu.
+     */
     @Override
     public String getNomeCurto() {
-        String[] partes = getNomeExibicao().split(" ");
-        if (partes.length >= 2) return partes[0] + " " + partes[1];
-        return partes[0];
+        return getNomeExibicao().split(" ")[0];
     }
 
     @Override

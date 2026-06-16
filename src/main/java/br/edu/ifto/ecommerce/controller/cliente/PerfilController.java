@@ -1,6 +1,7 @@
 package br.edu.ifto.ecommerce.controller.cliente;
 
 import br.edu.ifto.ecommerce.model.dto.EditarPerfilDTO;
+import br.edu.ifto.ecommerce.model.entity.cliente.Pessoa;
 import br.edu.ifto.ecommerce.model.entity.usuario.Usuario;
 import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
 import br.edu.ifto.ecommerce.service.EnderecoService;
@@ -43,6 +44,7 @@ public class PerfilController {
     @GetMapping(EDITAR)
     public String editar(Model model) {
         model.addAttribute("editarPerfilDTO", perfilService.buscarParaEdicao(getPessoaLogada().getId()));
+        model.addAttribute("ehPessoaFisica", getPessoaLogada().isPF());
         model.addAttribute("breadcrumbEditar", breadcrumbEditar());
         return HTML_CLIENTE_EDITAR_PERFIL;
     }
@@ -50,8 +52,10 @@ public class PerfilController {
     @PostMapping(EDITAR + SAVE)
     public String salvarEdicao(@Valid EditarPerfilDTO editarPerfilDTO, BindingResult result, Model model) {
         validarSenha(editarPerfilDTO, result);
+        validarTelefone(editarPerfilDTO, result);
 
         if (result.hasErrors()) {
+            model.addAttribute("ehPessoaFisica", getPessoaLogada().isPF());
             model.addAttribute("breadcrumbEditar", breadcrumbEditar());
             return HTML_CLIENTE_EDITAR_PERFIL;
         }
@@ -65,6 +69,20 @@ public class PerfilController {
         if (senha != null && !senha.isBlank() && senha.length() < SENHA_MIN) {
             result.rejectValue("senha", "erro.usuario.senha.tamanho.min",
                     "A senha deve conter no mínimo " + SENHA_MIN + " caracteres.");
+        }
+    }
+
+    /**
+     * Telefone é opcional; quando informado, deve casar com {@link Pessoa#TELEFONE_REGEX}
+     * (DDD de 2 ou 3 dígitos + número de 8 ou 9 dígitos, com separadores opcionais).
+     */
+    private void validarTelefone(EditarPerfilDTO dto, BindingResult result) {
+        String telefone = dto.getTelefone();
+        if (telefone == null || telefone.isBlank()) return;
+
+        if (!telefone.trim().matches(Pessoa.TELEFONE_REGEX)) {
+            result.rejectValue("telefone", "erro.pessoa.telefone.invalido",
+                    "Telefone inválido. Use DDD e número, ex.: (63) 99999-8888.");
         }
     }
 
