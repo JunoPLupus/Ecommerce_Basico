@@ -17,11 +17,11 @@
         </div>
         <div class="pg-data-grid">
             <div class="pg-data-field">
-                <span class="pg-data-label">Nome / Razão Social</span>
+                <span class="pg-data-label" th:text="${pessoa.isPF()? 'Nome' : 'Razão Social'}"></span>
                 <span th:text="${pessoa.nomeExibicao}"></span>
             </div>
             <div class="pg-data-field">
-                <span class="pg-data-label">CPF / CNPJ</span>
+                <span class="pg-data-label" th:text="${pessoa.isPF()? 'CPF' : 'CNPJ'}"></span>
                 <span th:text="${pessoa.documento}"></span>
             </div>
             <div class="pg-data-field">
@@ -41,12 +41,12 @@
             <a class="button-primary" th:href="@{/enderecos/insert}">+ Cadastrar novo endereço</a>
         </div>
 
-        <p th:if="${#lists.isEmpty(pessoa.enderecos)}" class="text-muted">
+        <p th:if="${#lists.isEmpty(enderecos)}" class="text-muted">
             Você ainda não tem endereços cadastrados.
         </p>
 
-        <div class="pg-addresses-grid" th:unless="${#lists.isEmpty(pessoa.enderecos)}">
-            <div class="pg-address-card" th:each="endereco : ${pessoa.enderecos}">
+        <div class="pg-addresses-grid" th:unless="${#lists.isEmpty(enderecos)}">
+            <div class="pg-address-card" th:each="endereco : ${enderecos}">
                 <div class="pg-address-card__info">
                     <strong th:text="${endereco.logradouro + (endereco.numero != null ? ', ' + endereco.numero : '')}"></strong>
                     <span th:text="${endereco.bairro + ', ' + endereco.cidade + ' - ' + endereco.estado}"></span>

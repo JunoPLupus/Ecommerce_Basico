@@ -1,10 +1,12 @@
 package br.edu.ifto.ecommerce.service;
 
 import br.edu.ifto.ecommerce.model.dto.EditarPerfilDTO;
+import br.edu.ifto.ecommerce.model.dto.PessoaDTO;
 import br.edu.ifto.ecommerce.model.entity.cliente.Pessoa;
 import br.edu.ifto.ecommerce.model.repository.ClienteRepository;
 import br.edu.ifto.ecommerce.model.repository.UsuarioRepository;
 import br.edu.ifto.ecommerce.utils.PerfilMapper;
+import br.edu.ifto.ecommerce.utils.PessoaMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,16 @@ public class PerfilService {
     private final ClienteRepository clienteRepository;
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
+
+    @Transactional(readOnly = true)
+    public PessoaDTO buscarPerfil(Long pessoaId) {
+        return PessoaMapper.toDTO(clienteRepository.findById(pessoaId));
+    }
+
+    @Transactional(readOnly = true)
+    public EditarPerfilDTO buscarParaEdicao(Long pessoaId) {
+        return PerfilMapper.toDTO(clienteRepository.findById(pessoaId));
+    }
 
     /**
      * Atualiza os dados pessoais da Pessoa e, opcionalmente, a senha do Usuário.

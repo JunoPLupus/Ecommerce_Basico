@@ -1,10 +1,9 @@
 package br.edu.ifto.ecommerce.controller.admin;
 
-import br.edu.ifto.ecommerce.model.entity.cliente.Pessoa;
-import br.edu.ifto.ecommerce.model.entity.venda.Venda;
+import br.edu.ifto.ecommerce.model.dto.PessoaDTO;
 import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
-import br.edu.ifto.ecommerce.model.repository.ClienteRepository;
-import br.edu.ifto.ecommerce.model.repository.VendaRepository;
+import br.edu.ifto.ecommerce.service.ClienteService;
+import br.edu.ifto.ecommerce.service.VendaService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,21 +24,16 @@ import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.breadcrumb;
 @RequestMapping(ADMIN_CLIENTES)
 public class AdminClienteController {
 
-    ClienteRepository clienteRepository;
-    VendaRepository vendaRepository;
+    private final ClienteService clienteService;
+    private final VendaService vendaService;
 
     @GetMapping("")
-    public String list(@RequestParam(required = false) String nome,
-                       Model model){
-        List<Pessoa> clientes;
-        int filtrosAplicados = 0;
+    public String list(@RequestParam(required = false) String nome, Model model) {
+        List<PessoaDTO> clientes = clienteService.listar(nome);
 
-        if(nome != null && !nome.isEmpty()){
-            clientes = clienteRepository.findAllByNomeOuRazaoSocial(nome);
+        if (nome != null && !nome.isEmpty()) {
             model.addAttribute("nome", nome);
-            model.addAttribute("filtrosAplicados", ++filtrosAplicados);
-        } else {
-            clientes = clienteRepository.findAll();
+            model.addAttribute("filtrosAplicados", 1);
         }
 
         model.addAttribute("clientes", clientes);
@@ -47,18 +41,16 @@ public class AdminClienteController {
     }
 
     @GetMapping(DETALHES_ID)
-    public String detail(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
-        Pessoa cliente = clienteRepository.findById(id);
+    public String detail(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
+        PessoaDTO cliente = clienteService.buscarDetalhe(id);
 
         if (cliente == null) {
             redirectAttributes.addFlashAttribute("erro", "Cliente #" + id + " não encontrado.");
             return "redirect:/" + ADMIN_CLIENTES;
         }
 
-        List<Venda> vendas = vendaRepository.findAllByClienteId(id);
-
         model.addAttribute("cliente", cliente);
-        model.addAttribute("vendas", vendas);
+        model.addAttribute("vendas", vendaService.listarPedidosDoCliente(id));
         model.addAttribute("breadcrumbItems", breadcrumb(
                 new BreadcrumbItem("Clientes", "/" + ADMIN_CLIENTES),
                 new BreadcrumbItem("Detalhes do cliente #" + id, null)

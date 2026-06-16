@@ -12,12 +12,12 @@
     <p>
         <mark>
             <i class="icon-document"></i>
-            <span th:text="${(cliente.getTipo() == 'F'.charAt(0) ? 'CPF' : 'CNPJ') + ': ' + cliente.getDocumentoMascarado()}"></span>
+            <span th:text="${(cliente.isPF() ? 'CPF' : 'CNPJ') + ': ' + cliente.getDocumentoMascarado()}"></span>
         </mark>
 
         <mark>
             <i class="icon-person-identity"></i>
-            <span th:text="${(cliente.getTipo() == 'F'.charAt(0) ? 'Nome' : 'Razão Social') + ': ' + cliente.getNomeExibicao()}"></span>
+            <span th:text="${(cliente.isPF() ? 'Nome' : 'Razão Social') + ': ' + cliente.getNomeExibicao()}"></span>
         </mark>
         &nbsp;
         <mark>

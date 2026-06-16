@@ -3,7 +3,7 @@ package br.edu.ifto.ecommerce.controller.cliente;
 import br.edu.ifto.ecommerce.model.entity.endereco.Endereco;
 import br.edu.ifto.ecommerce.model.enums.Estado;
 import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
-import br.edu.ifto.ecommerce.model.repository.EnderecoRepository;
+import br.edu.ifto.ecommerce.service.EnderecoService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.net.URI;
+import java.util.Optional;
 
 import static br.edu.ifto.ecommerce.utils.AutenticacaoUtils.getPessoaLogada;
 import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.breadcrumb;
@@ -25,7 +26,7 @@ import static br.edu.ifto.ecommerce.utils.Rotas.*;
 @RequestMapping(ENDERECOS)
 public class EnderecoController {
 
-    private final EnderecoRepository enderecoRepository;
+    private final EnderecoService enderecoService;
 
     /**
      * @param endereco necessário devido utilizar no form.html o th:object que faz referência ao objeto esperado no controller.
@@ -33,8 +34,7 @@ public class EnderecoController {
      */
     @GetMapping(INSERT)
     public String insert(Endereco endereco, ModelMap model, HttpServletRequest request) {
-        model.addAttribute("estados", Estado.values());
-        model.addAttribute("origem", origemRequisicao(request));
+        prepararFormulario(model, request);
         model.addAttribute("breadcrumbItems", breadcrumb(
                 new BreadcrumbItem("Meu Perfil", "/" + CLIENTES + PERFIL),
                 new BreadcrumbItem("Cadastrar Endereço", null)
@@ -44,30 +44,25 @@ public class EnderecoController {
 
     @PostMapping(SAVE)
     public String save(@Valid Endereco endereco, BindingResult result, ModelMap model,
-                        @RequestParam(value = "origem", required = false) String origem) {
+                       @RequestParam(value = "origem", required = false) String origem) {
         if (result.hasErrors()) {
             model.addAttribute("estados", Estado.values());
             model.addAttribute("origem", origem);
             return HTML_CLIENTE_FORM_ENDERECO;
         }
 
-        endereco.setPessoa(getPessoaLogada());
-        enderecoRepository.insert(endereco);
+        enderecoService.cadastrar(endereco, getPessoaLogada());
         return redirecionarParaOrigem(origem);
     }
 
     @GetMapping(EDIT_ID)
     public String edit(@PathVariable("id") Long id, ModelMap model, RedirectAttributes redirectAttributes, HttpServletRequest request) {
-        Endereco endereco = enderecoRepository.findById(id);
+        Optional<Endereco> endereco = enderecoService.buscarDoDono(id, getPessoaLogada());
 
-        if (endereco == null || !endereco.pertenceA(getPessoaLogada())) {
-            redirectAttributes.addFlashAttribute("erro", "Endereço não encontrado.");
-            return "redirect:/" + CLIENTES + PERFIL;
-        }
+        if (endereco.isEmpty()) return enderecoNaoEncontrado(redirectAttributes);
 
-        model.addAttribute("endereco", endereco);
-        model.addAttribute("estados", Estado.values());
-        model.addAttribute("origem", origemRequisicao(request));
+        model.addAttribute("endereco", endereco.get());
+        prepararFormulario(model, request);
         model.addAttribute("breadcrumbItems", breadcrumb(
                 new BreadcrumbItem("Meu Perfil", "/" + CLIENTES + PERFIL),
                 new BreadcrumbItem("Editar Endereço", null)
@@ -77,13 +72,10 @@ public class EnderecoController {
 
     @PostMapping(UPDATE)
     public String update(@Valid Endereco endereco, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes,
-                          @RequestParam(value = "origem", required = false) String origem) {
-        Endereco enderecoExistente = enderecoRepository.findById(endereco.getId());
+                         @RequestParam(value = "origem", required = false) String origem) {
+        Optional<Endereco> enderecoExistente = enderecoService.buscarDoDono(endereco.getId(), getPessoaLogada());
 
-        if (enderecoExistente == null || !enderecoExistente.pertenceA(getPessoaLogada())) {
-            redirectAttributes.addFlashAttribute("erro", "Endereço não encontrado.");
-            return "redirect:/" + CLIENTES + PERFIL;
-        }
+        if (enderecoExistente.isEmpty()) return enderecoNaoEncontrado(redirectAttributes);
 
         if (result.hasErrors()) {
             model.addAttribute("estados", Estado.values());
@@ -91,24 +83,34 @@ public class EnderecoController {
             return HTML_CLIENTE_FORM_ENDERECO;
         }
 
-        endereco.setPessoa(enderecoExistente.getPessoa());
-        enderecoRepository.update(endereco);
+        enderecoService.atualizar(endereco, enderecoExistente.get());
         return redirecionarParaOrigem(origem);
     }
 
     @PostMapping(DELETE_ID)
     public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-        Endereco endereco = enderecoRepository.findById(id);
+        Optional<Endereco> endereco = enderecoService.buscarDoDono(id, getPessoaLogada());
 
-        if (endereco == null || !endereco.pertenceA(getPessoaLogada())) {
-            redirectAttributes.addFlashAttribute("erro", "Endereço não encontrado.");
-            return "redirect:/" + CLIENTES + PERFIL;
-        }
+        if (endereco.isEmpty()) return enderecoNaoEncontrado(redirectAttributes);
 
-        boolean sucesso = enderecoRepository.delete(id);
+        boolean sucesso = enderecoService.excluir(id);
 
         if (!sucesso) redirectAttributes.addFlashAttribute("erro", "Não é possível excluir! Existem pedidos associados a este endereço.");
 
+        return redirectPerfil();
+    }
+
+    private void prepararFormulario(ModelMap model, HttpServletRequest request) {
+        model.addAttribute("estados", Estado.values());
+        model.addAttribute("origem", origemRequisicao(request));
+    }
+
+    private String enderecoNaoEncontrado(RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("erro", "Endereço não encontrado.");
+        return redirectPerfil();
+    }
+
+    private String redirectPerfil() {
         return "redirect:/" + CLIENTES + PERFIL;
     }
 
@@ -134,7 +136,7 @@ public class EnderecoController {
 
     /**
      * Monta o redirecionamento para a origem informada, validando que se trata de um caminho interno
-     * (evitando open redirect). Caso a origem seja inválida ou ausente, retorna para "Meus Endereços".
+     * (evitando open redirect). Caso a origem seja inválida ou ausente, retorna para "Meu Perfil".
      */
     private String redirecionarParaOrigem(String origem) {
         boolean origemValida = origem != null && origem.startsWith("/") && !origem.startsWith("//");
