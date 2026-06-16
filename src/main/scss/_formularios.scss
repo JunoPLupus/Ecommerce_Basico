@@ -115,3 +115,54 @@
     background-color: var(--bs-tertiary-bg);
   }
 }
+
+.pg-segmented {
+  display: flex;
+  gap: 0.25rem;
+  margin: 0 0 1.5rem;
+  padding: 0.25rem;
+  background-color: var(--bs-secondary-bg);
+  border-radius: 0.75rem;
+
+  li {
+    flex: 1;
+    list-style: none;
+  }
+
+  a {
+    display: block;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-weight: 500;
+    color: var(--bs-secondary-color);
+
+    &.active {
+      background-color: var(--bs-body-bg);
+      color: var(--bs-body-color);
+      font-weight: 600;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+.pg-auth-submit {
+  @extend .w-100;
+  margin-top: 1.5rem;
+}
+
+.pg-auth-footer {
+  @extend .text-center;
+  @extend .text-muted;
+  margin: 0;
+
+  a {
+    @extend .fw-semibold;
+    color: var(--bs-body-color);
+  }
+}
+
+.pg-field-error {
+  @extend .text-danger;
+  @extend .small;
+}

@@ -5,49 +5,47 @@
 <form th:fragment="form-pf"
       th:action="@{/clientes/save/fisica}"
       th:object="${pessoaFisica}"
-      method="post"
-      class="mt-3">
+      method="post">
 
     <input type="hidden" th:field="*{id}">
 
-    <div class="mb-4">
-        <label for="cpf">CPF</label>
-        <input type="text" th:field="*{cpf}" id="cpf" placeholder="Ex: 000.000.000-00">
-        <span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" class="text-danger"></span>
+    <div class="pg-form-fields">
+        <div>
+            <label for="nome">Nome Completo</label>
+            <input type="text" th:field="*{nome}" id="nome" placeholder="Seu nome completo">
+            <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="pg-field-error"></span>
+        </div>
+        <div>
+            <label for="cpf">CPF</label>
+            <input type="text" th:field="*{cpf}" id="cpf" placeholder="000.000.000-00">
+            <span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" class="pg-field-error"></span>
+        </div>
+        <div>
+            <label for="email-pf">E-mail</label>
+            <input type="email" th:field="*{email}" id="email-pf" placeholder="email@exemplo.com">
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="pg-field-error"></span>
+        </div>
+        <div>
+            <label for="login-pf">Usuário</label>
+            <input type="text" name="login" id="login-pf" placeholder="nome.exemplo">
+            <span th:if="${erroLogin}" th:text="${erroLogin}" class="pg-field-error"></span>
+        </div>
+        <div>
+            <label for="password-pf">Senha</label>
+            <div class="pg-senha-field">
+                <input type="password" name="password" id="password-pf" placeholder="Mínimo 6 caracteres">
+                <button type="button" class="pg-senha-field__toggle">
+                    <i class="icon-eye"></i>
+                </button>
+            </div>
+            <span th:if="${erroSenha}" th:text="${erroSenha}" class="pg-field-error"></span>
+        </div>
     </div>
 
-    <div class="mb-4">
-        <label for="nome">Nome</label>
-        <input type="text" th:field="*{nome}" id="nome" placeholder="Ex: João Silva">
-        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger"></span>
-    </div>
-
-    <div class="mb-4">
-        <label for="email-pf">E-mail</label>
-        <input type="email" th:field="*{email}" id="email-pf" placeholder="Ex: exemplo@gmail.com">
-        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
-    </div>
+    <button type="submit" class="button-dark pg-auth-submit">Criar minha conta</button>
 
     <hr>
-
-    <div class="mb-4">
-        <label for="login-pf">Login</label>
-        <input type="text" name="login" id="login-pf" placeholder="Ex: joao.silva">
-        <span th:if="${erroLogin}" th:text="${erroLogin}" class="text-danger"></span>
-    </div>
-
-    <div class="mb-4">
-        <label for="password-pf">Senha</label>
-        <input type="password" name="password" id="password-pf" placeholder="Mínimo 6 caracteres">
-        <span th:if="${erroSenha}" th:text="${erroSenha}" class="text-danger"></span>
-    </div>
-
-    <hr>
-
-    <div class="form-actions">
-        <button type="submit" class="button-primary">Cadastrar Cliente</button>
-        <span class="fw-light">Já têm uma conta? <a th:href="@{/login}">Entre agora!</a></span>
-    </div>
+    <p class="pg-auth-footer">Já tem uma conta? <a th:href="@{/login}">Entre agora!</a></p>
 
 </form>
 

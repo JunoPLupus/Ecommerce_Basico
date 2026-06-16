@@ -39,6 +39,13 @@ footer {
   @extend .container;
   @extend .mt-auto;
   @extend .pt-3;
+  @extend .pb-3;
+
+  p {
+    @extend .text-center;
+    @extend .text-muted;
+    @extend .mb-0;
+  }
 }
 
 a {

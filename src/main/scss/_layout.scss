@@ -12,19 +12,6 @@
   @extend .pt-3;
 }
 
-.nav-tab {
-  @extend .nav;
-  @extend .nav-tabs;
-  @extend .mt-3;
-
-  li {
-    @extend .nav-item;
-    a {
-      @extend .nav-link;
-    }
-  }
-}
-
 .mt-navbar {
   margin-top: 1rem;
 }
@@ -278,5 +265,41 @@
       padding: 0.25rem 0.5rem;
       margin-left: 0;
     }
+  }
+}
+
+// Fundo geral do app
+.pg-app-bg {
+  background-color: var(--app-bg);
+}
+
+// Telas de autenticação (login / cadastro)
+.pg-card.pg-auth-card {
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3rem;
+  border: 1px solid var(--bs-border-color-translucent);
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.06);
+  --bs-border-radius: 0.5rem;
+
+  hr {
+    margin: 1.5rem 0 1rem;
+  }
+}
+
+.pg-auth-header {
+  @extend .text-center;
+  margin-bottom: 1.5rem;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  p {
+    @extend .text-muted;
+    margin: 0;
   }
 }

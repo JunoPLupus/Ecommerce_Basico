@@ -38,3 +38,8 @@
   @extend .gap-2;
   @extend .justify-content-end;
 }
+
+.button-dark {
+  @extend .btn;
+  @extend .btn-dark;
+}
