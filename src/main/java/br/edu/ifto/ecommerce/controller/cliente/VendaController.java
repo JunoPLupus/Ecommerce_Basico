@@ -1,5 +1,6 @@
 package br.edu.ifto.ecommerce.controller.cliente;
 
+import br.edu.ifto.ecommerce.model.dto.VendaDTO;
 import br.edu.ifto.ecommerce.model.entity.cliente.Pessoa;
 import br.edu.ifto.ecommerce.model.entity.endereco.Endereco;
 import br.edu.ifto.ecommerce.model.entity.venda.Venda;
@@ -7,6 +8,7 @@ import br.edu.ifto.ecommerce.model.enums.FormaPagamento;
 import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
 import br.edu.ifto.ecommerce.service.EnderecoService;
 import br.edu.ifto.ecommerce.service.VendaService;
+import br.edu.ifto.ecommerce.utils.VendaMapper;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -44,8 +46,8 @@ public class VendaController {
             return "redirect:/" + CARRINHO;
         }
 
-        model.addAttribute(CARRINHO, carrinho);
-        model.addAttribute("enderecos", enderecoService.listarDoDono(getPessoaLogada().getId()));
+        model.addAttribute(CARRINHO, VendaMapper.toDTO(carrinho));
+        model.addAttribute("enderecos", enderecoService.listarResumoDoDono(getPessoaLogada().getId()));
         model.addAttribute("formasPagamento", FormaPagamento.values());
         model.addAttribute("breadcrumbItems", breadcrumb(
                 new BreadcrumbItem("Carrinho", "/" + CARRINHO),
@@ -93,7 +95,7 @@ public class VendaController {
 
     @GetMapping(DETALHES_ID)
     public String detalhesPedido(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
-        Venda venda = vendaService.buscarPedidoDoCliente(id, getPessoaLogada().getId());
+        VendaDTO venda = vendaService.buscarPedidoDoCliente(id, getPessoaLogada().getId());
 
         if (venda == null) {
             redirectAttributes.addFlashAttribute("erro", "Pedido #" + id + " não encontrado.");
@@ -103,7 +105,7 @@ public class VendaController {
         model.addAttribute("venda", venda);
         model.addAttribute("breadcrumbItems", breadcrumb(
                 new BreadcrumbItem("Meus Pedidos", "/" + PEDIDOS + LISTA),
-                new BreadcrumbItem("Pedido #" + venda.getId(), null)
+                new BreadcrumbItem("Pedido #" + venda.id(), null)
         ));
         return HTML_CLIENTE_DETAIL_PEDIDO;
     }

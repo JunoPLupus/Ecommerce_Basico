@@ -28,7 +28,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="item : ${carrinho.getItens()}">
+                    <tr th:each="item : ${carrinho.itens}">
                         <td>
                             <img class="cart-img-thumbnail"
                                  th:if="${item.produto.urlImagem != null}"

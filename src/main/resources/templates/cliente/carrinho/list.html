@@ -15,11 +15,11 @@
             Meu Carrinho
         </h1>
 
-        <p th:if="${carrinho.getItens() == null || #lists.isEmpty(carrinho.getItens())}">
+        <p th:if="${carrinho.itens == null || #lists.isEmpty(carrinho.itens)}">
             Seu carrinho está vazio. Vá às compras!
         </p>
 
-        <table th:unless="${carrinho.getItens() == null || #lists.isEmpty(carrinho.getItens())}">
+        <table th:unless="${carrinho.itens == null || #lists.isEmpty(carrinho.itens)}">
             <thead>
             <tr>
                 <th scope="col"></th>
@@ -31,7 +31,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="item : ${carrinho.getItens()}">
+            <tr th:each="item : ${carrinho.itens}">
                 <td>
                     <img class="cart-img-thumbnail"
                          th:if="${item.produto.urlImagem != null}"
@@ -79,7 +79,7 @@
 
     <!-- Painel direito: resumo e finalização -->
     <aside class="pg-card pg-cart-aside"
-           th:unless="${carrinho.getItens() == null || #lists.isEmpty(carrinho.getItens())}">
+           th:unless="${carrinho.itens == null || #lists.isEmpty(carrinho.itens)}">
         <p class="fw-light">
             Total (<span th:text="${carrinho.qtdItensTotal()}"></span> itens)
         </p>

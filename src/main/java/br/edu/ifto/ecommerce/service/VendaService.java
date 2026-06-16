@@ -1,10 +1,12 @@
 package br.edu.ifto.ecommerce.service;
 
+import br.edu.ifto.ecommerce.model.dto.VendaDTO;
 import br.edu.ifto.ecommerce.model.entity.cliente.Pessoa;
 import br.edu.ifto.ecommerce.model.entity.endereco.Endereco;
 import br.edu.ifto.ecommerce.model.entity.venda.Venda;
 import br.edu.ifto.ecommerce.model.enums.FormaPagamento;
 import br.edu.ifto.ecommerce.model.repository.VendaRepository;
+import br.edu.ifto.ecommerce.utils.VendaMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,37 +25,37 @@ public class VendaService {
     private final VendaRepository vendaRepository;
 
     @Transactional(readOnly = true)
-    public List<Venda> listarComFiltros(String nomeCliente, LocalDate dataInicial, LocalDate dataFinal,
-                                        Double valorMinimo, Double valorMaximo) {
+    public List<VendaDTO> listarComFiltros(String nomeCliente, LocalDate dataInicial, LocalDate dataFinal,
+                                           Double valorMinimo, Double valorMaximo) {
         List<Venda> vendas = vendaRepository.findAllByDynamicFilters(nomeCliente, dataInicial, dataFinal);
-        return filtrarPorValorTotal(vendas, valorMinimo, valorMaximo);
+        return VendaMapper.toDTOList(filtrarPorValorTotal(vendas, valorMinimo, valorMaximo));
     }
 
     @Transactional(readOnly = true)
-    public List<Venda> listarPedidosDoCliente(Long clienteId) {
-        return vendaRepository.findAllByClienteId(clienteId);
+    public List<VendaDTO> listarPedidosDoCliente(Long clienteId) {
+        return VendaMapper.toDTOList(vendaRepository.findAllByClienteId(clienteId));
     }
 
     @Transactional(readOnly = true)
-    public Venda buscarPorId(Long id) {
-        return vendaRepository.findById(id);
+    public VendaDTO buscarPorId(Long id) {
+        return VendaMapper.toDTO(vendaRepository.findById(id));
     }
 
     /**
-     * Retorna a venda apenas se ela pertencer ao cliente informado; caso contrário,
-     * retorna {@code null}. Impede que um cliente acesse pedidos de outro pela URL.
+     * Retorna o pedido como DTO apenas se ele pertencer ao cliente informado; caso
+     * contrário, {@code null}. Impede que um cliente acesse pedidos de outro pela URL.
      */
     @Transactional(readOnly = true)
-    public Venda buscarPedidoDoCliente(Long id, Long clienteId) {
+    public VendaDTO buscarPedidoDoCliente(Long id, Long clienteId) {
         Venda venda = vendaRepository.findById(id);
         boolean pertenceAoCliente = venda != null && venda.getCliente() != null
                 && Objects.equals(venda.getCliente().getId(), clienteId);
-        return pertenceAoCliente ? venda : null;
+        return pertenceAoCliente ? VendaMapper.toDTO(venda) : null;
     }
 
     /**
-     * Converte o carrinho em uma venda persistida, vinculando cliente, endereço,
-     * forma de pagamento, data e associando os itens à venda.
+     * Converte o carrinho em uma venda persistida. Retorna a entidade salva (usada
+     * apenas para compor a URL de redirecionamento, não é renderizada).
      */
     public Venda finalizar(Venda carrinho, Endereco endereco, FormaPagamento formaPagamento, Pessoa cliente) {
         carrinho.setCliente(cliente);

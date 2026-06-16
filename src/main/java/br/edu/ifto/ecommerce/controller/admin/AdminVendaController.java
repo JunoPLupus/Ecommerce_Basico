@@ -1,6 +1,6 @@
 package br.edu.ifto.ecommerce.controller.admin;
 
-import br.edu.ifto.ecommerce.model.entity.venda.Venda;
+import br.edu.ifto.ecommerce.model.dto.VendaDTO;
 import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
 import br.edu.ifto.ecommerce.service.VendaService;
 import lombok.AllArgsConstructor;
@@ -34,7 +34,7 @@ public class AdminVendaController {
                        @RequestParam(required = false) Double valorMaximo,
                        Model model) {
 
-        List<Venda> vendas = vendaService.listarComFiltros(nomeCliente, dataInicial, dataFinal, valorMinimo, valorMaximo);
+        List<VendaDTO> vendas = vendaService.listarComFiltros(nomeCliente, dataInicial, dataFinal, valorMinimo, valorMaximo);
 
         boolean hasValorMinimo = valorMinimo != null && valorMinimo > 0.0;
         boolean hasValorMaximo = valorMaximo != null && valorMaximo > 0.0;
@@ -60,7 +60,7 @@ public class AdminVendaController {
 
     @GetMapping(DETALHES_ID)
     public String detail(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
-        Venda venda = vendaService.buscarPorId(id);
+        VendaDTO venda = vendaService.buscarPorId(id);
 
         if (venda == null) {
             redirectAttributes.addFlashAttribute("erro", "Venda #" + id + " não encontrada.");
@@ -70,7 +70,7 @@ public class AdminVendaController {
         model.addAttribute("venda", venda);
         model.addAttribute("breadcrumbItems", breadcrumb(
                 new BreadcrumbItem("Vendas", "/" + ADMIN_VENDAS),
-                new BreadcrumbItem("Detalhes da venda #" + venda.getId(), null)
+                new BreadcrumbItem("Detalhes da venda #" + venda.id(), null)
         ));
 
         return HTML_ADMIN_DETAIL_VENDAS;

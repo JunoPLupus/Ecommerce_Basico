@@ -2,6 +2,7 @@ package br.edu.ifto.ecommerce.controller.cliente;
 
 import br.edu.ifto.ecommerce.model.entity.venda.Venda;
 import br.edu.ifto.ecommerce.service.CarrinhoService;
+import br.edu.ifto.ecommerce.utils.VendaMapper;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ public class CarrinhoController {
 
     @GetMapping("")
     public String verCarrinho(HttpSession session, Model model) {
-        model.addAttribute(CARRINHO, getCarrinho(session));
+        model.addAttribute(CARRINHO, VendaMapper.toDTO(getCarrinho(session)));
         return HTML_CARRINHO;
     }
 
