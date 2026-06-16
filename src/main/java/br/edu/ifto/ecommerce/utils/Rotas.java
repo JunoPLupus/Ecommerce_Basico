@@ -27,6 +27,7 @@ public final class Rotas {
     private static final String ID = "/{id}";
     public static final String FINALIZAR = "/finalizar";
     public static final String PERFIL = "/perfil";
+    public static final String EDITAR = "/editar";
 
     public static final String ADMIN_PRODUTOS = ADMIN + "/" + PRODUTOS;
     public static final String ADMIN_CLIENTES = ADMIN + "/" + CLIENTES;

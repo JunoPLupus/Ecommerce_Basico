@@ -21,4 +21,11 @@ public class UsuarioRepository {
     }
 
     public void insert(Usuario usuario) { em.persist(usuario); }
+
+    public void updateSenha(Long id, String novaSenha) {
+        em.createQuery("UPDATE Usuario u SET u.password = :senha WHERE u.id = :id")
+                .setParameter("senha", novaSenha)
+                .setParameter("id", id)
+                .executeUpdate();
+    }
 }
