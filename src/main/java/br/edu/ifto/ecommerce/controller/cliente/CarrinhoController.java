@@ -22,49 +22,36 @@ import static br.edu.ifto.ecommerce.utils.Rotas.*;
 @RequestMapping(CARRINHO)
 public class CarrinhoController {
 
-    private CarrinhoService carrinhoService;
+    private final CarrinhoService carrinhoService;
 
     @GetMapping("")
     public String verCarrinho(HttpSession session, Model model) {
-        Venda carrinho = getCarrinho(session);
-        model.addAttribute(CARRINHO, carrinho);
+        model.addAttribute(CARRINHO, getCarrinho(session));
         return HTML_CARRINHO;
     }
 
     @PostMapping(INSERT_ID)
     public String adicionarItemCarrinho(@PathVariable("id") Long id, HttpSession session) {
-        auxAddItemNoCarrinho(id, session);
+        carrinhoService.adicionarItemNoCarrinho(getCarrinho(session), id);
         return "redirect:/" + PRODUTOS;
     }
 
     @PostMapping(ADD_ID)
     public String aumentarQtdItemCarrinho(@PathVariable("id") Long id, HttpSession session) {
-        auxAddItemNoCarrinho(id, session);
+        carrinhoService.adicionarItemNoCarrinho(getCarrinho(session), id);
         return "redirect:/" + CARRINHO;
     }
 
     @PostMapping(REDUCE_ID)
-    public String reduzirQtdOuRemoverItemCarrinho(@PathVariable("id") Long id, HttpSession session) throws Exception {
-        Venda carrinho = getCarrinho(session);
-        carrinhoService.reduzirQtdItemNoCarrinho(carrinho, id);
+    public String reduzirQtdOuRemoverItemCarrinho(@PathVariable("id") Long id, HttpSession session) {
+        carrinhoService.reduzirQtdItemNoCarrinho(getCarrinho(session), id);
         return "redirect:/" + CARRINHO;
     }
 
     @PostMapping(DELETE_ID)
-    public String removerItemCarrinho(@PathVariable("id") Long id, HttpSession session) throws Exception {
-        Venda carrinho = getCarrinho(session);
-        carrinhoService.removerItemNoCarrinho(carrinho,id);
+    public String removerItemCarrinho(@PathVariable("id") Long id, HttpSession session) {
+        carrinhoService.removerItemNoCarrinho(getCarrinho(session), id);
         return "redirect:/" + CARRINHO;
-    }
-
-    private void auxAddItemNoCarrinho(Long id, HttpSession session) {
-        try {
-            Venda carrinho = getCarrinho(session);
-            carrinhoService.adicionarItemNoCarrinho(carrinho, id);
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private Venda getCarrinho(HttpSession session) {
