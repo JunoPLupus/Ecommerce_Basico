@@ -25,8 +25,8 @@
                     <label for="senha">Senha</label>
                     <div class="pg-senha-field">
                         <input type="password" id="senha" th:field="*{senha}" placeholder="Mínimo 6 caracteres">
-                        <button type="button" class="pg-senha-field__toggle" onclick="alternarSenha()">
-                            <i id="icon-senha" class="icon-eye"></i>
+                        <button type="button" class="pg-senha-field__toggle">
+                            <i class="icon-eye"></i>
                         </button>
                     </div>
                     <span th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" class="text-danger"></span>
@@ -39,20 +39,6 @@
         </form>
     </section>
     </div>
-
-    <script>
-        function alternarSenha() {
-            const input = document.getElementById('senha');
-            const icon = document.getElementById('icon-senha');
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.className = 'icon-eye-slash';
-            } else {
-                input.type = 'password';
-                icon.className = 'icon-eye';
-            }
-        }
-    </script>
 
 </main>
 </body>
