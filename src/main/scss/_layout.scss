@@ -63,6 +63,15 @@
   max-width: 40%;
 }
 
+.pg-editar-layout {
+  max-width: 40%;
+  margin: 0 auto;
+
+  .pg-card {
+    margin-top: 0;
+  }
+}
+
 // Carrinho - layout dois paineis
 .pg-cart-layout {
   @extend .container;

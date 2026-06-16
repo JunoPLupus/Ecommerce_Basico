@@ -34,6 +34,12 @@
   }
 }
 
+.pg-form-fields {
+  @extend .d-flex;
+  @extend .flex-column;
+  @extend .gap-3;
+}
+
 .pg-form-row {
   @extend .d-flex;
   @extend .gap-3;
@@ -51,6 +57,27 @@
 
   .button-primary {
     margin-left: 0;
+  }
+}
+
+.pg-senha-field {
+  position: relative;
+
+  input {
+    padding-right: 3rem;
+  }
+
+  &__toggle {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--bs-secondary-color);
+    padding: 0;
+    line-height: 1;
   }
 }
 
