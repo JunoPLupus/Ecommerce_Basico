@@ -35,7 +35,7 @@ public class EnderecoController {
     @GetMapping(INSERT)
     public String insert(Endereco endereco, ModelMap model, HttpServletRequest request) {
         prepararFormulario(model, request);
-        model.addAttribute("breadcrumbItems", breadcrumb(
+        model.addAttribute("breadcrumbEndereco", breadcrumb(
                 new BreadcrumbItem("Meu Perfil", "/" + CLIENTES + PERFIL),
                 new BreadcrumbItem("Cadastrar Endereço", null)
         ));
@@ -63,7 +63,7 @@ public class EnderecoController {
 
         model.addAttribute("endereco", endereco.get());
         prepararFormulario(model, request);
-        model.addAttribute("breadcrumbItems", breadcrumb(
+        model.addAttribute("breadcrumbEndereco", breadcrumb(
                 new BreadcrumbItem("Meu Perfil", "/" + CLIENTES + PERFIL),
                 new BreadcrumbItem("Editar Endereço", null)
         ));

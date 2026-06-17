@@ -38,7 +38,7 @@
     <section class="pg-card" sec:authorize="hasAnyRole('USER')">
         <div class="pg-card-header">
             <h2><i class="icon-pin"></i> Gerenciamento de Endereços</h2>
-            <a class="button-primary" th:href="@{/enderecos/insert}">+ Cadastrar novo endereço</a>
+            <a class="button-dark" th:href="@{/enderecos/insert}"><i class="icon-plus"></i> Cadastrar novo endereço</a>
         </div>
 
         <p th:if="${#lists.isEmpty(enderecos)}" class="text-muted">
@@ -53,12 +53,12 @@
                     <span th:text="'CEP: ' + ${endereco.cep}"></span>
                 </div>
                 <div class="pg-address-card__actions">
-                    <a th:href="@{/enderecos/edit/{id}(id=${endereco.id})}" class="button-secondary">
+                    <a th:href="@{/enderecos/edit/{id}(id=${endereco.id})}" class="button-icon">
                         <i class="icon-pen"></i>
                     </a>
                     <form th:action="@{/enderecos/delete/{id}(id=${endereco.id})}" method="post"
                           onsubmit="return confirm('Tem certeza que deseja excluir esse endereço? É uma ação irreversível.')">
-                        <button type="submit" class="button-danger"><i class="icon-trash"></i></button>
+                        <button type="submit" class="button-icon button-icon--danger"><i class="icon-trash"></i></button>
                     </form>
                 </div>
             </div>

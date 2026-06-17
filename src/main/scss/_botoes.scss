@@ -52,6 +52,10 @@
   padding: 0.375rem 0.5rem;
 
   &:hover {
-    color: var(--bs-danger);
+    color: var(--bs-body-color);
   }
+}
+
+.button-icon--danger:hover {
+  color: var(--bs-danger);
 }

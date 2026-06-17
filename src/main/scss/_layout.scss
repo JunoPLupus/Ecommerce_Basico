@@ -90,11 +90,7 @@
   @extend .col;
 }
 
-.pg-card.pg-card--form {
-  max-width: 40%;
-}
-
-.pg-editar-layout {
+.pg-form-layout {
   max-width: 40%;
   margin: 0 auto;
 
@@ -335,12 +331,6 @@
     @extend .gap-2;
     @extend .align-items-center;
     flex-shrink: 0;
-
-    .button-secondary,
-    .button-danger {
-      padding: 0.25rem 0.5rem;
-      margin-left: 0;
-    }
   }
 }
 
