@@ -19,8 +19,8 @@ form {
 
 hr {
   @extend .border-light-subtle;
-  @extend .mt-5;
-  @extend .mb-3;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 table {

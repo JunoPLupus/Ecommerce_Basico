@@ -109,7 +109,7 @@
   @extend .d-flex;
   @extend .gap-3;
   @extend .align-items-start;
-  @extend .mt-3;
+  margin-top: 1rem;
 }
 
 .pg-cart-main {
@@ -137,6 +137,10 @@
     @extend .justify-content-center;
     @extend .gap-1;
     margin-top: 1rem;
+  }
+
+  hr {
+    margin: 0.5rem 0;
   }
 }
 
@@ -219,10 +223,6 @@
   text-align: start;
   position: sticky;
   top: 1rem;
-
-  hr {
-    margin: 0.5rem 0;
-  }
 }
 
 .pg-card-header {
@@ -361,7 +361,7 @@
   --bs-border-radius: 0.5rem;
 
   hr {
-    margin: 1.5rem 0 1rem;
+    margin: 3rem 0 1rem;
   }
 }
 
@@ -378,4 +378,9 @@
     @extend .text-muted;
     margin: 0;
   }
+}
+
+
+.pg-checkout-page > .pg-checkout-layout:first-child {
+  margin-top: 0;
 }
