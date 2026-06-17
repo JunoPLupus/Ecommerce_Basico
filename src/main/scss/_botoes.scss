@@ -16,21 +16,10 @@
   @extend .btn-outline-secondary;
 }
 
-.button-outline-light {
+.button-light {
   @extend .btn;
-  @extend .btn-outline-light;
-  @extend .position-relative;
+  @extend .btn-light;
   margin-left: 1rem;
-
-  span {
-    @extend .position-absolute;
-    @extend .top-0;
-    @extend .start-100;
-    @extend .translate-middle;
-    @extend .badge;
-    @extend .rounded-pill;
-    @extend .bg-danger;
-  }
 }
 
 .button-group {

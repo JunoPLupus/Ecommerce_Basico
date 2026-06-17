@@ -25,3 +25,11 @@ document.querySelectorAll('.pg-senha-field__toggle').forEach(botao => {
         }
     });
 });
+
+const caminhoNav = window.location.pathname;
+document.querySelectorAll('.pg-nav-collapse > ul li a').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.length > 1 && caminhoNav.startsWith(href)) {
+        link.classList.add('active');
+    }
+});
