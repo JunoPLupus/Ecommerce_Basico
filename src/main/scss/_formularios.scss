@@ -110,9 +110,14 @@
     }
   }
 
+  .form-check-input:checked {
+    background-color: var(--bs-dark);
+    border-color: var(--bs-dark);
+  }
+
   &:has(.form-check-input:checked) {
-    border-color: var(--bs-primary);
-    background-color: var(--bs-tertiary-bg);
+    border-color: var(--bs-dark);
+    background-color: var(--bs-secondary-bg);
   }
 }
 

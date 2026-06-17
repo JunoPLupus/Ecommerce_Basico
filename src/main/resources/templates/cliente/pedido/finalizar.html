@@ -20,22 +20,23 @@
                 <table>
                     <thead>
                     <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Descrição</th>
+                        <th scope="col">Produto</th>
                         <th scope="col">Qtd</th>
-                        <th scope="col">Valor Unitário</th>
+                        <th scope="col">Unitário</th>
                         <th scope="col" class="subtotal">Subtotal</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="item : ${carrinho.itens}">
                         <td>
-                            <img class="cart-img-thumbnail"
-                                 th:if="${item.produto.urlImagem != null}"
-                                 th:src="${item.produto.urlImagem}"
-                                 th:alt="${item.produto.descricao}">
+                            <div class="pg-cart-produto">
+                                <img class="cart-img-thumbnail"
+                                     th:if="${item.produto.urlImagem != null}"
+                                     th:src="${item.produto.urlImagem}"
+                                     th:alt="${item.produto.descricao}">
+                                <div class="col-descricao"><span th:text="${item.produto.descricao}"></span></div>
+                            </div>
                         </td>
-                        <td class="col-descricao"><span th:text="${item.produto.descricao}"></span></td>
                         <td th:text="${item.quantidade}"></td>
                         <td th:text="'R$ ' + ${#numbers.formatDecimal(item.produto.valor, 1, 'POINT', 2, 'COMMA')}"></td>
                         <td class="subtotal"
@@ -102,8 +103,8 @@
                 <span th:text="'R$ ' + ${#numbers.formatDecimal(carrinho.total(), 1, 'POINT', 2, 'COMMA')}"></span>
             </div>
 
-            <button type="submit" class="button-primary" th:disabled="${#lists.isEmpty(enderecos)}">
-                Finalizar Compra <i class="icon-arrow-right"></i>
+            <button type="submit" class="button-dark" th:disabled="${#lists.isEmpty(enderecos)}">
+                Finalizar compra <i class="icon-arrow-right"></i>
             </button>
         </aside>
 
