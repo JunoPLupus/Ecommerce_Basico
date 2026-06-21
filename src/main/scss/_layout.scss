@@ -232,7 +232,8 @@
   }
 }
 
-.pg-card h2 {
+.pg-card h2,
+.pg-cliente-historico h2 {
   @extend .fs-5;
   @extend .fw-bold;
   @extend .mb-3;
@@ -465,4 +466,56 @@
       font-size: 2.5rem;
     }
   }
+}
+
+// Avatar com inicial (listagem e detalhe de cliente)
+.pg-avatar {
+  @extend .d-flex;
+  @extend .align-items-center;
+  @extend .justify-content-center;
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: #e8eafd;
+  font-weight: 700;
+  color: var(--bs-body-color);
+}
+
+.pg-avatar--lg {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  font-size: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Detalhe do cliente - card de perfil + histórico
+.pg-cliente-card {
+  flex: 0 0 340px;
+  margin: 0;
+  text-align: center;
+
+  &__nome {
+    @extend .fw-bold;
+    font-size: 1.25rem;
+    margin: 1rem 0 0.25rem;
+  }
+
+  &__usuario {
+    @extend .text-muted;
+    margin: 0;
+  }
+
+  &__dados {
+    @extend .d-flex;
+    @extend .flex-column;
+    @extend .gap-3;
+    text-align: left;
+  }
+}
+
+.pg-cliente-historico {
+  flex: 1;
 }

@@ -20,6 +20,13 @@ public class UsuarioRepository {
                 .getSingleResultOrNull();
     }
 
+    public Usuario findByPessoaId(Long pessoaId) {
+        return em.createQuery(
+                        "FROM Usuario u WHERE u.pessoa.id = :pessoaId", Usuario.class)
+                .setParameter("pessoaId", pessoaId)
+                .getSingleResultOrNull();
+    }
+
     public void insert(Usuario usuario) { em.persist(usuario); }
 
     public void updateSenha(Long id, String novaSenha) {

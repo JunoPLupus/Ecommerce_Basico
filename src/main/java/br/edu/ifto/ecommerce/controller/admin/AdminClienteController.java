@@ -51,6 +51,7 @@ public class AdminClienteController {
         }
 
         model.addAttribute("cliente", cliente);
+        model.addAttribute("login", clienteService.buscarLoginDoCliente(id));
         model.addAttribute("vendas", vendaService.listarPedidosDoCliente(id));
         model.addAttribute("breadcrumbItems", breadcrumb(
                 new BreadcrumbItem("Clientes", "/" + ADMIN_CLIENTES),

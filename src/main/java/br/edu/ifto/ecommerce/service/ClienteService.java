@@ -53,4 +53,10 @@ public class ClienteService {
     public PessoaDTO buscarDetalhe(Long id) {
         return PessoaMapper.toDTO(clienteRepository.findById(id));
     }
+
+    @Transactional(readOnly = true)
+    public String buscarLoginDoCliente(Long pessoaId) {
+        Usuario usuario = usuarioRepository.findByPessoaId(pessoaId);
+        return usuario != null ? usuario.getLogin() : null;
+    }
 }
