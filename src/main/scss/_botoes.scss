@@ -1,16 +1,5 @@
 @use "../../../node_modules/bootstrap/scss/bootstrap";
 
-.button-danger {
-  @extend .btn;
-  @extend .btn-danger;
-}
-
-.button-primary {
-  @extend .btn;
-  @extend .btn-primary;
-  margin-left: 1rem;
-}
-
 .button-secondary {
   @extend .btn;
   @extend .btn-outline-secondary;

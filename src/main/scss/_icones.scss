@@ -4,10 +4,6 @@
   @extend .bi-bag;
 }
 
-.icon-box {
-  @extend .bi-box-seam;
-}
-
 .icon-search {
   @extend .bi-search;
 }
@@ -34,22 +30,6 @@
 
 .icon-calendar {
   @extend .bi-calendar;
-}
-
-.icon-numbers {
-  @extend .bi-123;
-}
-
-.icon-person-identity {
-  @extend .bi-person-vcard;
-}
-
-.icon-email {
-  @extend .bi-envelope-at;
-}
-
-.icon-phone {
-  @extend .bi-telephone;
 }
 
 .icon-document {

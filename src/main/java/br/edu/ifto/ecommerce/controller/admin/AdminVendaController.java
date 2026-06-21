@@ -1,6 +1,5 @@
 package br.edu.ifto.ecommerce.controller.admin;
 
-import br.edu.ifto.ecommerce.model.dto.PessoaDTO;
 import br.edu.ifto.ecommerce.model.dto.VendaDTO;
 import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
 import br.edu.ifto.ecommerce.service.ClienteService;

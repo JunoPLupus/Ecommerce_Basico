@@ -11,14 +11,6 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
-.pg-footer {
-  @extend .pt-3;
-}
-
-.mt-navbar {
-  margin-top: 1rem;
-}
-
 .main-double-collumns {
   @extend .d-flex;
   @extend .justify-content-between;
@@ -120,11 +112,6 @@
 .pg-cart-aside {
   flex: 0 0 340px;
   margin: 0;
-
-  .button-primary {
-    @extend .w-100;
-    margin-left: 0;
-  }
 
   .button-dark {
     @extend .w-100;
