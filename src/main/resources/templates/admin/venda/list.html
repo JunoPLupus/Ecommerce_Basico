@@ -1,26 +1,17 @@
 <!DOCTYPE html>
-
 <html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
-
 <head th:replace="~{fragments/head :: head('Vendas',~{})}"></head>
-
 <body>
+<main class="pg-checkout-page">
 
-<main class="pg-card">
-
-    <h1>
-        <i class="icon-bag text-muted"></i>
-        Vendas
-    </h1>
+    <h1>Gestão de Vendas</h1>
+    <p class="text-muted">Gerencie todas as vendas realizadas na plataforma.</p>
 
     <form th:action="@{/admin/vendas}" method="get" class="search-bar">
-        <input type="search" id="nomeCliente" name="nomeCliente" placeholder="Pesquisar por nome do cliente..." aria-label="Filtro por nome de cliente" th:value="${nomeCliente}" >
+        <input type="search" id="nomeCliente" name="nomeCliente" placeholder="Buscar por nome ou razão social do cliente..." aria-label="Filtro por nome de cliente" th:value="${nomeCliente}">
         <div class="dropdown">
-            <button class="filter-btn"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Filtrar
+            <button class="filter-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="icon-filter"></i> Filtrar
             </button>
             <ul class="dropdown-menu">
                 <li>
@@ -53,36 +44,34 @@
 
     <p th:if="${vendas == null || #lists.isEmpty(vendas)}">Nenhuma venda encontrada.</p>
 
-    <table th:unless="${vendas == null || #lists.isEmpty(vendas)} ">
-        <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Data</th>
-            <th scope="col">Cliente</th>
-            <th scope="col">Total</th>
-            <th scope="col"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="venda : ${vendas}">
-            <td scope="row" th:text="${venda.id}"></td>
-            <td th:text="${#temporals.format(venda.data, 'dd/MM/yyyy HH:mm')}"></td>
-            <td th:text="${venda.cliente.nomeExibicao}"></td>
-            <td th:text="'R$ ' + ${#numbers.formatDecimal(venda.total, 1, 'POINT', 2, 'COMMA')}"></td>
-            <td class="text-end">
-                <a th:href="@{/admin/vendas/detalhes/{id}(id=${venda.id})}"
-                   type="button" class="button-primary"
-                   data-bs-toggle="tooltip"
-                   data-bs-placement="top"
-                   title="Ver detalhes da venda">
-                    <i class="icon-document"></i>
-                </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="pg-lista" th:unless="${vendas == null || #lists.isEmpty(vendas)}">
+        <div class="pg-lista-card" th:each="venda : ${vendas}">
+            <img class="cart-img-thumbnail"
+                 th:if="${!#lists.isEmpty(venda.itens) && venda.itens[0].produto.urlImagem != null}"
+                 th:src="${venda.itens[0].produto.urlImagem}" alt="Produto da venda">
+
+            <div class="pg-lista-card__info">
+                <span class="pg-lista-card__id" th:text="'ID #' + ${venda.id}"></span>
+                <p class="pg-lista-card__titulo" th:text="${venda.cliente.nomeExibicao}"></p>
+            </div>
+
+            <div class="pg-lista-card__metrica">
+                <span class="pg-data-label">Data</span>
+                <span class="pg-lista-card__metrica-valor" th:text="${#temporals.format(venda.data, 'dd MMM, yyyy')}"></span>
+            </div>
+
+            <div class="pg-lista-card__metrica">
+                <span class="pg-data-label">Total</span>
+                <span class="pg-lista-card__metrica-valor" th:text="'R$ ' + ${#numbers.formatDecimal(venda.total, 1, 'POINT', 2, 'COMMA')}"></span>
+            </div>
+
+            <a class="button-icon-dark" th:href="@{/admin/vendas/detalhes/{id}(id=${venda.id})}"
+               data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalhes da venda">
+                <i class="icon-eye"></i>
+            </a>
+        </div>
+    </div>
 
 </main>
-
 </body>
 </html>

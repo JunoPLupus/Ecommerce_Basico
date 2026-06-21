@@ -1,7 +1,9 @@
 package br.edu.ifto.ecommerce.controller.admin;
 
+import br.edu.ifto.ecommerce.model.dto.PessoaDTO;
 import br.edu.ifto.ecommerce.model.dto.VendaDTO;
 import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
+import br.edu.ifto.ecommerce.service.ClienteService;
 import br.edu.ifto.ecommerce.service.VendaService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,7 @@ import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.*;
 public class AdminVendaController {
 
     private final VendaService vendaService;
+    private final ClienteService clienteService;
 
     @GetMapping({"", LISTA})
     public String list(@RequestParam(required = false) String nomeCliente,
@@ -68,6 +71,7 @@ public class AdminVendaController {
         }
 
         model.addAttribute("venda", venda);
+        model.addAttribute("cliente", clienteService.buscarDetalhe(venda.cliente().id()));
         model.addAttribute("breadcrumbItems", breadcrumb(
                 new BreadcrumbItem("Vendas", "/" + ADMIN_VENDAS),
                 new BreadcrumbItem("Detalhes da venda #" + venda.id(), null)

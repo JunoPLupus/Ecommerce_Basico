@@ -11,23 +11,23 @@
 
     <p th:if="${#lists.isEmpty(pedidos)}" class="text-muted">Você ainda não realizou nenhum pedido.</p>
 
-    <div class="pg-pedidos-lista" th:unless="${#lists.isEmpty(pedidos)}">
-        <div class="pg-pedido-card" th:each="pedido : ${pedidos}">
+    <div class="pg-lista" th:unless="${#lists.isEmpty(pedidos)}">
+        <div class="pg-lista-card" th:each="pedido : ${pedidos}">
             <img class="cart-img-thumbnail"
                  th:if="${!#lists.isEmpty(pedido.itens) && pedido.itens[0].produto.urlImagem != null}"
                  th:src="${pedido.itens[0].produto.urlImagem}" alt="Produto do pedido">
 
-            <div class="pg-pedido-card__info">
-                <p class="pg-pedido-card__numero" th:text="'Pedido #' + ${pedido.id}"></p>
-                <span class="pg-pedido-card__data">
+            <div class="pg-lista-card__info">
+                <p class="pg-lista-card__titulo" th:text="'Pedido #' + ${pedido.id}"></p>
+                <span class="pg-lista-card__sub">
                     <i class="icon-calendar"></i>
                     <span th:text="${#temporals.format(pedido.data, 'dd ''de'' MMMM, yyyy')}"></span>
                 </span>
             </div>
 
-            <div class="pg-pedido-card__total">
-                <span class="pg-pedido-card__total-label">Total</span>
-                <span class="pg-pedido-card__total-valor"
+            <div class="pg-lista-card__metrica">
+                <span class="pg-data-label">Total</span>
+                <span class="pg-lista-card__metrica-valor"
                       th:text="'R$ ' + ${#numbers.formatDecimal(pedido.total, 1, 'POINT', 2, 'COMMA')}"></span>
             </div>
 

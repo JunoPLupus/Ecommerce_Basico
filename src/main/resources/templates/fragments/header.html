@@ -11,19 +11,13 @@
             <div class="pg-nav-collapse" id="navbarSupportedContent">
                 <ul>
                     <li sec:authorize="hasAnyRole('ADMIN')">
-                        <a th:href="@{/admin/vendas}">
-                            <i class="icon-bag"></i> Gerenciar Vendas
-                        </a>
+                        <a th:href="@{/admin/vendas}">Vendas</a>
                     </li>
                     <li sec:authorize="hasAnyRole('ADMIN')">
-                        <a th:href="@{/admin/clientes}">
-                            <i class="icon-person"></i> Gerenciar Clientes
-                        </a>
+                        <a th:href="@{/admin/produtos}">Produtos</a>
                     </li>
                     <li sec:authorize="hasAnyRole('ADMIN')">
-                        <a th:href="@{/admin/produtos}">
-                            <i class="icon-box"></i> Gerenciar Produtos
-                        </a>
+                        <a th:href="@{/admin/clientes}">Clientes</a>
                     </li>
                     <li sec:authorize="!hasAnyRole('ADMIN')">
                         <a th:href="@{/produtos}">Loja</a>
