@@ -374,3 +374,56 @@
 .pg-checkout-page > .pg-checkout-layout:first-child {
   margin-top: 0;
 }
+
+// Meus Pedidos - lista de cards
+.pg-pedidos-lista {
+  @extend .d-flex;
+  @extend .flex-column;
+  @extend .gap-3;
+  margin-top: 1.5rem;
+}
+
+.pg-pedido-card {
+  @extend .card;
+  @extend .d-flex;
+  @extend .align-items-center;
+  @extend .gap-3;
+  flex-direction: row;
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  padding: 1.25rem 1.5rem;
+
+  &__info {
+    flex: 1;
+  }
+
+  &__numero {
+    @extend .fw-bold;
+    font-size: 1.25rem;
+    margin: 0;
+  }
+
+  &__data {
+    @extend .text-muted;
+    @extend .d-flex;
+    @extend .align-items-center;
+    @extend .gap-1;
+  }
+
+  &__total {
+    text-align: center;
+  }
+
+  &__total-label {
+    @extend .text-muted;
+    @extend .d-block;
+    font-size: 0.75rem;
+  }
+
+  &__total-valor {
+    @extend .fw-bold;
+    @extend .d-block;
+    font-size: 1.25rem;
+  }
+}
