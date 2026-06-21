@@ -1,42 +1,68 @@
 <!DOCTYPE html>
 <html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
-<head th:replace="~{fragments/head :: head(${produto.id == null ? 'Cadastrar Produto' : 'Editar Produto'},~{})}"></head>
+<head th:replace="~{fragments/head :: head(${produto.id == null ? 'Novo Produto' : 'Editar Produto'},~{})}"></head>
 <body>
-<main class="pg-card">
+<main class="pg-checkout-page">
 
-    <h1 th:text="${produto.id == null ? 'Cadastrar Produto' : 'Editar Produto'}"></h1>
+    <div class="pg-form-layout">
+        <section class="pg-card">
+            <h2 th:text="${produto.id == null ? 'Novo Produto' : 'Editar Produto'}"></h2>
+            <p class="text-muted" th:text="${produto.id == null
+                    ? 'Preencha as informações essenciais para cadastrar um novo item no catálogo.'
+                    : 'Atualize as informações do item no catálogo.'}"></p>
 
-    <form class="mt-3" th:action="@{${produto.id == null ? '/admin/produtos/save' : '/admin/produtos/update'}}" th:object="${produto}" method="post">
+            <hr>
 
-        <input type="hidden" th:field="*{id}">
+            <form th:action="@{${produto.id == null ? '/admin/produtos/save' : '/admin/produtos/update'}}"
+                  th:object="${produto}" method="post">
 
-        <div class="mb-4">
-            <label for="urlImagem" class="form-label">URL da Imagem</label>
-            <input type="text" class="form-control" th:field="*{urlImagem}" id="urlImagem" placeholder="Ex.: https://placehold.co/600x400">
-        </div>
+                <input type="hidden" th:field="*{id}">
 
-        <div class="mb-4">
-            <label for="descricao" class="form-label">Descrição do Produto*</label>
-            <input type="text" class="form-control" th:field="*{descricao}" id="descricao" placeholder="Ex: Teclado Mecânico" required>
-            <span th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}" class="text-danger"></span>
-        </div>
+                <div class="pg-produto-preview">
+                    <img id="produto-preview-img" alt="Pré-visualização"
+                         th:src="${produto.urlImagem}"
+                         th:classappend="${produto.urlImagem == null || produto.urlImagem.isEmpty()} ? 'd-none'">
+                    <div class="pg-produto-preview__placeholder"
+                         th:classappend="${produto.urlImagem != null && !produto.urlImagem.isEmpty()} ? 'd-none'">
+                        <i class="icon-image"></i>
+                        <span>A pré-visualização aparecerá aqui</span>
+                    </div>
+                </div>
 
-        <div class="mb-4">
-            <label for="valor" class="form-label">Valor*</label>
-            <div class="input-group">
-                <span>R$</span>
-                <input type="number" aria-label="Valor em Reais (R$)"
-                       step="0.01" min="0"
-                       id="valor"
-                       th:field="*{valor}"
-                       placeholder="0.00" required >
-            </div>
-            <span th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}" class="text-danger"></span>
-        </div>
-        <hr>
-        <button type="submit" class="button-primary"
-                th:text="${produto.id == null ? 'Cadastrar Produto' : 'Editar Produto'}"></button>
-    </form>
+                <div class="pg-form-fields">
+                    <div>
+                        <label for="urlImagem">Link da Imagem (URL)</label>
+                        <div class="input-group">
+                            <span><i class="icon-link"></i></span>
+                            <input type="text" th:field="*{urlImagem}" id="urlImagem" placeholder="https://exemplo.com/imagem.jpg">
+                        </div>
+                        <small class="pg-form-hint">A imagem será exibida como miniatura de pré-visualização.</small>
+                    </div>
+                    <div>
+                        <label for="descricao">Descrição*</label>
+                        <textarea th:field="*{descricao}" id="descricao" rows="4" placeholder="Descreva o produto..." required></textarea>
+                        <span th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}" class="pg-field-error"></span>
+                    </div>
+                    <div>
+                        <label for="valor">Preço*</label>
+                        <div class="input-group">
+                            <span>R$</span>
+                            <input type="number" step="0.01" min="0" th:field="*{valor}" id="valor" placeholder="0,00" required>
+                        </div>
+                        <span th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}" class="pg-field-error"></span>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="form-actions">
+                    <a class="button-secondary" th:href="@{/admin/produtos}">Cancelar</a>
+                    <button type="submit" class="button-dark"
+                            th:text="${produto.id == null ? 'Salvar Produto' : 'Salvar alterações'}"></button>
+                </div>
+            </form>
+        </section>
+    </div>
 
 </main>
 </body>

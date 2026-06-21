@@ -33,3 +33,20 @@ document.querySelectorAll('.pg-nav-collapse > ul li a').forEach(link => {
         link.classList.add('active');
     }
 });
+
+const urlImagemInput = document.getElementById('urlImagem');
+const produtoPreviewImg = document.getElementById('produto-preview-img');
+if (urlImagemInput && produtoPreviewImg) {
+    const previewPlaceholder = document.querySelector('.pg-produto-preview__placeholder');
+    urlImagemInput.addEventListener('input', () => {
+        const url = urlImagemInput.value.trim();
+        if (url) {
+            produtoPreviewImg.src = url;
+            produtoPreviewImg.classList.remove('d-none');
+            if (previewPlaceholder) previewPlaceholder.classList.add('d-none');
+        } else {
+            produtoPreviewImg.classList.add('d-none');
+            if (previewPlaceholder) previewPlaceholder.classList.remove('d-none');
+        }
+    });
+}

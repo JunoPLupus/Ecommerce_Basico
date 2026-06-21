@@ -2,7 +2,6 @@ package br.edu.ifto.ecommerce.controller.admin;
 
 import br.edu.ifto.ecommerce.model.dto.ProdutoDTO;
 import br.edu.ifto.ecommerce.model.entity.produto.Produto;
-import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
 import br.edu.ifto.ecommerce.service.ProdutoService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -17,7 +16,6 @@ import java.util.List;
 
 import static br.edu.ifto.ecommerce.utils.Diretorios.*;
 import static br.edu.ifto.ecommerce.utils.Rotas.*;
-import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.*;
 
 @Controller
 @AllArgsConstructor
@@ -32,7 +30,6 @@ public class AdminProdutoController {
                          @RequestParam(required = false) Double precoMaximo,
                          ModelMap model) {
 
-        // TODO: ajustar filtro de pesquisa para aceitar descrição ou id como input
         List<ProdutoDTO> produtos = produtoService.listarComFiltros(descricao, precoMinimo, precoMaximo);
         int filtrosAplicados = 0;
 
@@ -55,10 +52,6 @@ public class AdminProdutoController {
      */
     @GetMapping(INSERT)
     public String insert(Produto produto, ModelMap model) {
-        model.addAttribute("breadcrumbItems", breadcrumb(
-                new BreadcrumbItem("Produtos", "/" + ADMIN_PRODUTOS),
-                new BreadcrumbItem("Cadastrar Produto", null)
-        ));
         return HTML_ADMIN_FORM_PRODUTOS;
     }
 
@@ -78,10 +71,6 @@ public class AdminProdutoController {
     @GetMapping(EDIT_ID)
     public String edit(@PathVariable("id") Long id, ModelMap model) {
         model.addAttribute("produto", produtoService.buscarPorId(id));
-        model.addAttribute("breadcrumbItems", breadcrumb(
-                new BreadcrumbItem("Produtos", "/" + ADMIN_PRODUTOS),
-                new BreadcrumbItem("Editar Produto", null)
-        ));
         return HTML_ADMIN_FORM_PRODUTOS;
     }
 

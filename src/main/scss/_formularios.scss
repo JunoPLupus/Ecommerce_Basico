@@ -171,3 +171,9 @@
   @extend .text-danger;
   @extend .small;
 }
+
+.pg-form-hint {
+  @extend .text-muted;
+  @extend .small;
+  font-style: italic;
+}

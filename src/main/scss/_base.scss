@@ -15,6 +15,9 @@ form {
   select {
     @extend .form-select;
   }
+  textarea {
+    @extend .form-control;
+  }
 }
 
 hr {
