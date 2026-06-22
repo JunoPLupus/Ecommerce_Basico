@@ -21,11 +21,23 @@ public class PerfilService {
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Busca os dados do perfil para exibição.
+     *
+     * @param pessoaId identificador da pessoa logada.
+     * @return o perfil como DTO de leitura.
+     */
     @Transactional(readOnly = true)
     public PessoaDTO buscarPerfil(Long pessoaId) {
         return PessoaMapper.toDTO(clienteRepository.findById(pessoaId));
     }
 
+    /**
+     * Busca os dados do perfil no formato do formulário de edição.
+     *
+     * @param pessoaId identificador da pessoa logada.
+     * @return DTO de edição preenchido.
+     */
     @Transactional(readOnly = true)
     public EditarPerfilDTO buscarParaEdicao(Long pessoaId) {
         return PerfilMapper.toDTO(clienteRepository.findById(pessoaId));
@@ -35,6 +47,10 @@ public class PerfilService {
      * Atualiza os dados pessoais da Pessoa e, opcionalmente, a senha do Usuário.
      * A Pessoa é carregada dentro da transação para que o JPA detecte as mudanças
      * automaticamente via dirty checking, sem necessidade de chamada explícita a merge().
+     *
+     * @param dto       dados do formulário (nome/razão social, telefone e senha opcional).
+     * @param pessoaId  identificador da pessoa a ser atualizada.
+     * @param usuarioId identificador do usuário (para troca de senha).
      */
     public void atualizar(EditarPerfilDTO dto, Long pessoaId, Long usuarioId) {
         Pessoa pessoa = clienteRepository.findById(pessoaId);
