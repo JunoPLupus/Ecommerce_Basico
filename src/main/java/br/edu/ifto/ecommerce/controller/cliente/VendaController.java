@@ -8,7 +8,7 @@ import br.edu.ifto.ecommerce.model.enums.FormaPagamento;
 import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
 import br.edu.ifto.ecommerce.service.EnderecoService;
 import br.edu.ifto.ecommerce.service.VendaService;
-import br.edu.ifto.ecommerce.utils.VendaMapper;
+import br.edu.ifto.ecommerce.utils.mappers.VendaMapper;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,12 +22,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
-import static br.edu.ifto.ecommerce.utils.AutenticacaoUtils.getPessoaLogada;
-import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.breadcrumb;
-import static br.edu.ifto.ecommerce.utils.Diretorios.HTML_CLIENTE_DETAIL_PEDIDO;
-import static br.edu.ifto.ecommerce.utils.Diretorios.HTML_CLIENTE_FINALIZAR_PEDIDO;
-import static br.edu.ifto.ecommerce.utils.Diretorios.HTML_CLIENTE_LISTA_PEDIDOS;
-import static br.edu.ifto.ecommerce.utils.Rotas.*;
+import static br.edu.ifto.ecommerce.utils.functions.AutenticacaoUtils.getPessoaLogada;
+import static br.edu.ifto.ecommerce.utils.functions.BreadcrumbUtils.breadcrumb;
+import static br.edu.ifto.ecommerce.utils.constants.Diretorios.HTML_CLIENTE_DETAIL_PEDIDO;
+import static br.edu.ifto.ecommerce.utils.constants.Diretorios.HTML_CLIENTE_FINALIZAR_PEDIDO;
+import static br.edu.ifto.ecommerce.utils.constants.Diretorios.HTML_CLIENTE_LISTA_PEDIDOS;
+import static br.edu.ifto.ecommerce.utils.constants.Rotas.*;
 
 @Controller
 @AllArgsConstructor

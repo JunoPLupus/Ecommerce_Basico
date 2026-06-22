@@ -1,6 +1,6 @@
-package br.edu.ifto.ecommerce.config;
+package br.edu.ifto.ecommerce.config.handler;
 
-import br.edu.ifto.ecommerce.utils.Navegacao;
+import br.edu.ifto.ecommerce.utils.functions.Navegacao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

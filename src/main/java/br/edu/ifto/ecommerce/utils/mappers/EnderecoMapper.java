@@ -1,4 +1,4 @@
-package br.edu.ifto.ecommerce.utils;
+package br.edu.ifto.ecommerce.utils.mappers;
 
 import br.edu.ifto.ecommerce.model.dto.EnderecoResumoDTO;
 import br.edu.ifto.ecommerce.model.entity.endereco.Endereco;

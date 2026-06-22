@@ -4,7 +4,7 @@ import br.edu.ifto.ecommerce.model.dto.EnderecoResumoDTO;
 import br.edu.ifto.ecommerce.model.entity.cliente.Pessoa;
 import br.edu.ifto.ecommerce.model.entity.endereco.Endereco;
 import br.edu.ifto.ecommerce.model.repository.EnderecoRepository;
-import br.edu.ifto.ecommerce.utils.EnderecoMapper;
+import br.edu.ifto.ecommerce.utils.mappers.EnderecoMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

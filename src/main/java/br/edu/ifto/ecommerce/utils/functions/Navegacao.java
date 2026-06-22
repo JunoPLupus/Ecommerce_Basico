@@ -1,12 +1,12 @@
-package br.edu.ifto.ecommerce.utils;
+package br.edu.ifto.ecommerce.utils.functions;
 
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
-import static br.edu.ifto.ecommerce.utils.Roles.ROLE_ADMIN;
-import static br.edu.ifto.ecommerce.utils.Rotas.ADMIN_VENDAS;
-import static br.edu.ifto.ecommerce.utils.Rotas.PRODUTOS;
+import static br.edu.ifto.ecommerce.utils.constants.Roles.ROLE_ADMIN;
+import static br.edu.ifto.ecommerce.utils.constants.Rotas.ADMIN_VENDAS;
+import static br.edu.ifto.ecommerce.utils.constants.Rotas.PRODUTOS;
 
 /**
  * Resolve a página inicial conforme o papel do usuário autenticado.

@@ -16,10 +16,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.net.URI;
 import java.util.Optional;
 
-import static br.edu.ifto.ecommerce.utils.AutenticacaoUtils.getPessoaLogada;
-import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.breadcrumb;
-import static br.edu.ifto.ecommerce.utils.Diretorios.*;
-import static br.edu.ifto.ecommerce.utils.Rotas.*;
+import static br.edu.ifto.ecommerce.utils.functions.AutenticacaoUtils.getPessoaLogada;
+import static br.edu.ifto.ecommerce.utils.functions.BreadcrumbUtils.breadcrumb;
+import static br.edu.ifto.ecommerce.utils.constants.Diretorios.*;
+import static br.edu.ifto.ecommerce.utils.constants.Rotas.*;
 
 @Controller
 @AllArgsConstructor

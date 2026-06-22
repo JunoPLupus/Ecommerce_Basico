@@ -4,8 +4,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import static br.edu.ifto.ecommerce.utils.Diretorios.HTML_LOGIN;
-import static br.edu.ifto.ecommerce.utils.Rotas.LOGIN;
+import static br.edu.ifto.ecommerce.utils.constants.Diretorios.HTML_LOGIN;
+import static br.edu.ifto.ecommerce.utils.constants.Rotas.LOGIN;
 
 /**
  * @Configuration para indicar ao Spring que essa é uma classe de configuração.

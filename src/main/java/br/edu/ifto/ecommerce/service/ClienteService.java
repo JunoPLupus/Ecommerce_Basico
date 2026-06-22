@@ -8,7 +8,7 @@ import br.edu.ifto.ecommerce.model.entity.usuario.Usuario;
 import br.edu.ifto.ecommerce.model.repository.ClienteRepository;
 import br.edu.ifto.ecommerce.model.repository.RoleRepository;
 import br.edu.ifto.ecommerce.model.repository.UsuarioRepository;
-import br.edu.ifto.ecommerce.utils.PessoaMapper;
+import br.edu.ifto.ecommerce.utils.mappers.PessoaMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static br.edu.ifto.ecommerce.utils.Roles.ROLE_USER;
+import static br.edu.ifto.ecommerce.utils.constants.Roles.ROLE_USER;
 
 @Transactional
 @Service

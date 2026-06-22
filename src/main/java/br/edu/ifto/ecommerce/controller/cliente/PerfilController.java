@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-import static br.edu.ifto.ecommerce.utils.AutenticacaoUtils.getPessoaLogada;
-import static br.edu.ifto.ecommerce.utils.AutenticacaoUtils.getUsuarioLogado;
-import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.breadcrumb;
-import static br.edu.ifto.ecommerce.utils.Diretorios.*;
-import static br.edu.ifto.ecommerce.utils.Rotas.*;
+import static br.edu.ifto.ecommerce.utils.functions.AutenticacaoUtils.getPessoaLogada;
+import static br.edu.ifto.ecommerce.utils.functions.AutenticacaoUtils.getUsuarioLogado;
+import static br.edu.ifto.ecommerce.utils.functions.BreadcrumbUtils.breadcrumb;
+import static br.edu.ifto.ecommerce.utils.constants.Diretorios.*;
+import static br.edu.ifto.ecommerce.utils.constants.Rotas.*;
 
 @Controller
 @AllArgsConstructor

@@ -3,7 +3,7 @@ package br.edu.ifto.ecommerce.service;
 import br.edu.ifto.ecommerce.model.dto.ProdutoDTO;
 import br.edu.ifto.ecommerce.model.entity.produto.Produto;
 import br.edu.ifto.ecommerce.model.repository.ProdutoRepository;
-import br.edu.ifto.ecommerce.utils.ProdutoMapper;
+import br.edu.ifto.ecommerce.utils.mappers.ProdutoMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

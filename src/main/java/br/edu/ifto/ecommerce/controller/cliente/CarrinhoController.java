@@ -2,7 +2,7 @@ package br.edu.ifto.ecommerce.controller.cliente;
 
 import br.edu.ifto.ecommerce.model.entity.venda.Venda;
 import br.edu.ifto.ecommerce.service.CarrinhoService;
-import br.edu.ifto.ecommerce.utils.VendaMapper;
+import br.edu.ifto.ecommerce.utils.mappers.VendaMapper;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 
-import static br.edu.ifto.ecommerce.utils.Diretorios.HTML_CARRINHO;
-import static br.edu.ifto.ecommerce.utils.Rotas.*;
+import static br.edu.ifto.ecommerce.utils.constants.Diretorios.HTML_CARRINHO;
+import static br.edu.ifto.ecommerce.utils.constants.Rotas.*;
 
 @Controller
 @AllArgsConstructor

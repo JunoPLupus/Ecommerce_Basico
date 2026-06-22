@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 
-import static br.edu.ifto.ecommerce.utils.Diretorios.HTML_CLIENTE_FORM;
-import static br.edu.ifto.ecommerce.utils.Rotas.*;
+import static br.edu.ifto.ecommerce.utils.constants.Diretorios.HTML_CLIENTE_FORM;
+import static br.edu.ifto.ecommerce.utils.constants.Rotas.*;
 
 @Controller
 @AllArgsConstructor

@@ -1,4 +1,4 @@
-package br.edu.ifto.ecommerce.config;
+package br.edu.ifto.ecommerce.config.handler;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,9 +11,9 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 
 import java.io.IOException;
 
-import static br.edu.ifto.ecommerce.utils.Roles.ROLE_ADMIN;
-import static br.edu.ifto.ecommerce.utils.Rotas.ADMIN_PRODUTOS;
-import static br.edu.ifto.ecommerce.utils.Rotas.PRODUTOS;
+import static br.edu.ifto.ecommerce.utils.constants.Roles.ROLE_ADMIN;
+import static br.edu.ifto.ecommerce.utils.constants.Rotas.ADMIN_PRODUTOS;
+import static br.edu.ifto.ecommerce.utils.constants.Rotas.PRODUTOS;
 
 public class AcessoNegadoHandler implements AccessDeniedHandler {
 

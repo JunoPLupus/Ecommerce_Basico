@@ -6,7 +6,7 @@ import br.edu.ifto.ecommerce.model.entity.endereco.Endereco;
 import br.edu.ifto.ecommerce.model.entity.venda.Venda;
 import br.edu.ifto.ecommerce.model.enums.FormaPagamento;
 import br.edu.ifto.ecommerce.model.repository.VendaRepository;
-import br.edu.ifto.ecommerce.utils.VendaMapper;
+import br.edu.ifto.ecommerce.utils.mappers.VendaMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

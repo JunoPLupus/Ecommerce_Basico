@@ -1,4 +1,4 @@
-package br.edu.ifto.ecommerce.utils;
+package br.edu.ifto.ecommerce.utils.constants;
 
 public final class Diretorios {
     private Diretorios() {}

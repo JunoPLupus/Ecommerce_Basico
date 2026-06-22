@@ -1,4 +1,4 @@
-package br.edu.ifto.ecommerce.utils;
+package br.edu.ifto.ecommerce.utils.functions;
 
 import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
 

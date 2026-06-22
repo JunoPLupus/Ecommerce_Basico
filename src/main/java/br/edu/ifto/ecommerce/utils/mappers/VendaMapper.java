@@ -1,4 +1,4 @@
-package br.edu.ifto.ecommerce.utils;
+package br.edu.ifto.ecommerce.utils.mappers;
 
 import br.edu.ifto.ecommerce.model.dto.ItemVendaDTO;
 import br.edu.ifto.ecommerce.model.dto.VendaDTO;
