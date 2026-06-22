@@ -1,75 +1,61 @@
 <!DOCTYPE html>
-
 <html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
-
 <head th:replace="~{fragments/head :: head('Carrinho',~{})}"></head>
-
 <body>
-
 <main class="pg-cart-layout">
 
-    <!-- Painel esquerdo: lista de produtos -->
     <div class="pg-card pg-cart-main">
-        <h1>
-            <i class="icon-cart text-muted"></i>
-            Meu Carrinho
-        </h1>
+        <h1>Meu Carrinho</h1>
 
-        <div th:replace="~{fragments/alert :: alert(${erro})}"></div>
-
-        <p th:if="${carrinho.getItens() == null || #lists.isEmpty(carrinho.getItens())}">
+        <p th:if="${carrinho.itens == null || #lists.isEmpty(carrinho.itens)}">
             Seu carrinho está vazio. Vá às compras!
         </p>
 
-        <table th:unless="${carrinho.getItens() == null || #lists.isEmpty(carrinho.getItens())}">
+        <table th:unless="${carrinho.itens == null || #lists.isEmpty(carrinho.itens)}">
             <thead>
             <tr>
-                <th scope="col"></th>
-                <th scope="col">Descrição</th>
-                <th scope="col">Valor Unitário</th>
+                <th scope="col">Produto</th>
+                <th scope="col">Preço</th>
                 <th scope="col">Quantidade</th>
-                <th scope="col">Subtotal</th>
                 <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="item : ${carrinho.getItens()}">
+            <tr th:each="item : ${carrinho.itens}">
                 <td>
-                    <img class="cart-img-thumbnail"
-                         th:if="${item.produto.urlImagem != null}"
-                         th:src="${item.produto.urlImagem}"
-                         th:alt="${item.produto.descricao}">
+                    <div class="pg-cart-produto">
+                        <img class="cart-img-thumbnail"
+                             th:if="${item.produto.urlImagem != null}"
+                             th:src="${item.produto.urlImagem}"
+                             th:alt="${item.produto.descricao}">
+                        <div class="col-descricao"><span th:text="${item.produto.descricao}"></span></div>
+                    </div>
                 </td>
-                <td class="col-descricao" th:text="${item.produto.descricao}"></td>
                 <td th:text="'R$ ' + ${#numbers.formatDecimal(item.produto.valor, 1, 'POINT', 2, 'COMMA')}"></td>
                 <td>
                     <div class="cart-qty">
                         <form th:action="@{/carrinho/reduce/{id}(id=${item.produto.id})}" method="post">
-                            <button type="submit" class="button-primary"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
+                            <button type="submit"
+                                    data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Reduzir quantidade">
                                 <i class="icon-minus"></i>
                             </button>
                         </form>
                         <span th:text="${item.quantidade}"></span>
                         <form th:action="@{/carrinho/add/{id}(id=${item.produto.id})}" method="post">
-                            <button type="submit" class="button-primary"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
+                            <button type="submit"
+                                    data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Aumentar quantidade">
                                 <i class="icon-plus"></i>
                             </button>
                         </form>
                     </div>
                 </td>
-                <td th:text="'R$ ' + ${#numbers.formatDecimal(item.total(), 1, 'POINT', 2, 'COMMA')}"></td>
                 <td>
                     <form th:action="@{/carrinho/delete/{id}(id=${item.produto.id})}" method="post">
-                        <button type="submit" class="button-danger"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="top"
-                                title="Remover produto do carrinho">
+                        <button type="submit" class="button-icon button-icon--danger"
+                                data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Remover do carrinho">
                             <i class="icon-trash"></i>
                         </button>
                     </form>
@@ -79,22 +65,31 @@
         </table>
     </div>
 
-    <!-- Painel direito: resumo e finalização -->
     <aside class="pg-card pg-cart-aside"
-           th:unless="${carrinho.getItens() == null || #lists.isEmpty(carrinho.getItens())}">
-        <p class="fw-light">
-            Total (<span th:text="${carrinho.qtdItensTotal()}"></span> itens)
-        </p>
-        <p class="pg-cart-price"
-           th:text="'R$ ' + ${#numbers.formatDecimal(carrinho.total(), 1, 'POINT', 2, 'COMMA')}"></p>
-        <form th:action="@{/pedidos/insert}" method="post">
-            <button type="submit" class="button-primary">
-                Finalizar Compra
-            </button>
-        </form>
+           th:unless="${carrinho.itens == null || #lists.isEmpty(carrinho.itens)}">
+        <h2>Resumo do Pedido</h2>
+
+        <div class="pg-summary-row">
+            <span th:text="'Itens (' + ${carrinho.qtdItensTotal()} + ')'"></span>
+            <span th:text="'R$ ' + ${#numbers.formatDecimal(carrinho.total(), 1, 'POINT', 2, 'COMMA')}"></span>
+        </div>
+        <div class="pg-summary-row">
+            <span>Frete</span>
+            <span class="pg-summary-free">Grátis</span>
+        </div>
+
+        <hr>
+
+        <div class="pg-summary-row pg-summary-total">
+            <span>Total</span>
+            <span th:text="'R$ ' + ${#numbers.formatDecimal(carrinho.total(), 1, 'POINT', 2, 'COMMA')}"></span>
+        </div>
+
+        <a class="button-dark" th:href="@{/pedidos/finalizar}">
+            Fechar pedido <i class="icon-arrow-right"></i>
+        </a>
     </aside>
 
 </main>
-
 </body>
 </html>

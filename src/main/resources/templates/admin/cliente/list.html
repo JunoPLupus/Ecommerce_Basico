@@ -1,23 +1,15 @@
 <!DOCTYPE html>
-
 <html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
-
 <head th:replace="~{fragments/head :: head('Clientes',~{})}"></head>
-
 <body>
+<main class="pg-checkout-page">
 
-<main class="pg-card">
-
-    <h1>
-        <i class="icon-person text-muted"></i>
-        Clientes
-    </h1>
+    <h1>Gestão de Clientes</h1>
+    <p class="text-muted">Gerencie a base de dados de clientes e acesse históricos detalhados.</p>
 
     <form th:action="@{/admin/clientes}" method="get" class="search-bar">
-        <input type="search" id="nome" name="nome" placeholder="Pesquisar por nome do cliente..." aria-label="Filtro por nome de cliente" th:value="${nome}">
-        <button class="button-secondary" type="submit" id="button-search">
-            <i class="icon-search"></i>
-        </button>
+        <span><i class="icon-search"></i></span>
+        <input type="search" id="nome" name="nome" placeholder="Buscar por nome ou razão social..." aria-label="Filtro por nome de cliente" th:value="${nome}">
     </form>
 
     <div th:if="${filtrosAplicados != null}">
@@ -29,34 +21,22 @@
 
     <p th:if="${clientes == null || #lists.isEmpty(clientes)}">Nenhum cliente encontrado.</p>
 
-    <table th:unless="${clientes == null || #lists.isEmpty(clientes)}">
-        <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nome de Exibição</th>
-            <th scope="col"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="cliente : ${clientes}">
-            <td scope="row" th:text="${cliente.id}"></td>
-            <td th:text="${cliente.getNomeExibicao()}"></td>
-            <td class="text-end">
-                <div class="button-group">
-                    <a th:href="@{/admin/clientes/detalhes/{id}(id=${cliente.id})}"
-                       type="button" class="button-primary"
-                       data-bs-toggle="tooltip"
-                       data-bs-placement="top"
-                       title="Ver detalhes do cliente">
-                        <i class="icon-document"></i>
-                    </a>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="pg-lista" th:unless="${clientes == null || #lists.isEmpty(clientes)}">
+        <div class="pg-lista-card" th:each="cliente : ${clientes}">
+            <span class="pg-avatar" th:text="${#strings.toUpperCase(#strings.substring(cliente.nomeExibicao, 0, 1))}"></span>
+
+            <div class="pg-lista-card__info">
+                <span class="pg-lista-card__id" th:text="'ID #' + ${cliente.id}"></span>
+                <p class="pg-lista-card__titulo" th:text="${cliente.nomeExibicao}"></p>
+            </div>
+
+            <a class="button-icon-dark" th:href="@{/admin/clientes/detalhes/{id}(id=${cliente.id})}"
+               data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalhes do cliente">
+                <i class="icon-eye"></i>
+            </a>
+        </div>
+    </div>
 
 </main>
-
 </body>
 </html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
+<head th:replace="~{fragments/head :: head('Editar Dados Pessoais',~{})}"></head>
+<body>
+<main class="pg-checkout-page">
+
+    <div class="pg-form-layout">
+        <div th:replace="~{fragments/breadcrumb :: breadcrumb(${breadcrumbEditar})}"></div>
+        <h1>Editar Dados Pessoais</h1>
+
+    <section class="pg-card">
+        <form th:action="@{/clientes/editar/save}" method="post" th:object="${editarPerfilDTO}">
+            <div class="pg-form-fields">
+                <div>
+                    <label for="nomeOuRazaoSocial" th:text="${ehPessoaFisica} ? 'Nome' : 'Razão Social'">Nome</label>
+                    <input type="text" id="nomeOuRazaoSocial" th:field="*{nomeOuRazaoSocial}">
+                    <span th:if="${#fields.hasErrors('nomeOuRazaoSocial')}" th:errors="*{nomeOuRazaoSocial}" class="text-danger"></span>
+                </div>
+                <div>
+                    <label for="telefone">Telefone</label>
+                    <input type="text" id="telefone" th:field="*{telefone}">
+                    <span th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="text-danger"></span>
+                </div>
+                <div>
+                    <label for="senha">Senha</label>
+                    <div class="pg-senha-field">
+                        <input type="password" id="senha" th:field="*{senha}" placeholder="Mínimo 6 caracteres">
+                        <button type="button" class="pg-senha-field__toggle">
+                            <i class="icon-eye"></i>
+                        </button>
+                    </div>
+                    <span th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-actions">
+                <a class="button-secondary" th:href="@{/clientes/perfil}">Cancelar</a>
+                <button type="submit" class="button-dark">Salvar alterações</button>
+            </div>
+        </form>
+    </section>
+    </div>
+
+</main>
+</body>
+</html>

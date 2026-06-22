@@ -4,10 +4,6 @@
   @extend .bi-bag;
 }
 
-.icon-box {
-  @extend .bi-box-seam;
-}
-
 .icon-search {
   @extend .bi-search;
 }
@@ -36,22 +32,6 @@
   @extend .bi-calendar;
 }
 
-.icon-numbers {
-  @extend .bi-123;
-}
-
-.icon-person-identity {
-  @extend .bi-person-vcard;
-}
-
-.icon-email {
-  @extend .bi-envelope-at;
-}
-
-.icon-phone {
-  @extend .bi-telephone;
-}
-
 .icon-document {
   @extend .bi-file-earmark-text;
 }
@@ -62,4 +42,48 @@
 
 .icon-logout {
   @extend .bi-box-arrow-right;
+}
+
+.icon-pin {
+  @extend .bi-geo-alt;
+}
+
+.icon-wallet {
+  @extend .bi-wallet;
+}
+
+.icon-truck {
+  @extend .bi-truck;
+}
+
+.icon-arrow-right {
+  @extend .bi-arrow-right-short;
+}
+
+.icon-eye {
+  @extend .bi-eye;
+}
+
+.icon-eye-slash {
+  @extend .bi-eye-slash;
+}
+
+.icon-cart-plus {
+  @extend .bi-cart-plus;
+}
+
+.icon-credit-card {
+  @extend .bi-credit-card;
+}
+
+.icon-filter {
+  @extend .bi-funnel;
+}
+
+.icon-image {
+  @extend .bi-image;
+}
+
+.icon-link {
+  @extend .bi-link-45deg;
 }

@@ -2,7 +2,7 @@
     <nav class="pg-nav">
         <div class="pg-nav-container">
             <a class="pg-nav-brand" th:href="@{/produtos}">
-                <img th:src="@{/images/logo.svg}" alt="IFTO" height="40">
+                <img th:src="@{/images/logo.svg}" alt="E-COMMERCE" height="40">
             </a>
             <button class="pg-nav-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,34 +11,28 @@
             <div class="pg-nav-collapse" id="navbarSupportedContent">
                 <ul>
                     <li sec:authorize="hasAnyRole('ADMIN')">
-                        <a aria-current="page" th:href="@{/admin/vendas}">
-                            <i class="icon-bag"></i> Gerenciar Vendas
-                        </a>
+                        <a th:href="@{/admin/vendas}">Vendas</a>
                     </li>
                     <li sec:authorize="hasAnyRole('ADMIN')">
-                        <a aria-current="page" th:href="@{/admin/clientes}">
-                            <i class="icon-person"></i> Gerenciar Clientes
-                        </a>
+                        <a th:href="@{/admin/produtos}">Produtos</a>
                     </li>
                     <li sec:authorize="hasAnyRole('ADMIN')">
-                        <a aria-current="page" th:href="@{/admin/produtos}">
-                            <i class="icon-box"></i> Gerenciar Produtos
-                        </a>
+                        <a th:href="@{/admin/clientes}">Clientes</a>
                     </li>
                     <li sec:authorize="!hasAnyRole('ADMIN')">
-                        <a aria-current="page" th:href="@{/produtos}">
-                            <i class="icon-box"></i> Produtos
-                        </a>
+                        <a th:href="@{/produtos}">Loja</a>
                     </li>
                 </ul>
-                <a sec:authorize="hasAnyRole('USER')" class = "button-outline-light" aria-current="page" th:href="@{/carrinho}">
-                    <i class="icon-cart"></i> Carrinho
-                    <span th:if="${session.carrinho != null && !#lists.isEmpty(session.carrinho.getItens())}" th:text="${session.carrinho.qtdItensTotal()}">
-                                <span class="visually-hidden"></span>
-                              </span>
+
+                <a sec:authorize="hasAnyRole('USER')" class="pg-nav-cart" th:href="@{/carrinho}" title="Carrinho">
+                    <i class="icon-cart"></i>
+                    <span class="pg-nav-cart__badge"
+                          th:if="${session.carrinho != null && !#lists.isEmpty(session.carrinho.getItens())}"
+                          th:text="${session.carrinho.qtdItensTotal()}"></span>
                 </a>
-                <a sec:authorize="!isAuthenticated()" class="button-outline-light" th:href="@{/login}">Entre</a>
-                <a sec:authorize="!isAuthenticated()" class="button-primary" th:href="@{/clientes/cadastro}">Cadastre-se</a>
+
+                <a sec:authorize="!isAuthenticated()" class="pg-nav-link" th:href="@{/login}">Entrar</a>
+                <a sec:authorize="!isAuthenticated()" class="button-light" th:href="@{/clientes/cadastro}">Cadastrar</a>
 
                 <div sec:authorize="isAuthenticated()" class="pg-nav-user dropdown">
                     <button class="pg-nav-user__toggle" type="button"
@@ -55,12 +49,17 @@
                                 <div class="pg-nav-user__username">@<span sec:authentication="principal.username"></span></div>
                             </div>
                         </li>
+                        <li>
+                            <a class="pg-nav-user__menu-profile" th:href="@{/clientes/perfil}">
+                                <i class="icon-person"></i> Meu Perfil
+                            </a>
+                        </li>
                         <li sec:authorize="hasAnyRole('USER')">
                             <a class="pg-nav-user__menu-item" th:href="@{/pedidos/list}">
                                 <i class="icon-bag"></i> Meus pedidos
                             </a>
                         </li>
-                        <li sec:authorize="hasAnyRole('USER')" class="pg-nav-user__menu-divider"></li>
+                        <li class="pg-nav-user__menu-divider"></li>
                         <li>
                             <form th:action="@{/logout}" method="post">
                                 <button type="submit" class="pg-nav-user__menu-item">
@@ -70,7 +69,7 @@
                         </li>
                     </ul>
                 </div>
-                </div>
+            </div>
         </div>
     </nav>
 </header>

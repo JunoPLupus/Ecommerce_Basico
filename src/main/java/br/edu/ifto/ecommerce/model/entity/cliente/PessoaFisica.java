@@ -25,11 +25,6 @@ public class PessoaFisica extends Pessoa {
     private String nome;
 
     @Override
-    public char getTipo() {
-        return 'F';
-    }
-
-    @Override
     public String getNomeExibicao() {
         return getNome();
     }

@@ -2,64 +2,66 @@
 <html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
 <head th:replace="~{fragments/head :: head('Detalhes do Cliente',~{})}"></head>
 <body>
-<main class="pg-card">
+<main class="pg-checkout-page">
 
-    <h1>
-        <i class="icon-person text-muted"></i>
-        Detalhes do Cliente
-        <small class="text-muted" th:text="'#' + ${cliente.id}"></small>
-    </h1>
-    <p>
-        <mark>
-            <i class="icon-document"></i>
-            <span th:text="${(cliente.getTipo() == 'F'.charAt(0) ? 'CPF' : 'CNPJ') + ': ' + cliente.getDocumentoMascarado()}"></span>
-        </mark>
+    <h1>Cliente <small class="text-muted" th:text="'#' + ${cliente.id}"></small></h1>
 
-        <mark>
-            <i class="icon-person-identity"></i>
-            <span th:text="${(cliente.getTipo() == 'F'.charAt(0) ? 'Nome' : 'Razão Social') + ': ' + cliente.getNomeExibicao()}"></span>
-        </mark>
-        &nbsp;
-        <mark>
-            <i class="icon-email"></i>
-            <span th:text="'E-mail: ' + ${cliente.email}"></span>
-        </mark>
+    <div class="pg-checkout-layout">
 
-        <mark>
-            <i class="icon-phone"></i>
-            <span th:text="'Telefone: ' + ${cliente.telefone}"></span>
-        </mark>
-    </p>
-    <br>
+        <section class="pg-card pg-cliente-card">
+            <span class="pg-avatar pg-avatar--lg" th:text="${#strings.toUpperCase(#strings.substring(cliente.nomeExibicao, 0, 1))}"></span>
+            <p class="pg-cliente-card__nome" th:text="${cliente.nomeExibicao}"></p>
+            <p class="pg-cliente-card__usuario" th:if="${login != null}">@<span th:text="${login}"></span></p>
 
-    <p th:if="${vendas == null || #lists.isEmpty(vendas)}">Nenhuma venda associada à este cliente.</p>
+            <hr>
 
-    <table th:unless="${vendas == null || #lists.isEmpty(vendas)} ">
-        <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Data</th>
-            <th scope="col">Total</th>
-            <th scope="col"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="venda : ${vendas}">
-            <td scope="row" th:text="${venda.id}"></td>
-            <td th:text="${#temporals.format(venda.data, 'dd/MM/yyyy HH:mm')}"></td>
-            <td th:text="'R$ ' + ${#numbers.formatDecimal(venda.total, 1, 'POINT', 2, 'COMMA')}"></td>
-            <td class="text-end">
-                <a th:href="@{/admin/vendas/detalhes/{id}(id=${venda.id})}"
-                   type="button" class="button-primary"
-                   data-bs-toggle="tooltip"
-                   data-bs-placement="top"
-                   title="Ver detalhes da venda">
-                    <i class="icon-document"></i>
-                </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+            <div class="pg-cliente-card__dados">
+                <div class="pg-data-field">
+                    <span class="pg-data-label" th:text="${cliente.isPF() ? 'CPF' : 'CNPJ'}"></span>
+                    <span th:text="${cliente.documentoMascarado}"></span>
+                </div>
+                <div class="pg-data-field">
+                    <span class="pg-data-label">E-mail</span>
+                    <span th:text="${cliente.email}"></span>
+                </div>
+                <div class="pg-data-field">
+                    <span class="pg-data-label">Telefone</span>
+                    <span th:text="${cliente.telefone}"></span>
+                </div>
+            </div>
+        </section>
+
+        <div class="pg-cliente-historico">
+            <h2><i class="icon-bag"></i> Histórico de Vendas</h2>
+
+            <p th:if="${vendas == null || #lists.isEmpty(vendas)}">Nenhuma venda associada a este cliente.</p>
+
+            <div class="pg-lista" th:unless="${vendas == null || #lists.isEmpty(vendas)}">
+                <div class="pg-lista-card" th:each="venda : ${vendas}">
+                    <img class="cart-img-thumbnail"
+                         th:if="${!#lists.isEmpty(venda.itens) && venda.itens[0].produto.urlImagem != null}"
+                         th:src="${venda.itens[0].produto.urlImagem}" alt="Produto da venda">
+
+                    <div class="pg-lista-card__info">
+                        <span class="pg-lista-card__id" th:text="'ID #' + ${venda.id}"></span>
+                        <p class="pg-lista-card__titulo" th:text="${#temporals.format(venda.data, 'dd ''de'' MMMM ''de'' yyyy')}"></p>
+                    </div>
+
+                    <div class="pg-lista-card__metrica">
+                        <span class="pg-data-label">Total</span>
+                        <span class="pg-lista-card__metrica-valor" th:text="'R$ ' + ${#numbers.formatDecimal(venda.total, 1, 'POINT', 2, 'COMMA')}"></span>
+                    </div>
+
+                    <a class="button-icon-dark" th:href="@{/admin/vendas/detalhes/{id}(id=${venda.id})}"
+                       data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalhes da venda">
+                        <i class="icon-eye"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </main>
 </body>
 </html>

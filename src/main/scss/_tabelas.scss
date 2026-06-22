@@ -1,5 +1,8 @@
+@use "../../../node_modules/bootstrap/scss/bootstrap";
+
 .subtotal {
-  max-width: 3rem;
+  @extend .text-end;
+  white-space: nowrap;
 }
 
 .total {
@@ -8,5 +11,12 @@
 }
 
 .col-descricao {
-  max-width: 20rem;
+  max-width: 14rem;
+
+  span {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }

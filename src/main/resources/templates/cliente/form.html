@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-
 <html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{::script})}">
-
 <head th:replace="~{fragments/head :: head('Cadastrar Cliente',~{})}"></head>
-
 <body>
+<main class="pg-card pg-auth-card">
 
-<main class="pg-card pg-card--form">
+    <div class="pg-auth-header">
+        <h1>Crie sua conta</h1>
+        <p>Bem-vindo(a). Preencha seus dados para começar.</p>
+    </div>
 
-    <h1>Cadastrar Cliente</h1>
-    <p class="fw-light">Todos os campos são obrigatórios*</p>
-
-    <ul class="nav-tab">
+    <ul class="pg-segmented">
         <li>
             <a id="nav-item-pf"
                th:classappend="${activeTab == 'pj'} ? '' : 'active'"

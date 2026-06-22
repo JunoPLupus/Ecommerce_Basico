@@ -6,27 +6,9 @@
   @extend .mt-3;
   background-color: white;
   padding: 2rem;
-}
-
-.pg-footer {
-  @extend .pt-3;
-}
-
-.nav-tab {
-  @extend .nav;
-  @extend .nav-tabs;
-  @extend .mt-3;
-
-  li {
-    @extend .nav-item;
-    a {
-      @extend .nav-link;
-    }
-  }
-}
-
-.mt-navbar {
-  margin-top: 1rem;
+  border: 1px solid var(--bs-border-color-translucent);
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .main-double-collumns {
@@ -40,10 +22,9 @@
 
 .card-img-top {
   width: 100%;
-  height: 12rem;
-  object-fit: contain;
-  background-color: #f8f9fa;
-  padding: 0.5rem;
+  height: 14rem;
+  object-fit: cover;
+  background-color: #f1f3f5;
 }
 
 .card-title {
@@ -51,16 +32,63 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  min-height: 2.5rem;
+  margin: 0;
 }
 
 .produto-card {
   @extend .card;
   @extend .h-100;
   --bs-card-cap-bg: white;
+  border: 1px solid var(--bs-border-color-translucent);
+  border-radius: 0.75rem;
+  overflow: hidden;
 }
 
-.pg-card.pg-card--form {
+.produto-card__body {
+  @extend .d-flex;
+  @extend .flex-column;
+  @extend .gap-2;
+  padding: 1rem;
+}
+
+.produto-card__footer {
+  @extend .d-flex;
+  @extend .align-items-center;
+  @extend .justify-content-between;
+  margin-top: 0.5rem;
+}
+
+.produto-card__preco {
+  @extend .fw-bold;
+  font-size: 1.25rem;
+}
+
+.pg-produtos-page {
+  @extend .container;
+  @extend .mt-3;
+  @extend .mb-4;
+}
+
+.pg-produtos-grid {
+  @extend .row;
+  @extend .row-cols-1;
+  @extend .row-cols-sm-2;
+  @extend .row-cols-lg-4;
+  @extend .g-4;
+}
+
+.pg-produto-col {
+  @extend .col;
+}
+
+.pg-form-layout {
   max-width: 40%;
+  margin: 0 auto;
+
+  .pg-card {
+    margin-top: 0;
+  }
 }
 
 // Carrinho - layout dois paineis
@@ -69,29 +97,40 @@
   @extend .d-flex;
   @extend .gap-3;
   @extend .align-items-start;
-  @extend .mt-3;
+  margin-top: 1rem;
 }
 
 .pg-cart-main {
   flex: 1;
   margin: 0;
-}
 
-.pg-cart-aside {
-  flex: 0 0 260px;
-  margin: 0;
-  text-align: center;
-
-  .button-primary {
-    @extend .w-100;
-    margin-left: 0;
+  table {
+    --bs-table-striped-bg: transparent;
   }
 }
 
-.pg-cart-price {
-  @extend .fs-3;
-  @extend .fw-bold;
-  @extend .my-2;
+.pg-cart-aside {
+  flex: 0 0 340px;
+  margin: 0;
+
+  .button-dark {
+    @extend .w-100;
+    @extend .d-flex;
+    @extend .align-items-center;
+    @extend .justify-content-center;
+    @extend .gap-1;
+    margin-top: 1rem;
+  }
+
+  hr {
+    margin: 0.5rem 0;
+  }
+}
+
+.pg-cart-produto {
+  @extend .d-flex;
+  @extend .align-items-center;
+  @extend .gap-3;
 }
 
 .cart-img-thumbnail {
@@ -104,11 +143,366 @@
 }
 
 .cart-qty {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  form {
+    margin: 0;
+  }
+
+  button {
+    @extend .btn;
+    border: 0;
+    border-radius: 0;
+    color: var(--bs-body-color);
+    padding: 0.375rem 0.75rem;
+
+    &:hover {
+      background-color: var(--bs-tertiary-bg);
+    }
+  }
+
+  span {
+    min-width: 2.5rem;
+    padding: 0 0.5rem;
+    text-align: center;
+  }
+}
+
+// Checkout - layout principal + resumo lateral
+.pg-checkout-page {
+  @extend .container;
+  @extend .mt-3;
+}
+
+.pg-checkout-header {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.pg-checkout-layout {
+  @extend .pg-cart-layout;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.pg-checkout-main {
+  @extend .pg-cart-main;
+  @extend .d-flex;
+  @extend .flex-column;
+  @extend .gap-3;
+
+  .pg-card {
+    margin-top: 0;
+  }
+}
+
+.pg-checkout-aside {
+  @extend .pg-cart-aside;
+  flex-basis: 360px;
+  text-align: start;
+  position: sticky;
+  top: 1rem;
+}
+
+.pg-card-header {
+  @extend .d-flex;
+  @extend .justify-content-between;
+  @extend .align-items-center;
+  @extend .mb-3;
+
+  h2 {
+    @extend .mb-0;
+  }
+}
+
+.pg-card h2,
+.pg-cliente-historico h2 {
+  @extend .fs-5;
+  @extend .fw-bold;
+  @extend .mb-3;
+
+  i {
+    @extend .text-muted;
+    @extend .me-2;
+  }
+}
+
+.pg-summary-row {
+  @extend .d-flex;
+  @extend .justify-content-between;
+  @extend .mb-2;
+}
+
+.pg-summary-total {
+  @extend .fs-5;
+  @extend .fw-bold;
+}
+
+.pg-summary-free {
+  @extend .text-success;
+}
+
+.pg-order-info {
+  @extend .mt-3;
+
+  h3 {
+    @extend .fs-6;
+    @extend .fw-bold;
+    @extend .mb-1;
+
+    i {
+      @extend .text-muted;
+      @extend .me-2;
+    }
+  }
+
+  p {
+    @extend .mb-0;
+    @extend .text-muted;
+  }
+}
+
+// Perfil - tela de Meu Perfil
+.pg-data-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--bs-border-color);
+}
+
+.pg-data-field {
+  @extend .d-flex;
+  @extend .flex-column;
+  @extend .gap-1;
+}
+
+.pg-data-label {
+  @extend .text-muted;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.pg-data-link {
+  color: var(--bs-body-color);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.pg-addresses-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.pg-address-card {
+  @extend .border;
+  @extend .rounded-3;
+  @extend .p-3;
+  @extend .d-flex;
+  @extend .justify-content-between;
+  @extend .align-items-start;
+
+  &__info {
+    @extend .d-flex;
+    @extend .flex-column;
+    @extend .gap-1;
+
+    span {
+      @extend .text-muted;
+      font-size: 0.875rem;
+    }
+  }
+
+  &__actions {
+    @extend .d-flex;
+    @extend .gap-2;
+    @extend .align-items-center;
+    flex-shrink: 0;
+  }
+}
+
+// Fundo geral do app
+.pg-app-bg {
+  background-color: var(--app-bg);
+}
+
+// Telas de autenticação (login / cadastro)
+.pg-card.pg-auth-card {
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3rem;
+  border: 1px solid var(--bs-border-color-translucent);
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.06);
+  --bs-border-radius: 0.5rem;
+
+  hr {
+    margin: 3rem 0 1rem;
+  }
+}
+
+.pg-auth-header {
+  @extend .text-center;
+  margin-bottom: 1.5rem;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  p {
+    @extend .text-muted;
+    margin: 0;
+  }
+}
+
+
+.pg-checkout-page > .pg-checkout-layout:first-child {
+  margin-top: 0;
+}
+
+// Listas em cards (Meus Pedidos / Gestão de Vendas)
+.pg-lista {
+  @extend .d-flex;
+  @extend .flex-column;
+  @extend .gap-3;
+  margin-top: 1.5rem;
+}
+
+.pg-lista-card {
+  @extend .card;
   @extend .d-flex;
   @extend .align-items-center;
-  @extend .gap-2;
+  @extend .gap-4;
+  flex-direction: row;
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  padding: 1.25rem 1.5rem;
 
-  .button-primary {
-    margin-left: 0;
+  &__info {
+    flex: 1;
   }
+
+  &__id {
+    @extend .pg-data-label;
+    @extend .d-block;
+  }
+
+  &__titulo {
+    @extend .fw-bold;
+    font-size: 1.0625rem;
+    margin: 0;
+  }
+
+  &__sub {
+    @extend .text-muted;
+    @extend .d-flex;
+    @extend .align-items-center;
+    @extend .gap-1;
+  }
+
+  &__metrica {
+    flex: 0 0 9.5rem;
+    text-align: right;
+  }
+
+  &__metrica-valor {
+    @extend .fw-bold;
+    @extend .d-block;
+    font-size: 1.0625rem;
+  }
+}
+
+// Formulário de produto - pré-visualização da imagem
+.pg-produto-preview {
+  @extend .d-flex;
+  @extend .align-items-center;
+  @extend .justify-content-center;
+  border: 2px dashed var(--bs-border-color);
+  border-radius: 0.75rem;
+  background-color: var(--bs-tertiary-bg);
+  min-height: 14rem;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+
+  img {
+    max-width: 100%;
+    max-height: 14rem;
+    object-fit: contain;
+  }
+
+  &__placeholder {
+    @extend .d-flex;
+    @extend .flex-column;
+    @extend .align-items-center;
+    @extend .text-muted;
+    gap: 0.5rem;
+
+    i {
+      font-size: 2.5rem;
+    }
+  }
+}
+
+// Avatar com inicial (listagem e detalhe de cliente)
+.pg-avatar {
+  @extend .d-flex;
+  @extend .align-items-center;
+  @extend .justify-content-center;
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: #e8eafd;
+  font-weight: 700;
+  color: var(--bs-body-color);
+}
+
+.pg-avatar--lg {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  font-size: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Detalhe do cliente - card de perfil + histórico
+.pg-cliente-card {
+  flex: 0 0 340px;
+  margin: 0;
+  text-align: center;
+
+  &__nome {
+    @extend .fw-bold;
+    font-size: 1.25rem;
+    margin: 1rem 0 0.25rem;
+  }
+
+  &__usuario {
+    @extend .text-muted;
+    margin: 0;
+  }
+
+  &__dados {
+    @extend .d-flex;
+    @extend .flex-column;
+    @extend .gap-3;
+    text-align: left;
+  }
+}
+
+.pg-cliente-historico {
+  flex: 1;
 }

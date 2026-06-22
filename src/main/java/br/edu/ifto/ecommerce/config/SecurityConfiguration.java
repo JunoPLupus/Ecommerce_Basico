@@ -1,5 +1,8 @@
 package br.edu.ifto.ecommerce.config;
 
+import br.edu.ifto.ecommerce.config.handler.AcessoNegadoHandler;
+import br.edu.ifto.ecommerce.config.handler.AuthSuccessHandler;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,8 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static br.edu.ifto.ecommerce.utils.Rotas.*;
-import static br.edu.ifto.ecommerce.utils.Roles.*;
+import static br.edu.ifto.ecommerce.utils.constants.Rotas.*;
+import static br.edu.ifto.ecommerce.utils.constants.Roles.*;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -29,8 +32,12 @@ public class SecurityConfiguration {
                                         .requestMatchers("/" + ADMIN_PRODUTOS + "/**").hasAnyRole(ADMIN)
                                         .requestMatchers("/" + ADMIN_VENDAS + "/**").hasAnyRole(ADMIN)
 
+                                        .requestMatchers("/" + CLIENTES + PERFIL).authenticated()
+                                        .requestMatchers("/" + CLIENTES + EDITAR + "/**").authenticated()
+
                                         .requestMatchers("/" + CARRINHO + "/**").hasAnyRole(USER)
                                         .requestMatchers("/" + PEDIDOS + "/**").hasAnyRole(USER)
+                                        .requestMatchers("/" + ENDERECOS + "/**").hasAnyRole(USER)
                                         .requestMatchers("/" + PRODUTOS + "/**").hasAnyRole("ANONYMOUS", USER)
 
                                         .requestMatchers("/css/**").permitAll()

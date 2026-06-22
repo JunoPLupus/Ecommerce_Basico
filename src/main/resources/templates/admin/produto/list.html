@@ -1,36 +1,24 @@
 <!DOCTYPE html>
-
 <html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
-
 <head th:replace="~{fragments/head :: head('Gerenciar Produtos',~{})}"></head>
-
 <body>
-
-<main class="pg-card">
+<main class="pg-checkout-page">
 
     <div class="main-double-collumns">
-        <h1>
-            <i class="icon-box text-muted"></i>
-            Gerenciar Produtos
-        </h1>
-        <a th:href="@{/admin/produtos/insert}"
-           type="button" class="button-primary"
-           data-bs-toggle="tooltip"
-           data-bs-placement="top"
-           title="Cadastrar Novo Produto">
-            <i class="icon-plus"></i>
-            Cadastrar Novo Produto
+        <div>
+            <h1>Gestão de Produtos</h1>
+            <p class="text-muted">Gerencie o catálogo de produtos da sua loja, ajuste preços e descrições.</p>
+        </div>
+        <a class="button-dark" th:href="@{/admin/produtos/insert}">
+            <i class="icon-plus"></i> Cadastrar Produto
         </a>
     </div>
 
     <form th:action="@{/admin/produtos}" method="get" class="search-bar">
-        <input type="search" id="descricao" name="descricao" placeholder="Pesquisar por descrição do produto..." aria-label="Filtro por descrição de produto" th:value="${descricao}" >
+        <input type="search" id="descricao" name="descricao" placeholder="Buscar por nome do produto..." aria-label="Filtro por descrição de produto" th:value="${descricao}">
         <div class="dropdown">
-            <button class="filter-btn"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                Filtrar
+            <button class="filter-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="icon-filter"></i> Filtrar
             </button>
             <ul class="dropdown-menu">
                 <li>
@@ -56,45 +44,38 @@
 
     <p th:if="${produtos == null || #lists.isEmpty(produtos)}">Nenhum produto encontrado.</p>
 
-    <table th:unless="${produtos == null || #lists.isEmpty(produtos)}">
-        <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Descrição</th>
-            <th scope="col">Valor(R$)</th>
-            <th scope="col" colspan="2"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="produto : ${produtos}">
-            <td scope="row" th:text="${produto.id}"></td>
-            <td class="col-descricao" th:text="${produto.descricao}"></td>
-            <td th:text="'R$ ' + ${#numbers.formatDecimal(produto.valor, 1, 'POINT', 2, 'COMMA')}"></td>
-            <td class="text-end">
-                <div class="button-group">
-                    <a th:href="@{/admin/produtos/edit/{id}(id=${produto.id})}"
-                       type="button" class="button-primary"
-                       data-bs-toggle="tooltip"
-                       data-bs-placement="top"
-                       title="Editar produto">
-                        <i class="icon-pen"></i>
-                    </a>
-                    <form th:action="@{/admin/produtos/delete/{id}(id=${produto.id})}" method="post">
-                        <button type="submit" class="button-danger"
-                                onclick="return window.confirm('Tem certeza que deseja excluir este produto?')"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="top"
-                                title="Deletar produto">
-                            <i class="icon-trash"></i>
-                        </button>
-                    </form>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="pg-lista" th:unless="${produtos == null || #lists.isEmpty(produtos)}">
+        <div class="pg-lista-card" th:each="produto : ${produtos}">
+            <img class="cart-img-thumbnail"
+                 th:if="${produto.urlImagem != null}"
+                 th:src="${produto.urlImagem}" alt="Imagem do produto">
+
+            <div class="pg-lista-card__info">
+                <span class="pg-lista-card__id" th:text="'ID #' + ${produto.id}"></span>
+                <p class="pg-lista-card__titulo" th:text="${produto.descricao}"></p>
+            </div>
+
+            <div class="pg-lista-card__metrica">
+                <span class="pg-data-label">Preço Unitário</span>
+                <span class="pg-lista-card__metrica-valor" th:text="'R$ ' + ${#numbers.formatDecimal(produto.valor, 1, 'POINT', 2, 'COMMA')}"></span>
+            </div>
+
+            <div class="button-group">
+                <a class="button-icon" th:href="@{/admin/produtos/edit/{id}(id=${produto.id})}"
+                   data-bs-toggle="tooltip" data-bs-placement="top" title="Editar produto">
+                    <i class="icon-pen"></i>
+                </a>
+                <form th:action="@{/admin/produtos/delete/{id}(id=${produto.id})}" method="post"
+                      onsubmit="return window.confirm('Tem certeza que deseja excluir este produto?')">
+                    <button type="submit" class="button-icon button-icon--danger"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Excluir produto">
+                        <i class="icon-trash"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
 </main>
-
 </body>
 </html>

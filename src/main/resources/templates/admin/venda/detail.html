@@ -2,54 +2,102 @@
 <html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
 <head th:replace="~{fragments/head :: head('Detalhes da Venda',~{})}"></head>
 <body>
-<main class="pg-card">
+<main class="pg-checkout-page">
 
-    <h1>
-        <i class="icon-bag text-muted"></i>
-        Detalhes da Venda
-        <small class="text-muted" th:text="'#' + ${venda.id}"></small>
-    </h1>
-    <p>
-        <mark>
-            <i class="icon-calendar"></i>
-            <span th:text="${#temporals.format(venda.data, 'dd/MM/yyyy HH:mm')}"></span>
-        </mark>
-        &nbsp;
-        <mark>
-            <i class="icon-person"></i>
-            <span> Cliente:
-                <a th:href="@{/admin/clientes/detalhes/{id}(id=${venda.cliente.id})}" th:text="${venda.cliente.nomeExibicao}" class="link"></a>
-            </span>
-        </mark>
-    </p>
-    <table>
-        <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Descrição do Produto</th>
-            <th scope="col">Valor unitário</th>
-            <th scope="col">Quantidade</th>
-            <th scope="col" class="text-end subtotal">Sub-Total</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item : ${venda.itens}">
-            <td scope="row" th:text="${item.produto.id}"></td>
-            <td class="col-descricao" th:text="${item.produto.descricao}"></td>
-            <td th:text="'R$ ' + ${#numbers.formatDecimal(item.produto.valor, 1, 'POINT', 2, 'COMMA')}"></td>
-            <td th:text="${#numbers.formatDecimal(item.quantidade, 1, 0)}"></td>
-            <td class="text-end subtotal"
-                th:text="'R$ ' + ${#numbers.formatDecimal(item.total, 1, 'POINT', 2, 'COMMA')}">
-            </td>
-        </tr>
-        <tr>
-            <td colspan="4" class="text-end"><strong>Total</strong></td>
-            <td class="text-end subtotal">
-                <strong th:text="'R$ ' + ${#numbers.formatDecimal(venda.total, 1, 'POINT', 2, 'COMMA')}"></strong>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <h1>Venda <small class="text-muted" th:text="'#' + ${venda.id}"></small></h1>
+
+    <div class="pg-checkout-layout">
+
+        <div class="pg-checkout-main">
+
+            <section class="pg-card">
+                <h2><i class="icon-person"></i> Dados do Cliente</h2>
+                <div class="pg-data-grid">
+                    <div class="pg-data-field">
+                        <span class="pg-data-label" th:text="${cliente.isPF() ? 'Nome' : 'Razão Social'}"></span>
+                        <a class="pg-data-link" th:href="@{/admin/clientes/detalhes/{id}(id=${cliente.id})}" th:text="${cliente.nomeExibicao}"></a>
+                    </div>
+                    <div class="pg-data-field">
+                        <span class="pg-data-label" th:text="${cliente.isPF() ? 'CPF' : 'CNPJ'}"></span>
+                        <span th:text="${cliente.documentoMascarado}"></span>
+                    </div>
+                    <div class="pg-data-field">
+                        <span class="pg-data-label">E-mail</span>
+                        <span th:text="${cliente.email}"></span>
+                    </div>
+                    <div class="pg-data-field">
+                        <span class="pg-data-label">Telefone</span>
+                        <span th:text="${cliente.telefone}"></span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pg-card">
+                <h2><i class="icon-bag"></i> Itens do Pedido</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th scope="col">Produto</th>
+                        <th scope="col">Qtd</th>
+                        <th scope="col">Preço Un.</th>
+                        <th scope="col" class="subtotal">Subtotal</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${venda.itens}">
+                        <td>
+                            <div class="pg-cart-produto">
+                                <img class="cart-img-thumbnail"
+                                     th:if="${item.produto.urlImagem != null}"
+                                     th:src="${item.produto.urlImagem}"
+                                     th:alt="${item.produto.descricao}">
+                                <div class="col-descricao"><span th:text="${item.produto.descricao}"></span></div>
+                            </div>
+                        </td>
+                        <td th:text="${#numbers.formatDecimal(item.quantidade, 1, 0)}"></td>
+                        <td th:text="'R$ ' + ${#numbers.formatDecimal(item.produto.valor, 1, 'POINT', 2, 'COMMA')}"></td>
+                        <td class="subtotal"
+                            th:text="'R$ ' + ${#numbers.formatDecimal(item.total, 1, 'POINT', 2, 'COMMA')}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </div>
+
+        <aside class="pg-card pg-checkout-aside">
+            <h2>Resumo do Pedido</h2>
+
+            <div class="pg-summary-row">
+                <span th:text="${'Subtotal (' + venda.qtdItensTotal() + ' itens)'}"></span>
+                <span th:text="'R$ ' + ${#numbers.formatDecimal(venda.total, 1, 'POINT', 2, 'COMMA')}"></span>
+            </div>
+            <div class="pg-summary-row">
+                <span>Frete</span>
+                <span class="pg-summary-free">Grátis</span>
+            </div>
+
+            <hr>
+
+            <div class="pg-summary-row pg-summary-total">
+                <span>Total</span>
+                <span th:text="'R$ ' + ${#numbers.formatDecimal(venda.total, 1, 'POINT', 2, 'COMMA')}"></span>
+            </div>
+
+            <div class="pg-order-info">
+                <h3><i class="icon-truck"></i> Endereço de Entrega</h3>
+                <p th:text="${venda.endereco.logradouro + (venda.endereco.numero != null ? ', ' + venda.endereco.numero : '') + ' - ' + venda.endereco.bairro}"></p>
+                <p th:text="${venda.endereco.cidade + ' - ' + venda.endereco.estado + ', CEP: ' + venda.endereco.cep}"></p>
+            </div>
+
+            <div class="pg-order-info">
+                <h3><i class="icon-credit-card"></i> Método de Pagamento</h3>
+                <p th:text="${venda.formaPagamento.descricao}"></p>
+            </div>
+        </aside>
+
+    </div>
+
 </main>
 </body>
 </html>

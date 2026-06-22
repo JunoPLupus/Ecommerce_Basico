@@ -22,6 +22,10 @@ import br.edu.ifto.ecommerce.model.entity.role.Role;
 @AllArgsConstructor
 @Entity
 public class Usuario implements Serializable, UserDetails {
+
+    public static final int LOGIN_TAMANHO_MIN = 3;
+    public static final int SENHA_TAMANHO_MIN = 6;
+
     @Setter(AccessLevel.NONE)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,13 +37,13 @@ public class Usuario implements Serializable, UserDetails {
 
     @NotNull(message = "{erro.usuario.login.obrigatorio}")
     @NotBlank(message = "{erro.usuario.login.obrigatorio}")
-    @Size(min = 3, message = "{erro.usuario.login.tamanho.min}")
+    @Size(min = LOGIN_TAMANHO_MIN, message = "{erro.usuario.login.tamanho.min}")
     @Column(unique = true)
     private String login;
 
     @NotNull(message = "{erro.usuario.senha.obrigatorio}")
     @NotBlank(message = "{erro.usuario.senha.obrigatorio}")
-    @Size(min = 6, message = "{erro.usuario.senha.tamanho.min}")
+    @Size(min = SENHA_TAMANHO_MIN, message = "{erro.usuario.senha.tamanho.min}")
     private String password;
 
     @NotNull(message = "{erro.usuario.roles.obrigatorio}")

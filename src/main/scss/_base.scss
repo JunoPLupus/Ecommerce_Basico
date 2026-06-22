@@ -9,15 +9,21 @@ form {
   label {
     @extend .form-label;
   }
-  input {
+  input:not([type="radio"]):not([type="checkbox"]) {
+    @extend .form-control;
+  }
+  select {
+    @extend .form-select;
+  }
+  textarea {
     @extend .form-control;
   }
 }
 
 hr {
   @extend .border-light-subtle;
-  @extend .mt-5;
-  @extend .mb-3;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 table {
@@ -36,6 +42,13 @@ footer {
   @extend .container;
   @extend .mt-auto;
   @extend .pt-3;
+  @extend .pb-3;
+
+  p {
+    @extend .text-center;
+    @extend .text-muted;
+    @extend .mb-0;
+  }
 }
 
 a {

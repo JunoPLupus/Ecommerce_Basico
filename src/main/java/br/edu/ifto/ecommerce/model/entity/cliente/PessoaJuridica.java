@@ -25,11 +25,6 @@ public class PessoaJuridica extends Pessoa {
     private String razaoSocial;
 
     @Override
-    public char getTipo() {
-        return 'J';
-    }
-
-    @Override
     public String getNomeExibicao() {
         return getRazaoSocial();
     }

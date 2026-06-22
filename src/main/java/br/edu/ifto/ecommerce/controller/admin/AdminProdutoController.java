@@ -1,8 +1,8 @@
 package br.edu.ifto.ecommerce.controller.admin;
 
+import br.edu.ifto.ecommerce.model.dto.ProdutoDTO;
 import br.edu.ifto.ecommerce.model.entity.produto.Produto;
-import br.edu.ifto.ecommerce.model.record.BreadcrumbItem;
-import br.edu.ifto.ecommerce.model.repository.ProdutoRepository;
+import br.edu.ifto.ecommerce.service.ProdutoService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -12,19 +12,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static br.edu.ifto.ecommerce.utils.Diretorios.*;
-import static br.edu.ifto.ecommerce.utils.Rotas.*;
-import static br.edu.ifto.ecommerce.utils.BreadcrumbUtils.*;
+import static br.edu.ifto.ecommerce.utils.constants.Diretorios.*;
+import static br.edu.ifto.ecommerce.utils.constants.Rotas.*;
 
 @Controller
 @AllArgsConstructor
 @RequestMapping(ADMIN_PRODUTOS)
 public class AdminProdutoController {
 
-    private ProdutoRepository produtoRepository;
+    private final ProdutoService produtoService;
 
     @GetMapping({"", LISTA})
     public String listar(@RequestParam(required = false) String descricao,
@@ -32,9 +30,7 @@ public class AdminProdutoController {
                          @RequestParam(required = false) Double precoMaximo,
                          ModelMap model) {
 
-        // TODO: ajustar filtro de pesquisa para aceitar descrição ou id como input
-        List<Produto> produtos = new ArrayList<>(
-                produtoRepository.findAllByDynamicFilters(descricao, precoMinimo, precoMaximo));
+        List<ProdutoDTO> produtos = produtoService.listarComFiltros(descricao, precoMinimo, precoMaximo);
         int filtrosAplicados = 0;
 
         if (descricao != null) {
@@ -55,59 +51,47 @@ public class AdminProdutoController {
      * @return html de cadastro de produto
      */
     @GetMapping(INSERT)
-    public String insert(Produto produto, ModelMap model){
-        model.addAttribute("breadcrumbItems", breadcrumb(
-                new BreadcrumbItem("Produtos","/" + ADMIN_PRODUTOS),
-                new BreadcrumbItem("Cadastrar Produto", null)
-        ));
+    public String insert(Produto produto, ModelMap model) {
         return HTML_ADMIN_FORM_PRODUTOS;
     }
 
     @PostMapping(SAVE)
-    public String save(@Valid Produto produto, BindingResult result, Model model){
-        if (produto.getUrlImagem() == null || produto.getUrlImagem().trim().isEmpty()) produto.setUrlImagem("https://placehold.co/600x400");
+    public String save(@Valid Produto produto, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return HTML_ADMIN_FORM_PRODUTOS;
         }
-        produtoRepository.insert(produto);
+        produtoService.salvar(produto);
         return "redirect:/" + ADMIN_PRODUTOS;
     }
 
     /**
      * @param id do produto a ser editado
      * @return html de edição de produto
-     * @PathVariable é utilizado quando o valor da variável é passada diretamente na URL
      */
     @GetMapping(EDIT_ID)
     public String edit(@PathVariable("id") Long id, ModelMap model) {
-        model.addAttribute("produto", produtoRepository.findById(id));
-        model.addAttribute("breadcrumbItems", breadcrumb(
-                new BreadcrumbItem("Produtos", "/" + ADMIN_PRODUTOS),
-                new BreadcrumbItem("Editar Produto", null)
-        ));
+        model.addAttribute("produto", produtoService.buscarPorId(id));
         return HTML_ADMIN_FORM_PRODUTOS;
     }
 
     @PostMapping(UPDATE)
     public String update(@Valid Produto produto, BindingResult result, Model model) {
-        if (produto.getUrlImagem() == null || produto.getUrlImagem().trim().isEmpty()) produto.setUrlImagem("https://placehold.co/600x400");
         if (result.hasErrors()) {
             return HTML_ADMIN_FORM_PRODUTOS;
         }
-        produtoRepository.update(produto);
+        produtoService.atualizar(produto);
         return "redirect:/" + ADMIN_PRODUTOS;
     }
 
     /**
      * @param id do produto a ser removido
      * @return redirecionamento para a listagem de produtos
-     * @PathVariable é utilizado quando o valor da variável é passada diretamente na URL
      */
     @PostMapping(DELETE_ID)
-    public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
-        boolean sucess = produtoRepository.delete(id);
+    public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+        boolean sucesso = produtoService.excluir(id);
 
-        if(!sucess) redirectAttributes.addFlashAttribute("erro", "Não é possível excluir! Existem vendas associadas a este produto.");
+        if (!sucesso) redirectAttributes.addFlashAttribute("erro", "Não é possível excluir! Existem vendas associadas a este produto.");
 
         return "redirect:/" + ADMIN_PRODUTOS;
     }

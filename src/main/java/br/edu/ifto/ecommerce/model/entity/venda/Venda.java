@@ -1,7 +1,10 @@
 package br.edu.ifto.ecommerce.model.entity.venda;
 
 import br.edu.ifto.ecommerce.model.entity.cliente.Pessoa;
+import br.edu.ifto.ecommerce.model.entity.endereco.Endereco;
+import br.edu.ifto.ecommerce.model.enums.FormaPagamento;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
@@ -27,6 +30,13 @@ public class Venda implements Serializable {
 
     @ManyToOne
     private Pessoa cliente;
+
+    @ManyToOne
+    private Endereco endereco;
+
+    @NotNull (message = "{erro.venda.formapagamento.obrigatorio}")
+    @Enumerated(EnumType.STRING)
+    private FormaPagamento formaPagamento;
 
     private LocalDateTime data;
 

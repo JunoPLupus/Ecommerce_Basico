@@ -2,46 +2,40 @@
 <html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main}, ~{})}">
 <head th:replace="~{fragments/head :: head('Meus Pedidos',~{})}"></head>
 <body>
-<main class="pg-card">
+<main class="pg-checkout-page">
 
-    <h1>
-        <i class="icon-bag text-muted"></i>
-        Meus Pedidos
-    </h1>
+    <h1>Meus Pedidos</h1>
+    <p class="text-muted">Acompanhe o status de suas compras, visualize detalhes e gerencie suas devoluções em um só lugar.</p>
 
     <div th:replace="~{fragments/alert :: alert(${erro})}"></div>
 
-    <p th:if="${#lists.isEmpty(pedidos)}">Você ainda não realizou nenhum pedido.</p>
+    <p th:if="${#lists.isEmpty(pedidos)}" class="text-muted">Você ainda não realizou nenhum pedido.</p>
 
-    <table th:unless="${#lists.isEmpty(pedidos)}">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Data</th>
-            <th scope="col">Itens</th>
-            <th scope="col" class="text-end subtotal">Total</th>
-            <th scope="col"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="pedido : ${pedidos}">
-            <td th:text="${pedido.id}"></td>
-            <td th:text="${#temporals.format(pedido.data, 'dd/MM/yyyy HH:mm')}"></td>
-            <td th:text="${pedido.qtdItensTotal()}"></td>
-            <td class="text-end subtotal"
-                th:text="'R$ ' + ${#numbers.formatDecimal(pedido.total(), 1, 'POINT', 2, 'COMMA')}">
-            </td>
-            <td class="text-end">
-                <a class="button-primary" th:href="@{/pedidos/detalhes/{id}(id=${pedido.id})}"
-                   data-bs-toggle="tooltip"
-                   data-bs-placement="top"
-                   title="Ver detalhes do pedido">
-                    <i class="icon-document"></i>
-                </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="pg-lista" th:unless="${#lists.isEmpty(pedidos)}">
+        <div class="pg-lista-card" th:each="pedido : ${pedidos}">
+            <img class="cart-img-thumbnail"
+                 th:if="${!#lists.isEmpty(pedido.itens) && pedido.itens[0].produto.urlImagem != null}"
+                 th:src="${pedido.itens[0].produto.urlImagem}" alt="Produto do pedido">
+
+            <div class="pg-lista-card__info">
+                <p class="pg-lista-card__titulo" th:text="'Pedido #' + ${pedido.id}"></p>
+                <span class="pg-lista-card__sub">
+                    <i class="icon-calendar"></i>
+                    <span th:text="${#temporals.format(pedido.data, 'dd ''de'' MMMM, yyyy')}"></span>
+                </span>
+            </div>
+
+            <div class="pg-lista-card__metrica">
+                <span class="pg-data-label">Total</span>
+                <span class="pg-lista-card__metrica-valor"
+                      th:text="'R$ ' + ${#numbers.formatDecimal(pedido.total, 1, 'POINT', 2, 'COMMA')}"></span>
+            </div>
+
+            <a class="button-dark" th:href="@{/pedidos/detalhes/{id}(id=${pedido.id})}">
+                <i class="icon-eye"></i> Ver Detalhes <i class="icon-arrow-right"></i>
+            </a>
+        </div>
+    </div>
 
 </main>
 </body>
